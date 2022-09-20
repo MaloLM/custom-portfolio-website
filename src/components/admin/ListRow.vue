@@ -1,5 +1,5 @@
 <template>
-    <div class="listRow">
+    <div class="row">
 
     </div>
 </template>

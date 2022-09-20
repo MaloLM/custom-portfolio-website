@@ -1,9 +1,15 @@
 <template>
   <div class="admin">
+    <br> 
     <w-card class="main-content">
       <h1> {{ viewTitle }}</h1>
-      <w-tabs :items="tabs" card :fill-bar="fillBar"></w-tabs>
+      <br> 
+      <AdminTabs>
+      
+      </AdminTabs>
     </w-card>
+   
+    
   </div>
 </template>
 
@@ -12,25 +18,12 @@
 
 // import AboutMeFormVue from '@/components/admin/forms/AboutMeForm.vue';
 import { ref } from 'vue'
+import AdminTabs from '@/components/admin/adminTabs.vue';
 
 const viewTitle = ref('Admin')
-
-const tabs = [
-      { title: 'About me', content: "aboutme"},
-      { title: 'Hobbies', content: 'TODO.' },
-      { title: 'Personnel projects', content: 'TODO' },
-      { title: 'Career', content: 'TODO' },
-      { title: 'Professional projects', content: 'TODO' },
-      { title: 'Job experience', content: 'TODO' },
-      { title: 'eductation', content: 'TODO' },
-      { title: 'Travels', content: 'TODO' }
-    ]
-  
-const fillBar = false
 
 </script>
 
 
-<style scoped>
-  
+<style scoped>      
 </style>

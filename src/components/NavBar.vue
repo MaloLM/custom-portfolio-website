@@ -4,16 +4,26 @@
       <router-link to="/career" class="link">Career </router-link> 
       <router-link to="/travels" class="link">Travels </router-link>
       <router-link to="/get-in-touch" class="link">Get in touch </router-link> 
-      <router-link to="/admin" class="link">Admin </router-link>
-      
-      <!-- <w-button class="ma1 mr6" bg-color="secondary" style="float:right" round>TODO</w-button> -->
-      <DarkThemeButton style="float:right"/>
+      <div style="float:right">
+        <DarkThemeButton style="float:left" />
+
+        <router-link to="/admin" class="link"> 
+          <w-icon class="paramButton"  style="float:right; margin-left: 8px;"
+          xl
+          color="grey-light4">
+          fa fa-cog
+         </w-icon>
+        </router-link>
+        
+      </div>
+       
     </nav>
     <router-view/>
 </template>
 
 
 <script setup>
+import 'font-awesome/css/font-awesome.min.css'
 import DarkThemeButton from "./public/DarkThemeButton.vue";
 
 </script>
@@ -40,6 +50,7 @@ nav a.router-link-exact-active {
 .link {
     padding-right: 20px;
 }
+
 
 </style>
   

@@ -5,7 +5,7 @@
         <h1 class="pageTitle">{{ mainTitle }}</h1>
         <div>
           <p>{{text}}</p>
-          <img/>
+          <w-image></w-image>
         </div>
         <br/>
       </div>

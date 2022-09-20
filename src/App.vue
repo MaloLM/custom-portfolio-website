@@ -25,12 +25,12 @@
 }
 
 .main-content{
-      margin-top: 50px;
-      margin-bottom: 100%;
-      margin-left: 70px;
-      margin-right: 70px;
-      transition: 0.3s;
-    }
+    margin-top: 50px;
+    margin-bottom: 100%;
+    margin-left: 70px;
+    margin-right: 70px;
+    transition: 0.3s;
+  }
 
 .light {
   background-color: white;
