@@ -4,33 +4,47 @@
       <app-tabs :tabList="tabList" >
         <template v-slot:tabPanel-1> 
             <br>
-            <AboutMeForm></AboutMeForm>
+            <h3>About me form</h3>
+            <AboutMeAndCareerForm></AboutMeAndCareerForm>
         </template>
         <template v-slot:tabPanel-2> 
+            <br> 
+            <h3>Hobbies list</h3>
             <br> 
             <HobbieForm></HobbieForm>
         </template>
         <template v-slot:tabPanel-3> 
             <br>
+            <h3>Personnal projects list</h3>
+            <br> 
             <MainForm></MainForm>
         </template>
         <template v-slot:tabPanel-4> 
             <br>
-            <CareerForm></CareerForm>
+            <h3>Career form</h3>
+            <AboutMeAndCareerForm></AboutMeAndCareerForm>
         </template>
         <template v-slot:tabPanel-5>
             <br>
+            <h3>Professional projects list</h3>
+            <br> 
             <MainForm></MainForm>
         </template>
         <template v-slot:tabPanel-6> 
             <br>
+            <h3>Job experiences list</h3>
+            <br> 
             <MainForm></MainForm>
         </template>
         <template v-slot:tabPanel-7> 
             <br>
+            <h3>Education list</h3>
+            <br> 
             <MainForm></MainForm>
         </template>
         <template v-slot:tabPanel-8> 
+            <br>
+            <h3>Travels list</h3>
             <br>
             <TravelForm></TravelForm>
         </template>
@@ -40,18 +54,16 @@
   
 <script>
 import AppTabs from "./AppTabs.vue";
-import AboutMeForm from "./forms/AboutMeForm.vue";
+import AboutMeAndCareerForm from "./forms/AboutMeAndCareerForm.vue";
 import HobbieForm from "./forms/HobbieForm.vue";
 import MainForm from "./forms/MainForm.vue";
-import CareerForm from "./forms/CareerForm.vue";
 import TravelForm from "./forms/TravelForm.vue";
 export default {
 components: {
     AppTabs,
-    AboutMeForm,
+    AboutMeAndCareerForm,
     HobbieForm,
     MainForm,
-    CareerForm,
     TravelForm
 },
 

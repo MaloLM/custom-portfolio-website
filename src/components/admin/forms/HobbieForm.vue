@@ -1,5 +1,5 @@
 <template>
-    <div class="TODO">
+    <div class="hobbies">
         <ListOfRows></ListOfRows>
     </div>
 </template>

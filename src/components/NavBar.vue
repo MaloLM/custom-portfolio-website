@@ -4,10 +4,12 @@
       <router-link to="/career" class="link">Career </router-link> 
       <router-link to="/travels" class="link">Travels </router-link>
       <router-link to="/get-in-touch" class="link">Get in touch </router-link> 
+      <!-- <router-link to="/authentication" class="link">tempAuth </router-link>  -->
+      
       <div style="float:right">
         <DarkThemeButton style="float:left" />
 
-        <router-link to="/admin" class="link"> 
+        <router-link to="/authentication" class="link"> 
           <w-icon class="paramButton"  style="float:right; margin-left: 8px;"
           xl
           color="grey-light4">

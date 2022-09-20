@@ -1,7 +1,7 @@
 <template>
     <Carousel class="caroussel-margin" :settings="settings" :breakpoints="breakpoints">
     <Slide v-for="slide in 10" :key="slide">
-        <w-card class="caroussel-card-padding" title="Card title" title-class="blue-light5--bg">
+        <w-card class="caroussel-card" title="Card title" title-class="blue-light5--bg">
         <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
             quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
@@ -62,7 +62,8 @@
   margin-bottom: 50px;
 }
 
-.caroussel-card-padding{
+.caroussel-card{
   margin-right: 40px;
+    background-color: rgba(255, 255, 255, 1);
 }
 </style>

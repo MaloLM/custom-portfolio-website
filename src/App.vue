@@ -1,9 +1,7 @@
 <template>
 
   <w-app>
-    <!-- All your app's content goes here. -->
     <NavBar />
-  
   </w-app>
 
 </template>
@@ -21,7 +19,12 @@
   /* text-align: center; */
   color: #2c3e50;
   transition: 0.3s;
-
+   /* background-image: url("assets/background.jpg"); */
+   background-color: #030303;
+   background-image: url("assets/diagonal-motion.jpg");
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   
 }
 
 .main-content{
@@ -35,14 +38,15 @@
 .light {
   background-color: white;
   border-color: rgb(0, 0, 0);
+  background-image: url("assets/diagonal-motion.jpg");
   color:rgb(0, 0, 0);
   transition: 0.3s;
 }
 
 .dark #app {
-    
     background-color: rgb(57, 57, 57);
     color:rgb(244, 244, 244);
+    background-image: none;
     transition: 0.3s;
 }
 </style>

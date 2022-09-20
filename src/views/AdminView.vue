@@ -18,12 +18,16 @@
 
 // import AboutMeFormVue from '@/components/admin/forms/AboutMeForm.vue';
 import { ref } from 'vue'
-import AdminTabs from '@/components/admin/adminTabs.vue';
+import AdminTabs from '@/components/admin/AdminTabs.vue';
 
 const viewTitle = ref('Admin')
 
 </script>
 
 
-<style scoped>      
+<style scoped>  
+
+.main-content { 
+    background-color: rgba(255, 255, 255, 1);
+}
 </style>
