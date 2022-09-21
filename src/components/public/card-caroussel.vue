@@ -1,12 +1,13 @@
 <template>
     <Carousel class="caroussel-margin" :settings="settings" :breakpoints="breakpoints">
     <Slide v-for="slide in 10" :key="slide">
-        <w-card class="caroussel-card" title="Card title" title-class="blue-light5--bg">
-        <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem dolore delectus,
-            quisquam ipsa laudantium esse consequatur itaque similique et eligendi eum voluptas
-            odit dolor labore eveniet at vel sequi nostrum.<br><br>
-        </p>
+        <w-card :image="`${settings.baseUrl}images/japanese-wave.png`" class="caroussel-card">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+
+          <template #actions>
+            <div class="spacer"></div>
+            <w-button>Read more</w-button>
+          </template>
         </w-card>
     </Slide>
 
@@ -33,6 +34,7 @@
       data: () => ({
         // carousel settings
         settings: {
+          baseUrl: 'https://antoniandre.github.io/wave-ui/',
           itemsToShow: 1,
           snapAlign: 'center',
         },
@@ -46,7 +48,7 @@
           },
           // 1024 and up
           1024: {
-            itemsToShow: 5,
+            itemsToShow: 4,
             snapAlign: 'start',
           },
         },
@@ -65,5 +67,9 @@
 .caroussel-card{
   margin-right: 40px;
     background-color: rgba(255, 255, 255, 1);
+}
+
+.dark .caroussel-card {
+  background-color: black;
 }
 </style>

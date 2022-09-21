@@ -23,7 +23,9 @@ margin-right: 100px;
 background-color: rgba(255, 255, 255, 1);
 }
 
-/* .pageTitle{
-font-size: 60px;
-} */
+.dark .w-card {
+  background-color: black;
+ }
+
+
 </style>

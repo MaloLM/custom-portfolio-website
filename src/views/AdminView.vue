@@ -30,4 +30,8 @@ const viewTitle = ref('Admin')
 .main-content { 
     background-color: rgba(255, 255, 255, 1);
 }
+
+.dark .w-card {
+  background-color: black;
+ }
 </style>

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "firebase": "^9.10.0",
     "font-awesome": "^4.7.0",
     "svgmap": "^2.10.1",
     "vue": "^3.2.13",

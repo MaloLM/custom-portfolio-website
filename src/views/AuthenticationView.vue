@@ -14,16 +14,20 @@
     </w-input>
 
     <w-input
-        class="mt3"
-        label="Password"
-        :validators="[validators.required]">
+    class="mb2"
+    label="Password"
+    :validators="[validators.required]"
+    :type="isPassword ? 'password' : 'text'"
+    :inner-icon-left="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
+    :inner-icon-right="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
+    @click:inner-icon-right="isPassword = !isPassword">
     </w-input>
 
     <div class="text-right mt6">
         <w-button @click="goToHome()" type="submit">Login</w-button>
     </div>
     </w-form>
-    
+
     </w-card>
 </div>
 
@@ -32,7 +36,11 @@
 
 <script setup>
 import router from '../router'
+// import app from '../main.js'
 var viewTitle = "Authentication"
+
+var isPassword = true
+
 
 var success = null
 var error = null
@@ -46,7 +54,7 @@ var validators = {
     router.push('/admin') 
 }
 
-
+// app.firebase.auth().createUserWithEmailAndPassword('alex@gmail.com', 'ioioioioio89')
 
 </script>
 
@@ -60,4 +68,8 @@ var validators = {
     transition: 0.3s;
     background-color: rgba(255, 255, 255, 1);
   }
+
+  .dark .w-card {
+  background-color: black;
+ }
 </style>

@@ -61,5 +61,4 @@ var baseUrl = 'https://antoniandre.github.io/wave-ui/'
 .description{
   font-size: 18px;
 }
-
 </style>
