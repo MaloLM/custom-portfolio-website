@@ -3,14 +3,20 @@
     <w-card class="main-content">
     <h1> {{ viewTitle }}</h1>
     
-    <w-form
+    <div v-if="error" class="alert alert-danger">{{error}}</div>
+
+    <w-form action="#"
     @validate="validated++;success = error = false"
     @success="success = true"
-    @error="error = true">
+    @error="error = true"
+    @submit.prevent="Login">
+    
 
     <w-input
         label="E-mail adress"
-        :validators="[validators.required]">
+        :validators="[validators.required]"
+        v-model="email">
+        
     </w-input>
 
     <w-input
@@ -19,12 +25,12 @@
     :validators="[validators.required]"
     :type="isPassword ? 'password' : 'text'"
     :inner-icon-left="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
-    :inner-icon-right="isPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"
-    @click:inner-icon-right="isPassword = !isPassword">
+    @click:inner-icon-right="isPassword = !isPassword"
+    v-model="password">
     </w-input>
 
     <div class="text-right mt6">
-        <w-button @click="goToHome()" type="submit">Login</w-button>
+        <w-button type="submit">Login</w-button>
     </div>
     </w-form>
 
@@ -33,31 +39,57 @@
 
 </template>
 
-
 <script setup>
-import router from '../router'
-// import app from '../main.js'
-var viewTitle = "Authentication"
+    import { ref } from 'vue'
+    import { useStore } from 'vuex'
+    import firebase from 'firebase/compat/app'
+    import 'firebase/compat/auth'
+    import { useRouter } from 'vue-router'
 
-var isPassword = true
+  
+    const email = ref('')
+    const password = ref('')
+    const error = ref(null)
 
+    var viewTitle = "Authentication"
+    var isPassword = true
+    var success = null
+    var validated = 0
 
-var success = null
-var error = null
-var validated = 0
-var validators = {
-    required: value => !!value || 'This field is required'
+    const store = useStore()
+    const router = useRouter()
+    
+    var validators = {
+        required: value => !!value || 'This field is required'
+      }
+
+    function Login(){
+      try {
+        logIn(email.value, password.value)
+        // store.dispatch('logIn', {
+        //     email: email.value,
+        //     password: password.value
+        // })
+      }
+      catch (err) {
+        error.value = err.message
+      }
+    }
+
+    async function logIn( email, password ){
+      const response = await firebase.auth().signInWithEmailAndPassword(email, password)
+      if (response) {
+        store.commit('SET_LOGGED_IN', true)
+        router.push('/admin') 
+        
+      } else {
+          console.log('login failed')
+          router.push('/')
+      }
   }
 
-  function goToHome(){
-    console.log("test")
-    router.push('/admin') 
-}
-
-// app.firebase.auth().createUserWithEmailAndPassword('alex@gmail.com', 'ioioioioio89')
-
 </script>
-
+    
 
 <style scoped>
 .main-content{

@@ -5,12 +5,10 @@ import store from './store'
 import WaveUI from 'wave-ui'
 import 'wave-ui/dist/wave-ui.css'
 
-// import firebase from 'firebase/app';
-// import {} from 'firebase/auth' ;
-// import firebase from "firebase";
-// import { initializeApp } from 'firebase/app';
+
 // import 'firebase/compat/auth';
-// import 'firebase/compat/firestore';
+
+import firebase from 'firebase/compat/app';
 
 // Import the functions you need from the SDKs you need
 // import { initializeApp } from "firebase/app";
@@ -19,18 +17,18 @@ import 'wave-ui/dist/wave-ui.css'
 
 //  Your web app's Firebase configuration
 
-//  const firebaseConfig = {
-//    apiKey: "AIzaSyBONiZm2L04Qzqq1XyvaWpaUYrzIaR6UgE",
-//    authDomain: "my-portefolio-1390c.firebaseapp.com",
-//    projectId: "my-portefolio-1390c",
-//    storageBucket: "my-portefolio-1390c.appspot.com",
-//    messagingSenderId: "741595692754",
-//    appId: "1:741595692754:web:32e209c44d3af17560f70b"
-//  };
+const firebaseConfig = {
+    apiKey: process.env.VUE_APP_API_KEY,
+    authDomain: process.env.VUE_APP_AUTH_DOMAIN,
+    projectId: process.env.VUE_APP_PROJECT_ID,
+    storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.VUE_APP_MESSAGING_SENDER_ID,
+    appId: process.env.VUE_APP_APP_ID
+};
 
-// const FirebaseApp = initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
-const app = createApp(App).use(store).use(router) //.use(firebase)
+const app = createApp(App).use(store).use(router)
 
 new WaveUI(app, {
     // Some Wave UI options.
