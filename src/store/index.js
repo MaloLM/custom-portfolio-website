@@ -14,7 +14,7 @@ export default createStore({
   mutations: {
     SET_LOGGED_IN(state, value) {
       state.loggedIn = value;
-    },
+    }
   }//,
   //actions: {
   // }

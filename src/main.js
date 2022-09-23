@@ -4,19 +4,9 @@ import router from './router'
 import store from './store'
 import WaveUI from 'wave-ui'
 import 'wave-ui/dist/wave-ui.css'
-
-
-// import 'firebase/compat/auth';
-
 import firebase from 'firebase/compat/app';
 
-// Import the functions you need from the SDKs you need
-// import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
 //  Your web app's Firebase configuration
-
 const firebaseConfig = {
     apiKey: process.env.VUE_APP_API_KEY,
     authDomain: process.env.VUE_APP_AUTH_DOMAIN,

@@ -21,11 +21,9 @@
       </div>
 
       <h1>Personnal projects</h1>
-
       <CardCaroussel></CardCaroussel>
 
       <h1>Hobbies and interests</h1>
-
       <CardCaroussel></CardCaroussel>
       
     </div>
