@@ -20,9 +20,7 @@ firebase.initializeApp(firebaseConfig);
 
 const app = createApp(App).use(store).use(router)
 
-new WaveUI(app, {
-    // Some Wave UI options.
-  })
+new WaveUI(app, {})
 
 app.mount('#app')
 

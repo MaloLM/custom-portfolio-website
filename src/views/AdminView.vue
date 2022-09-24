@@ -1,24 +1,30 @@
 <template>
   <div class="admin">
-    <br> 
     <w-card class="main-content">
+      <br> 
       <h1> {{ viewTitle }}</h1>
       <br> 
-      <AdminTabs>
-      
-      </AdminTabs>
-    </w-card>
-   
-    
+      <AdminTabs></AdminTabs>
+    </w-card>  
   </div>
 </template>
 
 <script setup>
-
 import { ref } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 import AdminTabs from '@/components/admin/AdminTabs.vue';
 
 const viewTitle = ref('Admin')
+
+const store = useStore()
+const router = useRouter()
+
+const user_status = store.getters
+
+if(user_status.user != true){ // TODO : correct user_status.user to user_status
+  router.push('/')
+}
 
 </script>
 

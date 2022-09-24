@@ -1,51 +1,34 @@
 <template>
 
   <w-app>
-    <nav>
+    <nav id="navbar">
       <router-link to="/" class="link">About me </router-link> 
       <router-link to="/career" class="link">Career </router-link> 
       <router-link to="/travels" class="link">Travels </router-link>
       <router-link to="/get-in-touch" class="link">Get in touch </router-link> 
       
+      
       <div style="float:right">
         <DarkThemeButton style="float:left" />
-        <w-icon class="paramButton" 
+        <router-link to="/authentication" class="link">
+          <w-icon class="paramButton" 
           xl
           style="float:right; margin-left: 8px;" 
-          @click="updateOverlayState"
           color="grey-light4">
           fa fa-cog
-         </w-icon>
+         </w-icon> 
+        </router-link> 
       </div>
     </nav>
     <router-view/>
   </w-app>
-
-  <w-dialog
-      width="30%"
-      class="dialog"
-      v-model="showDialog"
-      title="Authentication">
-      <AuthenticationView></AuthenticationView>
-  </w-dialog>
   
 </template>
 
 <script setup>
-  import {ref } from 'vue'
   import 'font-awesome/css/font-awesome.min.css'
   import DarkThemeButton from "./components/public/DarkThemeButton.vue";
-  import AuthenticationView from './components/public/forms/AuthenticationForm.vue';
 
-  var showDialog = ref(false)
-
-  function updateOverlayState(){
-    console.log(showDialog)
-
-    if(!showDialog.value){
-      showDialog.value = true
-    }
-  }
 </script>
 
 

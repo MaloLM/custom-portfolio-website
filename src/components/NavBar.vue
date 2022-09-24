@@ -20,7 +20,6 @@
         <w-icon class="paramButton" 
           xl
           style="float:right; margin-left: 8px;" 
-          @click="updateOverlayState()"
           color="grey-light4">
           fa fa-cog
          </w-icon>

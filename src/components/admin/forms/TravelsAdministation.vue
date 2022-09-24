@@ -1,5 +1,5 @@
 <template>
-    <div class="hobbies">
+    <div class="travels">
         <ListOfRows :formType="formTypeToShare"></ListOfRows>
     </div>
 </template>
