@@ -13,25 +13,32 @@
                         class="mb6"
                         label="Country name"
                         outline
-                        v-model="countryName">
+                        v-model="countryName"
+                        required>
                         </w-input>
+
                         <w-input
                         class="mb6"
                         label="Country code"
                         outline
-                        v-model="countryCode">
+                        v-model="countryCode"
+                        required>
                         </w-input>
+
                         <w-input
                         class="mb6"
                         label="Duration (days)"
                         outline
-                        v-model="duration">
+                        v-model="duration"
+                        required>
                         </w-input>
+
                         <w-input
                         class="mb6"
                         label="Date (month & year)"
                         outline
-                        v-model="date">
+                        v-model="date"
+                        required>
                         </w-input>
                     
                 </div>

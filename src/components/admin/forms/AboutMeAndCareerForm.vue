@@ -7,7 +7,8 @@
         class="mb3"
         outline
         label= "Title"
-        v-model="title">
+        v-model="title"
+        required>
         </w-input>
 
         <w-textarea
@@ -15,13 +16,28 @@
         outline
         rows="10"
         label= "Description"
-        v-model="description">
+        v-model="description"
+        required>
         </w-textarea>
 
         <br>
 
         <w-card title="Image" title-class="grey">
-            <input type="file" @change="previewFiles"  accept="image/*" id="choose-file" name="choose-file">
+            <input 
+            type="file" 
+            ref="file" 
+            @change="readFile()"
+            accept="image/*" 
+            id="choose-file" 
+            name="choose-file" 
+            required>
+
+            <div v-if="image">
+                <br>
+            </div>
+
+                <img v-if="image" :src="preview" class="image" />
+            
         </w-card>
 
         <br>
@@ -34,9 +50,7 @@
 
 
 <script>
-import { getDatabase, ref, set } from "firebase/database";
-import firebase from 'firebase/compat/app';
-import 'firebase/storage';
+import DataService from "../../../firebase";
 
 export default {
     props:{
@@ -44,9 +58,9 @@ export default {
     },
     data(){
         return {
-            title: "",
-            description: "",
-            image: ""
+            title: null,
+            description: null,
+            image: null
         }
     },
     setup(props){
@@ -58,31 +72,30 @@ export default {
             console.log(this.title)
             console.log(this.description)
             console.log(this.image)
-
         }, 
-        previewFiles(event) {
-        if(event.target.files[0]){
-            this.image =  event.target.files[0];
+        pushImage(){
+            console.log("pushImage TODO")
+        },
+        readFile() {
+            this.example = this.$refs.file.files[0];
+            if (
+                this.example.name.includes(".png") ||
+                this.example.name.includes(".jpg")
+            ) {
+                this.image = true;
+                this.preview = URL.createObjectURL(this.example);
+            } else {
+                this.image = false;
             }
         },
-        loadFormData(){
-            this.logFormData()
-            // const tmp = '/pages/about-me/title'
-            console.log("D")
-                firebase.database().ref('/pages/' + this.formType + '/').set({
+        pushFOrm(){
+            const data = {
                 title: this.title,
-                description: this.description 
-            });
-            console.log("F")
-        },
-        writeUserData() {
-            const db = getDatabase();
-            console.log("D")
-            set(ref(db, '/pages/about-me/'), {
-                title: this.title,
-                description: this.description 
-            });
+                description: this.description,
+                image: this.image
             }
+            DataService.createAboutMe(data)
+        }
     }
 }
 </script>
@@ -98,5 +111,11 @@ button {
     border-radius: 20px;
     font-size:13px;
 }
+
+.image{
+    max-width: 100% ;
+    height: auto;
+}
+
 
 </style>

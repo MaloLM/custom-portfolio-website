@@ -44,10 +44,9 @@
 
 <script setup>
     import { ref } from 'vue'
-    import { useStore } from 'vuex'
-    import firebase from 'firebase/compat/app'
-    import 'firebase/compat/auth'
+    import DatabaseService from "../services/databaseService";
     import { useRouter } from 'vue-router'
+    import { useStore } from 'vuex'
 
     const authTitle = "Authentication"
     const store = useStore()
@@ -61,9 +60,6 @@
     let success = null
     let validated = 0
 
-
-
-
     if (store.getters.user == true) {
         router.push('/admin') 
     }
@@ -76,25 +72,28 @@
 
     function Login(){
       try {
-        logIn(email.value, password.value)
+        login(email.value, password.value)
       }
       catch (err) {
         errorLabel.value = err.message
       }
     }
 
-    async function logIn( email, password ){
+    function login(email, password){
         try {
-            const response = await firebase.auth().signInWithEmailAndPassword(email, password)
-            if (response) {
+            const authRes = DatabaseService.logIn(email, password)
+
+            if(authRes){
                 store.commit('SET_LOGGED_IN', true)
-                router.push('/admin')    
+                router.push('/admin')  
             }
         } catch (err) {
             errorLabel.value = err.message
             console.log(errorLabel.value)
         }
-  }
+    }
+
+    
 
 </script>
 

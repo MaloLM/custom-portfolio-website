@@ -1,14 +1,15 @@
 <template>
     <form @submit.prevent="logFormData()">
         <div class="container">
-            
+
                 <div class="top">
 
                 <w-input 
                     class="mb3"
                     outline
                     label="Title"
-                    v-model="title">
+                    v-model="title"
+                    required>
                 </w-input>
 
 
@@ -17,7 +18,8 @@
                     outline
                     rows="10"
                     label="Text description"
-                    v-model="description">
+                    v-model="description"
+                    required>
                 </w-textarea>
 
                 <w-divider class="ma6"/>
@@ -25,15 +27,18 @@
 
                 <div class="right">
                 <w-card title="Image" title-class="grey" class="fillSpace">
-                    <w-image
-                    class="mr5"
-                    :src="`${image}images/japanese-wave.png`"
-                    :width="150"
-                    :height="150"
-                    >
-                    </w-image>
 
-                    <input type="file" @change="previewFiles"  accept="image/*" id="choose-file" name="choose-file">
+                    <input 
+                    type="file" 
+                    ref="file" 
+                    @change="readFile()"
+                    accept="image/*" 
+                    id="choose-file" 
+                    name="choose-file"
+                    required>
+
+                    <br><br>
+                        <img v-if="image" :src="preview" class="image"/>
                     <!-- <w-button class="ma1" bg-color="secondary" style="float:right;">Load image</w-button> -->
                 </w-card>
                 </div>
@@ -45,7 +50,8 @@
                         style="margin-top: 10px;"
                         outline
                         label="Add Skills (separator = ';')"
-                        v-model="skills">     
+                        v-model="skills"
+                        required>     
                     </w-input>
 
                     <br>
@@ -53,7 +59,8 @@
                     <w-input 
                         outline
                         label="Add technologies/tools (separator = ';')"
-                        v-model="ressources">
+                        v-model="ressources"
+                        required>
                     </w-input>
                 </w-card>
                 </div>
@@ -64,7 +71,8 @@
                     <w-input style="margin-top: 10px;"
                         outline
                         v-model="ressourceName"
-                        label="Ressource name">
+                        label="Ressource name"
+                        required>
                     </w-input>
                     
                     <br>
@@ -72,7 +80,8 @@
                     <w-input
                         outline
                         v-model="ressourceLink"
-                        label="Ressource link">
+                        label="Ressource link"
+                        required>
                     </w-input>
                 </w-card>
                 </div>
@@ -91,23 +100,40 @@
 </template>
 
 <script>
+// import { getDatabase, ref, set } from "firebase/database";
+import firebase from 'firebase/app';
+import 'firebase/storage';
+
 export default {
     props:{
         formType: String
     },
     data(){
         return {
-            title: "",
-            description: "",
-            image: 'https://antoniandre.github.io/wave-ui/',
-            skills: "",
-            ressources: "",
-            ressourceName: "",
-            ressourceLink: "",
+            title: null,
+            description: null,
+            image: false, //'https://antoniandre.github.io/wave-ui/',
+            example: null,
+            preview: null,
+            skills: null,
+            ressources: null,
+            ressourceName: null,
+            ressourceLink: null,
+          
         }
     },
-    setup(props){
-        console.log("main", props.formType)
+    setup(){
+        console.log("on setup")
+    },
+    mounted(props) {
+
+        console.log("mounted", props.formType);
+        
+        const issuesRef = firebase.database().ref('issues/');
+
+        const test = issuesRef.on("value")
+
+        console.log(test)
     },
     methods: {
         logFormData(){
@@ -119,14 +145,21 @@ export default {
             console.log(this.ressourceName)
             console.log(this.ressourceLink)
         }, 
-        previewFiles(event) {
-        if(event.target.files[0]){
-            this.image =  event.target.files[0];
-            }
-        },
         passEvent(){
             window.scrollTo(0, 0);
-            this.$emit('toggleShow', 'hello')
+            this.$emit('toggleShow', 'hello') // TODO
+        },
+        readFile() {
+            this.example = this.$refs.file.files[0];
+            if (
+                this.example.name.includes(".png") ||
+                this.example.name.includes(".jpg")
+            ) {
+                this.image = true;
+                this.preview = URL.createObjectURL(this.example);
+            } else {
+                this.image = false;
+            }
         }
     }
 }
@@ -162,6 +195,11 @@ export default {
     flex-flow: column;
     margin: 10px;
     height: 90%;
+}
+
+.image{
+    max-width: 100% ;
+    height: auto;
 }
 
 button {

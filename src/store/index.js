@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import 'firebase/compat/auth'
+// import 'firebase/compat/auth'
 
 
 export default createStore({

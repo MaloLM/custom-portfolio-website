@@ -12,6 +12,7 @@
         <DarkThemeButton style="float:left" />
         <router-link to="/authentication" class="link">
           <w-icon class="paramButton" 
+          v-if="path !== '/admin'"
           xl
           style="float:right; margin-left: 8px;" 
           color="grey-light4">
@@ -28,6 +29,11 @@
 <script setup>
   import 'font-awesome/css/font-awesome.min.css'
   import DarkThemeButton from "./components/public/DarkThemeButton.vue";
+  import {useRoute} from 'vue-router'
+  import {computed} from 'vue'
+
+  const route=useRoute();
+  const path = computed(() =>route.path)
 
 </script>
 
@@ -43,7 +49,7 @@
   transition: 0.3s;
    /* background-image: url("assets/background.jpg"); */
    background-color: #030303;
-   background-image: url("assets/diagonal-motion.jpg");
+   background-image: url("assets/white-theme-bckground.jpg");
    background-repeat: no-repeat;
    background-attachment: fixed;
    
@@ -60,7 +66,7 @@
 .light {
   background-color: white;
   border-color: rgb(0, 0, 0);
-  background-image: url("assets/diagonal-motion.jpg");
+  background-image: url("assets/white-theme-bckground.jpg");
   color:rgb(0, 0, 0);
   transition: 0.3s;
 }
@@ -68,7 +74,7 @@
 .dark #app {
     background-color: rgb(57, 57, 57);
     color:rgb(244, 244, 244);
-    background-image: none;
+    background-image: url("assets/dark-theme-bckground.jpg");
     transition: 0.3s;
 }
 
@@ -77,6 +83,11 @@ nav {
   background-color: black;
   border-color: #070707;
   border: 2px solid;
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 1px;
+  border-bottom-color: rgb(55, 51, 51);
+  border-left-width: 0px;
 }
 
 nav a {
