@@ -1,5 +1,6 @@
 import firebase from "../firebase";
 import 'firebase/auth';
+import "firebase/database";
 
 const db = firebase.database().ref("/pages");
 
