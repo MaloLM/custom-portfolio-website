@@ -4,10 +4,11 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-      loggedIn: false
+      loggedIn: false,
+      darkTheme: false,
   },
   getters: {
-    user(state){
+    status(state){
       return state.loggedIn
     }
   },

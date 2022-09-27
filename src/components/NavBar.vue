@@ -40,7 +40,7 @@ const store = useStore()
 
 function updateOverlayState(){
   var showOverlay = store.getters
-  showOverlay = showOverlay.user.showOverlay
+  showOverlay = showOverlay.status.showOverlay
 
   if(showOverlay){
     store.commit('SET_SHOW_OVERLAY', false)

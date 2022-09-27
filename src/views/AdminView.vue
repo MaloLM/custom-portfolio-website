@@ -23,9 +23,9 @@ const viewTitle = ref('Admin')
 const store = useStore()
 const router = useRouter()
 
-const user_status = store.getters
+const user_status = store.getters.status
 
-if(user_status.user != true){ // TODO : correct user_status.user to user_status
+if(user_status != true){ // TODO : correct user_status.user to user_status
   router.push('/')
 }
 
