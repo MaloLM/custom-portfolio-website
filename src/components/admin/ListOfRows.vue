@@ -2,17 +2,18 @@
     <div class="list-of-rows">
         <div v-if="isShow">
             <w-button class="ma1 button-spacing" @click="isShow = !isShow"  bg-color="primary" >Add new</w-button>
-            <ListRow
+            <ListRow @toggleShow="toggleShow($event)" 
+            @removePost="removePost($event)"
             v-for="post in posts"
-            :key="post.id"
-            :uid="post.id"
+            :key=post.id
+            :uid=post.id
             :title="post.title">
             </ListRow>
         </div>
 
         <div v-if="!isShow">
-            <TravelForm v-if="formType === 'travels'" @toggleShow="toggleShow($event)"></TravelForm>
-            <MainForm v-else :formType="formType" @toggleShow="toggleShow($event)"></MainForm>
+            <TravelForm v-if="formType === 'travels'" @toggleShow="toggleShow($event)" :id="postToEditId"></TravelForm>
+            <MainForm v-else :formType="formType" @toggleShow="toggleShow($event)"  :id="postToEditId"></MainForm>
         </div>
     </div>
     
@@ -20,27 +21,18 @@
 
 
 <script>
-import { ref } from 'vue'
 import ListRow from "./ListRow.vue";
 import MainForm from './forms/MainForm.vue';
 import TravelForm from './forms/TravelForm.vue';
+import databaseService from '@/services/databaseService';
+
 
 export default {
   data() {
     return {
+        postToEditId: null,
         isShow: true,
-        posts: ref([
-            { id: 1, title: 'My journey with Vue' },
-            { id: 2, title: 'Blogging with Vue' },
-            { id: 3, title: 'Why Vue is so fun' },
-            { id: 4, title: 'My journey with Vue' },
-            { id: 5, title: 'Blogging with Vue' },
-            { id: 6, title: 'Why Vue is so fun' },
-            { id: 7, title: 'Why Vue is so fun' },
-            { id: 8, title: 'My journey with Vue' },
-            { id: 9, title: 'Blogging with Vue' },
-            { id: 10, title: 'Why Vue is so fun' },
-        ])
+        posts: null,
     }
   },
   components: {
@@ -53,11 +45,41 @@ export default {
   },
   setup(props){
     console.log("main", props.formType)
+
   },
   methods: {
-    toggleShow(){
+    toggleShow(postId){
+      console.log("TOGGLED: ", postId)
+      this.postToEditId = postId
         this.isShow = !this.isShow
+    },
+    removePost(id){
+      console.log('emit recieved', id)
+      databaseService.removePost(this.formType, id)
     }
+  },
+  mounted() {
+    console.log("PATH:", this.formType)
+
+    databaseService.getPosts(this.formType).on('value', (snapshot) => {
+      console.log(snapshot.val())
+        this.posts = snapshot.val()
+        var indexes = Object.keys(this.posts)  
+        if(indexes.length){
+          indexes.forEach(element => {
+            this.posts[element]['id'] = element
+          });
+        }
+      }, (errorObject) => {
+        console.log('The read failed: ' + errorObject.name);
+      }); 
+
+      // if(indexes.length){
+      //     indexes.forEach(element => {
+      //       this.posts[element]['id'] = element
+      //     });
+      //   } // walid async not working look up
+    
   }
 }
 

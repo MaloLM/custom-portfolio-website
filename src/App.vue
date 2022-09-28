@@ -31,8 +31,8 @@
   import DarkThemeButton from "./components/public/DarkThemeButton.vue";
   import {useRoute} from 'vue-router'
   import {computed} from 'vue'
-
-  const route=useRoute();
+ 
+  const route = useRoute();
   const path = computed(() =>route.path)
 
 </script>
@@ -65,7 +65,7 @@
 
 .light {
   background-color: white;
-  border-color: rgb(0, 0, 0);
+  /* border-color: rgb(0, 0, 0); */
   background-image: url("assets/white-theme-bckground.jpg");
   color:rgb(0, 0, 0);
   transition: 0.3s;

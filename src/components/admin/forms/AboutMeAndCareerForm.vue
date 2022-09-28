@@ -1,8 +1,7 @@
 <template>
     
     <br>
-
-    <form @submit.prevent="this.writeUserData()">
+    <form @submit.prevent="this.pushForm()">
         <w-input
         class="mb3"
         outline
@@ -30,7 +29,7 @@
             accept="image/*" 
             id="choose-file" 
             name="choose-file" 
-            required>
+            >
 
             <div v-if="image">
                 <br>
@@ -46,11 +45,18 @@
             <button>Submit</button>
         </div>
     </form>
+    <br>
+    <br>
+    <w-transition-expand y>
+        <w-alert v-if="showSuccessAlert"  dismiss success class="alerts">Data was successfully submitted</w-alert>
+        <w-alert v-if="showErrorAlert" dismiss error>Data failted to get submitted</w-alert>
+    </w-transition-expand>
 </template>
 
 
 <script>
-import DataService from "../../../firebase";
+import databaseService from '@/services/databaseService';
+
 
 export default {
     props:{
@@ -58,6 +64,8 @@ export default {
     },
     data(){
         return {
+            showSuccessAlert: false,
+            showErrorAlert: false,
             title: null,
             description: null,
             image: null
@@ -77,25 +85,52 @@ export default {
             console.log("pushImage TODO")
         },
         readFile() {
-            this.example = this.$refs.file.files[0];
+            this.file = this.$refs.file.files[0];
             if (
-                this.example.name.includes(".png") ||
-                this.example.name.includes(".jpg")
+                this.file.name.includes(".png") ||
+                this.file.name.includes(".jpg") ||
+                this.file.name.includes(".jpeg")
             ) {
                 this.image = true;
-                this.preview = URL.createObjectURL(this.example);
+                this.preview = URL.createObjectURL(this.file);
             } else {
                 this.image = false;
             }
         },
-        pushFOrm(){
-            const data = {
-                title: this.title,
-                description: this.description,
-                image: this.image
+        pushForm(){
+            try{
+                databaseService.updateAboutMeOrCareerData(this.formType, this.title, this.description, this.image)
+                this.showSuccessAlert = true
+            } catch(err){
+                this.showErrorAlert = true
             }
-            DataService.createAboutMe(data)
-        }
+            
+        },
+        
+    },
+    mounted(){
+        databaseService.getAboutMeOrCareerData(this.formType, 'title').on('value', (snapshot) => {
+            console.log(snapshot.val())
+            this.title = snapshot.val()
+        }, (errorObject) => {
+            console.log('The read failed: ' + errorObject.name);
+        }); 
+
+        databaseService.getAboutMeOrCareerData(this.formType, 'description').on('value', (snapshot) => {
+            console.log(snapshot.val())
+            this.description = snapshot.val()
+        }, (errorObject) => {
+            console.log('The read failed: ' + errorObject.name);
+        }); 
+
+        databaseService.getAboutMeOrCareerData(this.formType, 'image').on('value', (snapshot) => {
+            console.log(snapshot.val())
+            this.image = snapshot.val()
+            this.preview = snapshot.val()
+        }, (errorObject) => {
+            console.log('The read failed: ' + errorObject.name);
+        }); 
+        
     }
 }
 </script>
@@ -106,7 +141,7 @@ button {
     background-color: #2d467d;
     border: 0;
     padding: 10px 40px;
-    margin-top: 20px;
+    margin-top: 0px;
     color: white;
     border-radius: 20px;
     font-size:13px;
@@ -115,6 +150,10 @@ button {
 .image{
     max-width: 100% ;
     height: auto;
+}
+
+.alerts{
+    margin-right: 10px;
 }
 
 

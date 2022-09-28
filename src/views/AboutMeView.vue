@@ -2,19 +2,16 @@
   <div class="aboutMe">
     <div class="main-content">
       <div>
-        <h1 class="pageTitle">{{ mainTitle }}</h1>
+        <h1 class="pageTitle">{{ title }}</h1>
 
       <div class="container">
           <div class="row-1-1">
-            <p class="description">{{text}}</p>
+            <p class="description">{{description}}</p>
           </div>
           <div class="row-1-2" style="display: flex; justify-content: center;" >
-            <w-image
-                class="mr5"
-                :src="`${baseUrl}images/japanese-wave.png`"
-                :width="150"
-                :height="150">
-            </w-image>
+            <img 
+              v-bind:src="image"
+              width="250"/>
           </div>
         </div>
         <br/>
@@ -30,13 +27,69 @@
   </div>
 </template>
 
+<script>
+  import CardCaroussel from '@/components/public/card-caroussel.vue';
+  import databaseService from '@/services/databaseService';
+  
+  export default {
+    name: "about-me-view",
+    components: { CardCaroussel, },
+    data() {
+      return {
+        title: null,
+        description: null,
+        image: null,
+        personnalProjects: null,
+        hobbiesAndInterests: null,
+      };
+    },
+    methods: {
+   
+    },
+    mounted() {
+      // databaseService.getAll().on("value", this.afterGettingValue);
 
-<script setup>
-import CardCaroussel from '@/components/public/card-caroussel.vue';
-var mainTitle = "Malo Le Mestre"
-var text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-var baseUrl = 'https://antoniandre.github.io/wave-ui/'
-</script>
+      databaseService.getAboutMeOrCareerData('about-me','title').on('value', (snapshot) => {
+        // console.log(snapshot.val())
+        this.title = snapshot.val()
+      }, (errorObject) => {
+        console.log('The read failed: ' + errorObject.name);
+      }); 
+
+      databaseService.getAboutMeOrCareerData('about-me', 'description').on('value', (snapshot) => {
+        this.description = snapshot.val()
+      }, (errorObject) => {
+        console.log('The read failed: ' + errorObject.name);
+      }); 
+
+      databaseService.getAboutMeOrCareerData('about-me', 'image').on('value', (snapshot) => {
+
+        this.image = snapshot.val()
+      }, (errorObject) => {
+        console.log('The read failed: ' + errorObject.name);
+      }); 
+
+      databaseService.getPersonnalProjects().on('value', (snapshot) => {
+        console.log("perso projets")
+        console.log(snapshot.val())
+        this.personnalProjects = snapshot.val()
+      }, (errorObject) => {
+        console.log('The read failed: ' + errorObject.name);
+      }); 
+
+      databaseService.getHobbiesAndInterests().on('value', (snapshot) => {
+        console.log("interests")
+        console.log(snapshot.val())
+        this.hobbiesAndInterests = snapshot.val()
+      }, (errorObject) => {
+        console.log('The read failed: ' + errorObject.name);
+      }); 
+
+
+    },
+
+  };
+  </script>
 
 <style scoped>
 .pageTitle{

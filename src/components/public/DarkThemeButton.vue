@@ -1,5 +1,5 @@
 <template>
-    <div @click="onclick" class="switch">
+    <div @click="toggleTheme" class="switch">
         <div class="flicker"></div>
         <div class="moon"></div>
     </div>
@@ -7,20 +7,16 @@
 
 
 <script setup>
-    // var isDark = false
+    import { useStore } from 'vuex'
+    const store = useStore()
+    const theme = store.getters.theme.isDark
+
     document.body.classList.toggle('light')
-    function onclick(){
-        // isDark = (isDark == true) ? false : true;
+    function toggleTheme(){
+        store.commit('SET_DARK_THEME', !theme)
         document.body.classList.toggle('light')
         document.body.classList.toggle('dark')
-        // if(isDark == true){
-        //     document.body.classList.toggle('light')
-        //     document.body.classList.toggle('dark')
-        // } else {
-        //     document.body.classList.toggle('dark')
-        // }
     }
-
 </script>
 
 <style scoped>

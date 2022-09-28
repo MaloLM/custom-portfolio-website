@@ -33,8 +33,8 @@
 
 <script setup>
 import 'font-awesome/css/font-awesome.min.css'
-import { useStore } from 'vuex'
 import DarkThemeButton from "./public/DarkThemeButton.vue";
+import { useStore } from 'vuex'
 
 const store = useStore()
 

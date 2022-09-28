@@ -2,34 +2,43 @@
   <div class="admin">
     <w-card class="main-content">
       <br> 
-      <h1> {{ viewTitle }}</h1>
+      <h1> {{ title }}</h1>
       <br> 
       <AdminTabs></AdminTabs>
     </w-card>  
   </div>
 </template>
 
-<script setup>
 
+<script>
+  import AdminTabs from '@/components/admin/AdminTabs.vue';
+  import { useStore } from 'vuex'
+  import { useRouter } from 'vue-router'
 
+  export default {
+    name: "about-me-view",
+    components: { AdminTabs, },
+    data() {
+      return {
+        title: 'Admin'
+      };
+    },
+    methods: {
+   
+    },
+    mounted() {
+      const store = useStore()
+      const router = useRouter()
 
-import { ref } from 'vue'
-import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
-import AdminTabs from '@/components/admin/AdminTabs.vue';
+      const user_status = store.getters.status
 
-const viewTitle = ref('Admin')
+      if(user_status != true){
+        router.push('/')
+      }
+    },
 
-const store = useStore()
-const router = useRouter()
-
-const user_status = store.getters.status
-
-if(user_status != true){ // TODO : correct user_status.user to user_status
-  router.push('/')
-}
-
-</script>
+  };
+  </script>
 
 
 <style scoped>  

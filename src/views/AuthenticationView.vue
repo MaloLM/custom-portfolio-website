@@ -1,31 +1,38 @@
 <template>
 <div class="authentication">
     <w-card class="main-content">
+        
         <h3>{{authTitle}}</h3>
-        <w-form action="#"
+
+        <w-form 
+        action="#" 
+        v-model="valid"
         @validate="validated++;success = error = false"
         @success="success = true"
         @error="error = true"
         @submit.prevent="Login">
         
-
             <w-input
                 label="E-mail adress"
+                type="email"
                 :validators="[validators.required]"
-                v-model="email">
-                
+                v-model="email"> 
             </w-input>
 
             <w-input
+            required
             class="mb2 spacing"
             label="Password"
             :validators="[validators.required]"
             :type="isPassword ? 'password' : 'text'"
             v-model="password">
             </w-input>
+
             <br>
+
             <div class="text-right mt6">
                 <w-button
+                    :disabled="valid === false"
                     lg
                     type="submit"
                     style="float:right;">
@@ -44,56 +51,77 @@
 
 <script setup>
     import { ref } from 'vue'
-    import DatabaseService from "../services/databaseService";
+    import DatabaseService from '../services/databaseService';
     import { useRouter } from 'vue-router'
     import { useStore } from 'vuex'
 
-    const authTitle = "Authentication"
+    const authTitle = 'Authentication'
     const store = useStore()
     const router = useRouter()
   
-    const email = ref('')
-    const password = ref('')
+    const email = ref(null)
+    const password = ref(null)
     const errorLabel = ref(null)
 
     let isPassword = true
     let success = null
     let validated = 0
 
-    if (store.getters.user == true) {
+
+    if (store.getters.status) {
         router.push('/admin') 
     }
     
+    let valid = null;
+
 
     let validators = {
         required: value => !!value || 'This field is required'
       }
 
 
-    function Login(){
-      try {
-        login(email.value, password.value)
-      }
-      catch (err) {
-        errorLabel.value = err.message
-      }
+    function isEmailValid(email) {
+        const emailRegexp = new RegExp(
+        /^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{1,}([\.\-]{0,1}[a-zA-Z]){0,}[a-zA-Z0-9]{0,}$/i
+        )
+        return emailRegexp.test(email)
     }
 
-    function login(email, password){
-        try {
-            const authRes = DatabaseService.logIn(email, password)
-
-            if(authRes){
-                store.commit('SET_LOGGED_IN', true)
-                router.push('/admin')  
-            }
-        } catch (err) {
-            errorLabel.value = err.message
+    function Login(){
+        if(isEmailValid(email.value)){
+            login(email.value, password.value)
+        }
+        else{
+            errorLabel.value = "E-mail format is invalid, please correct it to login"
             console.log(errorLabel.value)
         }
     }
 
-    
+    async function login(email, password){
+        try {
+            if(email != null && password != null){
+                const authRes = await DatabaseService.logIn(email, password)
+
+                if(authRes){
+                    store.commit('SET_LOGGED_IN', true)
+                    router.push('/admin')
+                }
+                else if (authRes.Promise.status == 'rejected'){
+                    errorLabel.value = 'Credentials are incorrect'
+                }
+            }
+        }
+        catch (err) {
+            let errorMessage = err.message
+            
+            errorMessage = errorMessage.substring(
+                errorMessage.indexOf(":") + 1, 
+                errorMessage.lastIndexOf("(")
+            );
+            
+            errorLabel.value = errorMessage
+        } 
+    }
 
 </script>
 

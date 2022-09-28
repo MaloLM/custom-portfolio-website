@@ -9,9 +9,9 @@
 import ListOfRows from '../ListOfRows.vue';
 
 export default {
-  data(props) {
+  data() {
     return {
-        formType: props.formTypeToShare
+        // formType: props.formTypeToShare
     }
   },
   components: {
@@ -21,7 +21,7 @@ export default {
     formTypeToShare: String
   },
   setup(props){
-    console.log("main", props.formTypeToShare)
+    console.log("hobbie form setup", props.formTypeToShare)
   },
   methods: {
 
