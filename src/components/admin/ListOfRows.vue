@@ -50,7 +50,11 @@ export default {
   methods: {
     toggleShow(postId){
       console.log("TOGGLED: ", postId)
-      this.postToEditId = postId
+      if(postId == "null"){
+        this.postToEditId = null
+      } else {
+        this.postToEditId = postId
+      }
         this.isShow = !this.isShow
     },
     removePost(id){
@@ -65,8 +69,10 @@ export default {
       console.log(snapshot.val())
         this.posts = snapshot.val()
         var indexes = Object.keys(this.posts)  
+        console.log("index:", indexes)
         if(indexes.length){
           indexes.forEach(element => {
+            console.log("element:", element)
             this.posts[element]['id'] = element
           });
         }

@@ -45,7 +45,7 @@ class DatabaseService {
           value: idCount
         } 
         console.log('DEA', res)
-        db.ref("/pages/"  + 'id-count/' + path + '/').update(res);
+        db.ref("/pages/id-count/" + path + '/').update(res);
         console.log('DFA')
       } else {
         console.log('DDB')
@@ -53,7 +53,7 @@ class DatabaseService {
           value: snapshot.val() + 1
         }
         console.log('DEB', res)
-        db.ref("/pages/"  + 'id-count/' + path + '/').update(res);
+        // db.ref("/pages/id-count/" + path + '/').update(res);
         console.log('DFB')
       } 
     }, (errorObject) => {
@@ -80,10 +80,9 @@ class DatabaseService {
     }); 
   }
 
-  createPost(path, id, post){
+  createPost(path, post){
     console.log('right before creation', post)
-    db.ref('/pages/' + path + '/' + id).push(post);
-    this.incrementIdCount(path);
+    db.ref('/pages/' + path).push(post);
   }
   
   getPersonnalProjects(){

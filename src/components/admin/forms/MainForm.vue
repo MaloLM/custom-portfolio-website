@@ -26,19 +26,19 @@
                 </div>
 
                 <div class="right">
-                <w-card title="Image" title-class="grey" class="fillSpace">
+                    <w-card title="Image" title-class="grey" class="fillSpace">
 
-                    <input 
-                    type="file" 
-                    ref="file" 
-                    @change="readFile()"
-                    accept="image/*" 
-                    id="choose-file" 
-                    name="choose-file">
+                        <input 
+                        type="file" 
+                        ref="file" 
+                        @change="readFile()"
+                        accept="image/*" 
+                        id="choose-file" 
+                        name="choose-file">
 
-                    <br><br>
-                        <img v-if="image" :src="preview" class="image"/>
-                </w-card>
+                        <br><br>
+                            <img v-if="image" :src="preview" class="image"/>
+                    </w-card>
                 </div>
 
                 <div class="top-left">
@@ -103,8 +103,6 @@
 
 <script>
 import databaseService from '@/services/databaseService';
-import { toNumber } from '@vue/shared';
-
 
 export default {
     props:{
@@ -119,7 +117,7 @@ export default {
             postId: props.id,
             title: null,
             description: null,
-            image: false, //'https://antoniandre.github.io/wave-ui/',
+            image: false,
             example: null,
             preview: null,
             skills: null,
@@ -127,6 +125,7 @@ export default {
             ressourceName: null,
             ressourceLink: null, 
             retrievedPost: null,
+            createdAt: null,
         }
     },
     setup(){
@@ -135,13 +134,13 @@ export default {
     mounted() {
         console.log("mounted", this.formTypePath);
         console.log("before",this.postId)
-        this.postId = parseInt(this.postId) ;
-        console.log(this.postId)
-        console.log(typeof(this.postId))
+        // this.postId = parseInt(this.postId);
+        console.log("postid/ ",this.postId)
+        console.log("typeof postId:", typeof(this.postId))
 
-        if(!isNaN(this.postId)){ //TODO choose this method orr the bottom one
+        if(this.postId != null){ //TODO choose this method orr the bottom one
             databaseService.getPostsByPathAndId(this.formTypePath, this.postId).on('value', (snapshot) => {
-                console.log(snapshot.val())
+                console.log("snapshot: ", snapshot.val())
                 this.retrievedPost = snapshot.val()
                 this.title = this.retrievedPost.title
                 this.preview = this.retrievedPost.image
@@ -151,6 +150,7 @@ export default {
                 this.ressources = this.retrievedPost.ressources
                 this.ressourceName = this.retrievedPost.ressource.name
                 this.ressourceLink = this.retrievedPost.ressource.link
+                console.log('created at:', this.createdAt)
 
             }, (errorObject) => {
                 console.log('The read failed: ' + errorObject.name);
@@ -158,16 +158,8 @@ export default {
         }
     },
     methods: {
-        logFormData(){
-            console.log(this.title)
-            console.log(this.description)
-            console.log(this.image)
-            console.log(this.skills)
-            console.log(this.ressources)
-            console.log(this.ressourceName)
-            console.log(this.ressourceLink)
-        }, 
         cancelForm(){
+            this.postId = null;
             window.scrollTo(0, 0);
             this.$emit('toggleShow', "null") // TODO
         },
@@ -185,8 +177,9 @@ export default {
             }
         },
         submitData(){
-            if(!isNaN(this.postId)){
-                console.log("is a number")
+            console.log("submit", this.postId)
+            if(this.postId != null && this.post != "null"){
+                console.log("id not null")
                 console.log(this.postId)
                 const data = {
                     id: this.postId,
@@ -198,7 +191,8 @@ export default {
                     ressouce: {
                         ressourceName: this.ressourceName,
                         ressourceLink: this.ressourceLink
-                    }
+                    },
+                    createdAt: new Date().getTime()
                 }
 
                 try{
@@ -208,11 +202,10 @@ export default {
                     alert(err)
                 }
 
-            } else if (isNaN(this.postId) || this.postId == null){
-                console.log("Not a number")
+            } else if (this.postId == null){
+                console.log("id IS null")
                 console.log(this.postId)
                 var data = {
-                    id: this.postId,
                     title: this.title,
                     description: this.description,
                     image: this.image,
@@ -220,39 +213,47 @@ export default {
                     ressources: this.ressources,
                     ressouce: {
                         ressourceName: this.ressourceName,
-                        ressourceLink: this.ressourceLink
-                    }
+                        ressourceLink: this.ressourceLink,
+                    },
+                    createdAt: new Date().getTime()
                 }
 
                 console.log(data)
-                
-                databaseService.getIdCount(this.formTypePath).on('value', (snapshot) => {
-                    console.log("a", id)
-                    var id = snapshot.val()
-                    console.log("B", id)
+                try{
+                    databaseService.createPost(this.formTypePath, data)
 
-                    if(isNaN(id)){
-                        id = toNumber(id)
-                    }
+                } catch(err){
+                    console.log("err: ", err)
+                }
 
-                    data['id'] = id                    
+                // databaseService.getIdCount(this.formTypePath).on('value', (snapshot) => {
+                //     console.log("a", id)
+                //     var id = snapshot.val()
+                //     console.log("B", id)
 
-                    console.log("C", id)
+                //     if(isNaN(id)){
+                //         id = toNumber(id)
+                //     }
 
-                    databaseService.createPost(this.formTypePath, id, data)
-                    console.log("D")
+                //     data['id'] = id                    
+
+                //     console.log("C", id)
+
                     
-                    console.log("E")
+                //     console.log("D")
+                    
+                //     console.log("E")
 
-                }, (errorObject) => {
-                    console.log('The process failed: ' + errorObject.name);
-                }); 
+                // }, (errorObject) => {
+                //     console.log('The process failed: ' + errorObject.name);
+                // }); 
 
                 
 
                 // databaseService.createPost(this.formTypePath, id, children )
                 
             }
+            this.postId = null;
         }
 
 
