@@ -1,6 +1,6 @@
 <template>
 
-  <w-app>
+  <w-app >
     <nav id="navbar">
       <router-link to="/" class="link">About me </router-link> 
       <router-link to="/career" class="link">Career </router-link> 
@@ -21,7 +21,7 @@
         </router-link> 
       </div>
     </nav>
-    <router-view/>
+    <router-view :key="$route.fullPath" />
   </w-app>
   
 </template>

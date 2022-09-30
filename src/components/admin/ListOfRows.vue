@@ -1,7 +1,7 @@
 <template>
     <div class="list-of-rows">
         <div v-if="isShow">
-            <w-button class="ma1 button-spacing" @click="isShow = !isShow"  bg-color="primary" >Add new</w-button>
+            <w-button class="ma1 button" @click="isShow = !isShow"  bg-color="primary" >Add new</w-button>
             <ListRow @toggleShow="toggleShow($event)" 
             @removePost="removePost($event)"
             v-for="post in posts"
@@ -66,26 +66,16 @@ export default {
     console.log("PATH:", this.formType)
 
     databaseService.getPosts(this.formType).on('value', (snapshot) => {
-      console.log(snapshot.val())
         this.posts = snapshot.val()
         var indexes = Object.keys(this.posts)  
-        console.log("index:", indexes)
         if(indexes.length){
           indexes.forEach(element => {
-            console.log("element:", element)
             this.posts[element]['id'] = element
           });
         }
       }, (errorObject) => {
         console.log('The read failed: ' + errorObject.name);
       }); 
-
-      // if(indexes.length){
-      //     indexes.forEach(element => {
-      //       this.posts[element]['id'] = element
-      //     });
-      //   } // walid async not working look up
-    
   }
 }
 
@@ -94,8 +84,19 @@ export default {
 
 <style scoped>
 
-.button-spacing {
+.button {
     margin-bottom: 8px;
     margin-top: 20px;
+    background-color: #282586;
 }
+
+button {
+    border: 0;
+    padding: 10px 26px;
+    color: white;
+    border-radius: 5px;
+    font-size:13px;
+}
+
+
 </style>

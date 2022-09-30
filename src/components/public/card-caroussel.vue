@@ -1,14 +1,17 @@
 <template>
-    <Carousel class="caroussel-margin" :settings="settings" :breakpoints="breakpoints">
-    <Slide v-for="slide in 10" :key="slide">
-        <w-card :image="`${settings.baseUrl}images/japanese-wave.png`" class="caroussel-card">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-
+    <Carousel class="caroussel-margin" :settings="settings" :breakpoints="breakpoints" v-if="posts">
+    <Slide  v-for="(post) in posts" :key="post.createdAt">
+      <div class="card-container">
+        <w-card :image="post.image" class="caroussel-card">
+          
+          <h4 style="float:left">{{post.title}}</h4>
           <template #actions>
             <div class="spacer"></div>
             <w-button>Read more</w-button>
           </template>
         </w-card>
+      </div>
+        
     </Slide>
 
     <template #addons>
@@ -23,18 +26,21 @@
     import { Carousel, Navigation, Slide } from 'vue3-carousel';
     
     import 'vue3-carousel/dist/carousel.css';
+
     
     export default defineComponent({
-      name: 'Break-points',
+      name: 'Breakpoints',
+      props:{
+        posts : Object
+      },
       components: {
         Carousel,
         Slide,
         Navigation,
       },
+      methods: {},
       data: () => ({
-        // carousel settings
         settings: {
-          baseUrl: 'https://antoniandre.github.io/wave-ui/',
           itemsToShow: 1,
           snapAlign: 'center',
         },
@@ -43,21 +49,27 @@
         breakpoints: {
           // 700px and up
           700: {
-            itemsToShow: 3.5,
+            itemsToShow: 3,
             snapAlign: 'center',
           },
           // 1024 and up
           1024: {
-            itemsToShow: 4,
-            snapAlign: 'start',
+            itemsToShow: 3.15,
+            snapAlign: 'center',
           },
         },
       }),
+      mounted(){},
     });
     </script>
     
 
-<style scoped>
+<style>
+
+.carousel__prev--in-active,
+.carousel__next--in-active {
+  display: none;
+}
 
 .caroussel-margin{
   margin-top: 20px;
@@ -71,5 +83,10 @@
 
 .dark .caroussel-card {
   background-color: black;
+}
+
+.card-container{
+  width: 100%;
+  height: 100%;
 }
 </style>

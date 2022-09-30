@@ -3,7 +3,7 @@
         <div class="container">
 
                 <div class="top">
-
+                <br>
                 <w-input 
                     class="mb3"
                     outline
@@ -29,6 +29,7 @@
                     <w-card title="Image" title-class="grey" class="fillSpace">
 
                         <input 
+                        :required="!isImage"
                         type="file" 
                         ref="file" 
                         @change="readFile()"
@@ -37,7 +38,7 @@
                         name="choose-file">
 
                         <br><br>
-                            <img v-if="image" :src="preview" class="image"/>
+                            <img v-if="isImage" :src="preview" class="image"/>
                     </w-card>
                 </div>
 
@@ -95,6 +96,7 @@
                 </div>
         </div>
     </form>
+    <!-- <w-progress v-if="loading" class="mt4" color="green"></w-progress> -->
     <!-- <w-transition-expand y>
         <w-alert v-if="showSuccessAlert" dismiss success class="alerts">Data was successfully submitted</w-alert>
         <w-alert v-if="showErrorAlert" dismiss error>Data failted to get submitted</w-alert>
@@ -126,31 +128,31 @@ export default {
             ressourceLink: null, 
             retrievedPost: null,
             createdAt: null,
+            imageFile: null,
+            isImage: false,
+            loading: false,
         }
     },
-    setup(){
-        console.log("on setup")
-    },
-    mounted() {
+    setup(){},
+    mounted(){
         console.log("mounted", this.formTypePath);
-        console.log("before",this.postId)
-        // this.postId = parseInt(this.postId);
-        console.log("postid/ ",this.postId)
-        console.log("typeof postId:", typeof(this.postId))
+        console.log("postid: ",this.postId,  typeof(this.postId))
 
-        if(this.postId != null){ //TODO choose this method orr the bottom one
+        if(this.postId != null && this.postId != "null"){ 
             databaseService.getPostsByPathAndId(this.formTypePath, this.postId).on('value', (snapshot) => {
-                console.log("snapshot: ", snapshot.val())
                 this.retrievedPost = snapshot.val()
+
                 this.title = this.retrievedPost.title
                 this.preview = this.retrievedPost.image
                 this.image = this.retrievedPost.image
+                this.isImage = true
                 this.description = this.retrievedPost.description
                 this.skills = this.retrievedPost.skills
                 this.ressources = this.retrievedPost.ressources
                 this.ressourceName = this.retrievedPost.ressource.name
                 this.ressourceLink = this.retrievedPost.ressource.link
-                console.log('created at:', this.createdAt)
+                console.log(this.ressourceName)
+                console.log(this.ressourceLink)
 
             }, (errorObject) => {
                 console.log('The read failed: ' + errorObject.name);
@@ -161,26 +163,28 @@ export default {
         cancelForm(){
             this.postId = null;
             window.scrollTo(0, 0);
-            this.$emit('toggleShow', "null") // TODO
+            this.$emit('toggleShow', "null")
         },
         readFile() {
-            this.example = this.$refs.file.files[0];
-            if (
-                this.example.name.includes(".png") ||
-                this.example.name.includes(".jpg") ||
-                this.example.name.includes(".jpeg")
-            ) {
-                this.image = true;
-                this.preview = URL.createObjectURL(this.example);
-            } else {
-                this.image = false;
-            }
+                this.file = this.$refs.file.files[0];
+                if (
+                    this.file.name.includes(".png") ||
+                    this.file.name.includes(".jpg") ||
+                    this.file.name.includes(".jpeg")
+                ) {
+                    this.isImage = true
+                    this.preview = URL.createObjectURL(this.file);
+                    this.imageFile = this.file
+                } else {
+                    this.isImage = false;
+                }
         },
-        submitData(){
-            console.log("submit", this.postId)
+        submitData(){ 
+            this.loading = true
+            console.log("submit, post id:", this.post)
+            this.createdAt = new Date().getTime()
+            
             if(this.postId != null && this.post != "null"){
-                console.log("id not null")
-                console.log(this.postId)
                 const data = {
                     id: this.postId,
                     title: this.title,
@@ -188,75 +192,61 @@ export default {
                     image: this.image,
                     skills: this.skills,
                     ressources: this.ressources,
-                    ressouce: {
-                        ressourceName: this.ressourceName,
-                        ressourceLink: this.ressourceLink
+                    ressource: {
+                        name: this.ressourceName,
+                        link: this.ressourceLink
                     },
-                    createdAt: new Date().getTime()
+                    createdAt: this.createdAt
                 }
 
                 try{
-                    databaseService.updatePostByPathAndId(this.formTypePath, this.postId, data)
-                    this.cancelForm()
+                    const id = this.postId
+                    if(this.isImage && this.imageFile == null){
+                        databaseService.updatePostByPathAndId(this.formTypePath, id, data)
+                    } else{
+                        databaseService.updatePostByPathAndId(this.formTypePath, id, data)
+                        .then(() => {
+                            let filename = this.createdAt + '-' + this.imageFile.name
+                            databaseService.uploadFileThenUpdatePost(this.imageFile, this.formTypePath, id , filename)
+                            this.postId = null;
+                            this.loading = false
+                            this.cancelForm()
+                        });
+                    }
+                   
                 } catch(err){
-                    alert(err)
+                    console.log(err)
                 }
 
-            } else if (this.postId == null){
-                console.log("id IS null")
-                console.log(this.postId)
+            } else if (this.postId == null || this.postId == 'null' ){
                 var data = {
                     title: this.title,
                     description: this.description,
-                    image: this.image,
+                    image: "N/A",
                     skills: this.skills,
                     ressources: this.ressources,
-                    ressouce: {
-                        ressourceName: this.ressourceName,
-                        ressourceLink: this.ressourceLink,
+                    ressource: {
+                        name: this.ressourceName,
+                        link: this.ressourceLink,
                     },
                     createdAt: new Date().getTime()
                 }
 
-                console.log(data)
                 try{
                     databaseService.createPost(this.formTypePath, data)
-
+                    .then(() => {
+                        let filename = this.createdAt + '-' + this.imageFile.name
+                        console.log('FINAL FILE NAME:', filename)
+                        databaseService.uploadFileThenPushPost(this.imageFile , filename, this.formTypePath);
+                        this.postId = null;
+                        this.loading = false;
+                        this.cancelForm();
+                    });
                 } catch(err){
-                    console.log("err: ", err)
-                }
-
-                // databaseService.getIdCount(this.formTypePath).on('value', (snapshot) => {
-                //     console.log("a", id)
-                //     var id = snapshot.val()
-                //     console.log("B", id)
-
-                //     if(isNaN(id)){
-                //         id = toNumber(id)
-                //     }
-
-                //     data['id'] = id                    
-
-                //     console.log("C", id)
-
-                    
-                //     console.log("D")
-                    
-                //     console.log("E")
-
-                // }, (errorObject) => {
-                //     console.log('The process failed: ' + errorObject.name);
-                // }); 
-
-                
-
-                // databaseService.createPost(this.formTypePath, id, children )
-                
+                    console.log(err)
+                }             
             }
-            this.postId = null;
         }
-
-
     }
 }
 </script>

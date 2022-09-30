@@ -28,14 +28,12 @@
             @change="readFile()"
             accept="image/*" 
             id="choose-file" 
-            name="choose-file" 
-            >
+            name="choose-file">
 
             <div v-if="image">
                 <br>
             </div>
-
-                <img v-if="image" :src="preview" class="image" />
+            <img v-if="image" :src="preview" class="image" />
             
         </w-card>
 
@@ -68,22 +66,14 @@ export default {
             showErrorAlert: false,
             title: null,
             description: null,
-            image: null
+            image: null,
+            imageFile: null,
         }
     },
     setup(props){
-        console.log("aboutme or career")
         console.log(props.formType)
     },
     methods: {
-        logFormData(){
-            console.log(this.title)
-            console.log(this.description)
-            console.log(this.image)
-        }, 
-        pushImage(){
-            console.log("pushImage TODO")
-        },
         readFile() {
             this.file = this.$refs.file.files[0];
             if (
@@ -92,6 +82,7 @@ export default {
                 this.file.name.includes(".jpeg")
             ) {
                 this.image = true;
+                this.imageFile = this.file
                 this.preview = URL.createObjectURL(this.file);
             } else {
                 this.image = false;
@@ -99,7 +90,8 @@ export default {
         },
         pushForm(){
             try{
-                databaseService.updateAboutMeOrCareerData(this.formType, this.title, this.description, this.image)
+                databaseService.uploadFileThenUpdateAboutMe(this.formType, this.imageFile, this.title, this.description)
+                // databaseService.updateAboutMeOrCareerData(this.formType, this.title, this.description, this.imageFile)
                 this.showSuccessAlert = true
             } catch(err){
                 this.showErrorAlert = true
@@ -110,28 +102,31 @@ export default {
     },
     mounted(){
         databaseService.getAboutMeOrCareerData(this.formType, 'title').on('value', (snapshot) => {
-            console.log(snapshot.val())
             this.title = snapshot.val()
+            databaseService.getAboutMeOrCareerData(this.formType, 'description').on('value', (snapshot) => {
+                this.description = snapshot.val()
+
+                databaseService.getAboutMeOrCareerData(this.formType, 'image').on('value', (snapshot) => {
+                    this.image = snapshot.val()
+                    this.preview = snapshot.val()
+
+                }, (errorObject) => {
+                    console.log('The read failed: ' + errorObject.name);
+                }); 
+
+            }, (errorObject) => {
+                console.log('The read failed: ' + errorObject.name);
+            }); 
+
         }, (errorObject) => {
             console.log('The read failed: ' + errorObject.name);
         }); 
 
-        databaseService.getAboutMeOrCareerData(this.formType, 'description').on('value', (snapshot) => {
-            console.log(snapshot.val())
-            this.description = snapshot.val()
-        }, (errorObject) => {
-            console.log('The read failed: ' + errorObject.name);
-        }); 
-
-        databaseService.getAboutMeOrCareerData(this.formType, 'image').on('value', (snapshot) => {
-            console.log(snapshot.val())
-            this.image = snapshot.val()
-            this.preview = snapshot.val()
-        }, (errorObject) => {
-            console.log('The read failed: ' + errorObject.name);
-        }); 
         
+
+       
     }
+
 }
 </script>
 

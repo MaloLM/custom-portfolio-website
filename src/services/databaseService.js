@@ -1,7 +1,9 @@
 import firebase from "../firebase";
-import 'firebase/compat/auth';
-import "firebase/compat/database";
 import { toNumber } from "@vue/shared";
+import 'firebase/compat/auth';
+import 'firebase/compat/database';
+import 'firebase/compat/storage';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const db = firebase.database()
 
@@ -22,7 +24,7 @@ class DatabaseService {
   }
 
 
-  updatePostByPathAndId(path, id, children){
+  async updatePostByPathAndId(path, id, children){
     db.ref('/pages/' + path + '/' + id).update(children);
   }
 
@@ -30,6 +32,7 @@ class DatabaseService {
   getIdCount(path){
     return db.ref("/pages/"  + 'id-count/' + path + '/value');
   }
+
 
   incrementIdCount(path){
     console.log('DA')
@@ -61,6 +64,7 @@ class DatabaseService {
     }); 
   }
 
+
   decrementIdCount(path){
     this.getIdCount(path).on('value', (snapshot) => {
       if(isNaN(snapshot.val())){
@@ -80,7 +84,7 @@ class DatabaseService {
     }); 
   }
 
-  createPost(path, post){
+  async createPost(path, post){
     console.log('right before creation', post)
     db.ref('/pages/' + path).push(post);
   }
@@ -96,12 +100,12 @@ class DatabaseService {
 
 
   getEducation(){
-    return db.ref("/pages/career/education");
+     return db.ref("/pages/career/education");
   }
   
 
   getProfessionalProjects(){
-    return db.ref("/pages/career/professional-projects");
+     return db.ref("/pages/career/professional-projects");
   }
 
   
@@ -110,7 +114,7 @@ class DatabaseService {
   }
 
   getPosts(path){
-    return db.ref('/pages/'+ path);
+    return db.ref('/pages/'+ path + '/');
   }
 
 
@@ -118,25 +122,62 @@ class DatabaseService {
     return db.ref('/pages/'+ path + '/').child(id).remove();
   }
 
-  updateAboutMeOrCareerData(path, title, description, image){
-    var children = {
-      title: title,
-      description: description,
-      image: image
-    }
-    db.ref('/pages/' + path).update(children);
+  // updateAboutMeOrCareerData(path, title, description, image){
+    
+  //   var children = {
+  //     title: title,
+  //     description: description,
+  //     image: image
+  //   }
+  //   db.ref('/pages/' + path).update(children);
+  // }
+
+  uploadFileThenUpdateAboutMe(path, file, title, description){
+    // https://firebase.google.com/docs/storage/web/upload-files
+    const storage = getStorage();
+    const storageRef = ref(storage, 'images/'+ file.name);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on('state_changed', 
+        (snapshot) => {
+  
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+          switch (snapshot.state) {
+            case 'paused':
+              console.log('Upload is paused');
+              break;
+            case 'running':
+              console.log('Upload is running');
+              break;
+          }
+        }, 
+        (error) => {
+          console.log("error: ", error)
+        }, 
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref)
+          .then((downloadURL) => {
+            var children = {
+              title: title,
+              description: description,
+              image: downloadURL
+            }
+            db.ref('/pages/' + path).update(children);
+            
+           });
+        }
+      );
   }
 
-  createAboutMe(data) {
-    return db.push(data);
-  }
+  // createAboutMe(data) {
+  //   return db.push(data);
+  // }
 
 
   update(key, value) {
     return db.child(key).update(value);
   }
-
-
 
 
   deleteAll() {
@@ -152,6 +193,102 @@ class DatabaseService {
             return false
           }
       }
+
+
+  uploadFileThenPushPost(file, filename, formType) {
+    // https://firebase.google.com/docs/storage/web/upload-files
+    const storage = getStorage();
+    const storageRef = ref(storage, 'images/'+ filename);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on('state_changed', 
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+          switch (snapshot.state) {
+            case 'paused':
+              console.log('Upload is paused');
+              break;
+            case 'running':
+              console.log('Upload is running');
+              break;
+          }
+        }, 
+        (error) => {
+          console.log("error: ", error)
+        }, 
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref)
+          .then((downloadURL) => {
+            console.log('File available at', downloadURL);
+            let dataToUpdate = {
+              image: downloadURL
+            }
+
+            this.getPosts(formType).on('value', (snapshot) => {
+
+              let posts = snapshot.val()
+              let max = {
+                id: 0,
+                value: 0,
+              }
+              
+              Object.entries(posts).forEach(([key, value]) => {
+               
+                if(value.createdAt > max.value){
+                  max.value = value.createdAt
+                  max.id = key
+                }
+              })
+              this.updatePostByPathAndId(formType, max.id, dataToUpdate)
+
+          }, (errorObject) => {
+              console.log('The read failed: ' + errorObject.name);
+          }); 
+            
+          });
+        }
+      );
+  }
+
+
+  uploadFileThenUpdatePost(file, formType, postId, filename) {
+    // https://firebase.google.com/docs/storage/web/upload-files
+    const storage = getStorage();
+    const storageRef = ref(storage, 'images/'+ filename);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on('state_changed', 
+        (snapshot) => {
+  
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+          switch (snapshot.state) {
+            case 'paused':
+              console.log('Upload is paused');
+              break;
+            case 'running':
+              console.log('Upload is running');
+              break;
+          }
+        }, 
+        (error) => {
+          console.log("error: ", error)
+        }, 
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref)
+          .then((downloadURL) => {
+
+            let dataToUpdate = {
+                image: downloadURL
+            }
+            this.updatePostByPathAndId(formType, postId, dataToUpdate)
+           });
+        }
+      );
+
+  }
+
 }
 
 export default new DatabaseService();

@@ -1,8 +1,8 @@
 <template>
     <div class="list-row">
         <w-card>
-        <h4 style="float:left;">{{viewTitle}} </h4>
-             ({{rowId}})
+        <h4 style="float:left;">{{viewTitle}} ({{rowId}})</h4>
+              
         <div style="float:right;" >
             <button 
             class="editButton" 
@@ -52,7 +52,6 @@
             console.log('emit for remove')
             this.$emit('removePost', this.rowId)
         }
-        
     },
     mounted() {
         

@@ -15,27 +15,18 @@
     <br>
     <div class="row-3">
         <h1>Job experience</h1>
-        <CardCaroussel></CardCaroussel>
+        <CardCaroussel :posts="jobExperiences"></CardCaroussel>
       </div>
       <div class="row-4">
         <h1>Professionnal projects </h1>
-        <CardCaroussel></CardCaroussel>
+        <CardCaroussel :posts="professionalProjects"></CardCaroussel>
       </div>
       <div class="row-5">
         <h1>Education </h1>
-        <CardCaroussel></CardCaroussel>
+        <CardCaroussel :posts="education"></CardCaroussel>
       </div>
   </div>
 </template>
-
-<!-- 
-<script setup>
-  import CardCaroussel from '@/components/public/card-caroussel.vue';
-  var mainTitle = "Career"
-  var text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-
-</script> -->
-
 
 <script>
   import CardCaroussel from '@/components/public/card-caroussel.vue';
@@ -57,31 +48,78 @@
       };
     },
     methods: {
-   
+      sortByCreationDate(posts){
+        let array = []
+
+        Object.entries(posts).forEach(([key, value]) => {
+              value['id'] = key
+              array.push(value)
+        })
+
+        array = array.sort((a, b) => {
+            return b.createdAt - a.createdAt;
+        });
+        return array
+
+      }
     },
     mounted() {
-      // databaseService.getAll().on("value", this.afterGettingValue);
-
       databaseService.getAboutMeOrCareerData('career','title').on('value', (snapshot) => {
-        // console.log(snapshot.val())
         this.title = snapshot.val()
+
+        databaseService.getAboutMeOrCareerData('career','description').on('value', (snapshot) => {
+          this.description = snapshot.val()
+
+          databaseService.getAboutMeOrCareerData('career','image').on('value', (snapshot) => {
+            this.image = snapshot.val()
+
+            databaseService.getJobExperiences().on('value', (snapshot) => {
+              
+              let posts = snapshot.val()
+              posts = this.sortByCreationDate(posts)
+              this.jobExperiences = posts
+
+              databaseService.getProfessionalProjects().on('value', (snapshot) => {
+                
+                let posts = snapshot.val()
+                posts = this.sortByCreationDate(posts)
+                this.professionalProjects  = posts
+
+
+                databaseService.getEducation().on('value', (snapshot) => {
+
+                  let posts = snapshot.val()
+                  posts = this.sortByCreationDate(posts)
+                  this.education  = posts
+
+
+                }, (errorObject) => {
+                  console.log('The read failed: ' + errorObject.name);
+                });
+
+              }, (errorObject) => {
+                console.log('The read failed: ' + errorObject.name);
+              });
+
+            }, (errorObject) => {
+              console.log('The read failed: ' + errorObject.name);
+            });
+
+          }, (errorObject) => {
+            console.log('The read failed: ' + errorObject.name);
+          });
+
+        }, (errorObject) => {
+          console.log('The read failed: ' + errorObject.name);
+        }); 
+
       }, (errorObject) => {
         console.log('The read failed: ' + errorObject.name);
       }); 
 
-      databaseService.getAboutMeOrCareerData('career','description').on('value', (snapshot) => {
-        // console.log(snapshot.val())
-        this.description = snapshot.val()
-      }, (errorObject) => {
-        console.log('The read failed: ' + errorObject.name);
-      }); 
+      
 
-      databaseService.getAboutMeOrCareerData('career','image').on('value', (snapshot) => {
-        console.log(snapshot.val())
-        this.image = snapshot.val()
-      }, (errorObject) => {
-        console.log('The read failed: ' + errorObject.name);
-      }); 
+       
     },
   };
   </script>

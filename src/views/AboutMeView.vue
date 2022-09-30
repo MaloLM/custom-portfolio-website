@@ -1,5 +1,5 @@
 <template>
-  <div class="aboutMe">
+  <div class="aboutMe" >
     <div class="main-content">
       <div>
         <h1 class="pageTitle">{{ title }}</h1>
@@ -18,10 +18,10 @@
       </div>
 
       <h1>Personnal projects</h1>
-      <CardCaroussel></CardCaroussel>
+      <CardCaroussel :posts="personnalProjectsPosts"></CardCaroussel>
 
       <h1>Hobbies and interests</h1>
-      <CardCaroussel></CardCaroussel>
+      <CardCaroussel :posts="hobbiesAndInterestsPosts"></CardCaroussel>
       
     </div>
   </div>
@@ -39,52 +39,68 @@
         title: null,
         description: null,
         image: null,
-        personnalProjects: null,
-        hobbiesAndInterests: null,
+        personnalProjectsPosts: null,
+        hobbiesAndInterestsPosts: null,
       };
     },
     methods: {
-   
+      sortByCreationDate(posts){
+        let array = []
+
+        Object.entries(posts).forEach(([key, value]) => {
+              value['id'] = key
+              array.push(value)
+        })
+
+        array = array.sort((a, b) => {
+            return b.createdAt - a.createdAt;
+        });
+        return array
+
+      }
     },
+    setup(){},
     mounted() {
-      // databaseService.getAll().on("value", this.afterGettingValue);
 
       databaseService.getAboutMeOrCareerData('about-me','title').on('value', (snapshot) => {
-        // console.log(snapshot.val())
         this.title = snapshot.val()
+        databaseService.getAboutMeOrCareerData('about-me', 'description').on('value', (snapshot) => {
+          this.description = snapshot.val()
+          databaseService.getAboutMeOrCareerData('about-me', 'image').on('value', (snapshot) => {
+            this.image = snapshot.val()
+
+            databaseService.getPersonnalProjects('about-me', 'image').on('value', (snapshot) => {
+            
+              let posts = snapshot.val()
+              posts = this.sortByCreationDate(posts)
+              this.personnalProjectsPosts = posts
+
+
+              databaseService.getHobbiesAndInterests('about-me', 'image').on('value', (snapshot) => {
+
+              let posts = snapshot.val()
+              posts = this.sortByCreationDate(posts)
+              this.hobbiesAndInterestsPosts = posts
+              
+              }, (errorObject) => {
+                console.log('The read failed: ' + errorObject.name);
+              });
+            
+            }, (errorObject) => {
+              console.log('The read failed: ' + errorObject.name);
+            });
+            
+          }, (errorObject) => {
+            console.log('The read failed: ' + errorObject.name);
+          }); 
+
+        }, (errorObject) => {
+          console.log('The read failed: ' + errorObject.name);
+        }); 
+      
       }, (errorObject) => {
         console.log('The read failed: ' + errorObject.name);
       }); 
-
-      databaseService.getAboutMeOrCareerData('about-me', 'description').on('value', (snapshot) => {
-        this.description = snapshot.val()
-      }, (errorObject) => {
-        console.log('The read failed: ' + errorObject.name);
-      }); 
-
-      databaseService.getAboutMeOrCareerData('about-me', 'image').on('value', (snapshot) => {
-
-        this.image = snapshot.val()
-      }, (errorObject) => {
-        console.log('The read failed: ' + errorObject.name);
-      }); 
-
-      databaseService.getPersonnalProjects().on('value', (snapshot) => {
-        console.log("perso projets")
-        console.log(snapshot.val())
-        this.personnalProjects = snapshot.val()
-      }, (errorObject) => {
-        console.log('The read failed: ' + errorObject.name);
-      }); 
-
-      databaseService.getHobbiesAndInterests().on('value', (snapshot) => {
-        console.log("interests")
-        console.log(snapshot.val())
-        this.hobbiesAndInterests = snapshot.val()
-      }, (errorObject) => {
-        console.log('The read failed: ' + errorObject.name);
-      }); 
-
 
     },
 
@@ -112,4 +128,5 @@
 .description{
   font-size: 18px;
 }
+
 </style>
