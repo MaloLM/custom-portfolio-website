@@ -17,11 +17,9 @@
         <br/>
       </div>
 
-      <h1>Personnal projects</h1>
-      <CardCaroussel :posts="personnalProjectsPosts"></CardCaroussel>
+      <CardCaroussel title="Personnal projects" :posts="personnalProjectsPosts"></CardCaroussel>
 
-      <h1>Hobbies and interests</h1>
-      <CardCaroussel :posts="hobbiesAndInterestsPosts"></CardCaroussel>
+      <CardCaroussel title="Hobbies and interests" :posts="hobbiesAndInterestsPosts"></CardCaroussel>
       
     </div>
   </div>

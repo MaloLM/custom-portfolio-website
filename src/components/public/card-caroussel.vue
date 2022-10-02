@@ -1,13 +1,15 @@
 <template>
+    <h1 v-if="posts != null"> {{title}} </h1>
     <Carousel class="caroussel-margin" :settings="settings" :breakpoints="breakpoints" v-if="posts">
     <Slide  v-for="(post) in posts" :key="post.createdAt">
       <div class="card-container">
         <w-card :image="post.image" class="caroussel-card">
-          
           <h4 style="float:left">{{post.title}}</h4>
           <template #actions>
             <div class="spacer"></div>
-            <w-button>Read more</w-button>
+            <!-- <w-button>Read more</w-button> -->
+
+            <button>Read more</button>
           </template>
         </w-card>
       </div>
@@ -31,6 +33,7 @@
     export default defineComponent({
       name: 'Breakpoints',
       props:{
+        title: String,
         posts : Object
       },
       components: {
@@ -44,8 +47,6 @@
           itemsToShow: 1,
           snapAlign: 'center',
         },
-        // breakpoints are mobile first
-        // any settings not specified will fallback to the carousel settings
         breakpoints: {
           // 700px and up
           700: {
@@ -82,11 +83,23 @@
 }
 
 .dark .caroussel-card {
-  background-color: black;
+  background-color: rgb(30, 30, 30);
 }
 
 .card-container{
   width: 100%;
   height: 100%;
+}
+
+button {
+    background-color: #2d467d;
+    border: 0;
+    padding: 10px 25px;
+    margin-top: 20px;
+    margin-left: 10px;
+    /* margin-left: 10px; */
+    color: white;
+    border-radius: 6px;
+    font-size:13px;
 }
 </style>

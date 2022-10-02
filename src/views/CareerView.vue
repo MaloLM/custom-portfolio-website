@@ -14,16 +14,13 @@
     </div>
     <br>
     <div class="row-3">
-        <h1>Job experience</h1>
-        <CardCaroussel :posts="jobExperiences"></CardCaroussel>
+        <CardCaroussel title="Job experience" :posts="jobExperiences"></CardCaroussel>
       </div>
       <div class="row-4">
-        <h1>Professionnal projects </h1>
-        <CardCaroussel :posts="professionalProjects"></CardCaroussel>
+        <CardCaroussel title="Professionnal projects" :posts="professionalProjects"></CardCaroussel>
       </div>
       <div class="row-5">
-        <h1>Education </h1>
-        <CardCaroussel :posts="education"></CardCaroussel>
+        <CardCaroussel title="Education" :posts="education"></CardCaroussel>
       </div>
   </div>
 </template>
@@ -49,18 +46,23 @@
     },
     methods: {
       sortByCreationDate(posts){
-        let array = []
+        var size = Object.keys(posts).length;
 
-        Object.entries(posts).forEach(([key, value]) => {
-              value['id'] = key
-              array.push(value)
-        })
+        if(size > 0){
+          let array = []
 
-        array = array.sort((a, b) => {
-            return b.createdAt - a.createdAt;
-        });
-        return array
+          Object.entries(posts).forEach(([key, value]) => {
+                value['id'] = key
+                array.push(value)
+          })
 
+          array = array.sort((a, b) => {
+              return b.createdAt - a.createdAt;
+          });
+          return array
+        } else {
+          console.log("error: empty object")
+        }
       }
     },
     mounted() {

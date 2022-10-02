@@ -135,7 +135,6 @@ export default {
     },
     setup(){},
     mounted(){
-        console.log("mounted", this.formTypePath);
         console.log("postid: ",this.postId,  typeof(this.postId))
 
         if(this.postId != null && this.postId != "null"){ 
@@ -151,8 +150,6 @@ export default {
                 this.ressources = this.retrievedPost.ressources
                 this.ressourceName = this.retrievedPost.ressource.name
                 this.ressourceLink = this.retrievedPost.ressource.link
-                console.log(this.ressourceName)
-                console.log(this.ressourceLink)
 
             }, (errorObject) => {
                 console.log('The read failed: ' + errorObject.name);
@@ -181,8 +178,6 @@ export default {
         },
         submitData(){ 
             this.loading = true
-            console.log("submit, post id:", this.post)
-            this.createdAt = new Date().getTime()
             
             if(this.postId != null && this.post != "null"){
                 const data = {
@@ -202,7 +197,10 @@ export default {
                 try{
                     const id = this.postId
                     if(this.isImage && this.imageFile == null){
-                        databaseService.updatePostByPathAndId(this.formTypePath, id, data)
+                        databaseService.updatePostByPathAndId(this.formTypePath, id, data).then(() => {
+                            this.loading = false
+                            this.cancelForm()
+                        });
                     } else{
                         databaseService.updatePostByPathAndId(this.formTypePath, id, data)
                         .then(() => {
@@ -236,7 +234,6 @@ export default {
                     databaseService.createPost(this.formTypePath, data)
                     .then(() => {
                         let filename = this.createdAt + '-' + this.imageFile.name
-                        console.log('FINAL FILE NAME:', filename)
                         databaseService.uploadFileThenPushPost(this.imageFile , filename, this.formTypePath);
                         this.postId = null;
                         this.loading = false;

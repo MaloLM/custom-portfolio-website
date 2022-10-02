@@ -7,7 +7,6 @@
       <router-link to="/travels" class="link">Travels </router-link>
       <router-link to="/get-in-touch" class="link">Get in touch </router-link> 
       
-      
       <div style="float:right">
         <DarkThemeButton style="float:left" />
         <router-link to="/authentication" class="link">
@@ -26,7 +25,7 @@
   
 </template>
 
-<script setup>
+<!-- <script setup>
   import 'font-awesome/css/font-awesome.min.css'
   import DarkThemeButton from "./components/public/DarkThemeButton.vue";
   import {useRoute} from 'vue-router'
@@ -35,6 +34,27 @@
   const route = useRoute();
   const path = computed(() =>route.path)
 
+</script> -->
+
+<script>
+  import 'font-awesome/css/font-awesome.min.css'
+  import DarkThemeButton from "./components/public/DarkThemeButton.vue";
+  import {useRoute} from 'vue-router'
+  import {computed} from 'vue'
+
+  export default{
+    components: {
+      DarkThemeButton
+    },
+    data: () => {
+      return {
+        path: computed(() =>useRoute().path)
+      }
+    },
+    created(){
+      document.title = "Malo Le Mestre"
+    } 
+  }
 </script>
 
 
@@ -56,7 +76,7 @@
 }
 
 .main-content{
-    margin-top: 50px;
+    margin-top: 25px;
     margin-bottom: 100%;
     margin-left: 70px;
     margin-right: 70px;
@@ -65,7 +85,6 @@
 
 .light {
   background-color: white;
-  /* border-color: rgb(0, 0, 0); */
   background-image: url("assets/white-theme-bckground.jpg");
   color:rgb(0, 0, 0);
   transition: 0.3s;
@@ -100,6 +119,6 @@ nav a.router-link-exact-active {
 }
 
 .link {
-    padding-right: 20px;
+    padding-right: 27px;
 }
 </style>

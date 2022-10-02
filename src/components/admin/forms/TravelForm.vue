@@ -74,11 +74,7 @@
                 this.$emit('toggleShow', 'hello')
             },
             logFormData(){
-                console.log(this.countryName)
-                console.log(this.countryCode)
-                console.log(this.duration)
-                console.log(this.date)
-
+                
             }
         }
     }

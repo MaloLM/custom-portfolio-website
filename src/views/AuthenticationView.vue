@@ -28,19 +28,19 @@
             v-model="password">
             </w-input>
 
-            <br>
 
-            <div class="text-right mt6">
-                <w-button
+            <div>
+                <button
                     :disabled="valid === false"
-                    lg
                     type="submit"
                     style="float:right;">
                     Login
-                </w-button>
+                </button>
             </div>
 
         </w-form>
+        <br>
+        <br>
         <br>
         <w-alert error v-if="errorLabel">{{errorLabel}}</w-alert>
     </w-card>
@@ -137,6 +137,18 @@
     transition: 0.3s;
     background-color: white;
   }
+
+button {
+    background-color: #2d467d;
+    border: 0;
+    padding: 10px 40px;
+    margin-top: 20px;
+    margin-left: 10px;
+    /* margin-left: 10px; */
+    color: white;
+    border-radius: 20px;
+    font-size:13px;
+}
 
 
 .spacing {
