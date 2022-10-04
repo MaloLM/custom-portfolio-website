@@ -5,7 +5,7 @@
       <link rel="shortcut icon" type="image/png" href="./assets/favicon.png"/>
       ...
   </head>
-  <w-app >
+
     <nav id="navbar">
       <router-link to="/" class="link">About me </router-link> 
       <router-link to="/career" class="link">Career </router-link> 
@@ -26,20 +26,10 @@
       </div>
     </nav>
     <router-view :key="$route.fullPath" />
-  </w-app>
+
   
 </template>
 
-<!-- <script setup>
-  import 'font-awesome/css/font-awesome.min.css'
-  import DarkThemeButton from "./components/public/DarkThemeButton.vue";
-  import {useRoute} from 'vue-router'
-  import {computed} from 'vue'
- 
-  const route = useRoute();
-  const path = computed(() =>route.path)
-
-</script> -->
 
 <script>
   import 'font-awesome/css/font-awesome.min.css'
@@ -64,31 +54,27 @@
 
 
 <style>
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
   color: #2c3e50;
   transition: 0.3s;
-   /* background-image: url("assets/background.jpg"); */
-   background-color: #030303;
-   background-image: url("assets/white-theme-bckground.jpg");
-   background-repeat: no-repeat;
-   background-attachment: fixed;
-   
+  background-color: #030303;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  width: 100%;
+  height: 100%;
 }
 
 .main-content{
-    margin-top: 25px;
-    margin-bottom: 100%;
-    margin-left: 70px;
-    margin-right: 70px;
-    transition: 0.3s;
-  }
+  margin-top: 25px;
+  margin-left: 70px;
+  margin-right: 70px;
+  transition: 0.3s;
+}
 
-.light {
+.light #app {
   background-color: white;
   background-image: url("assets/white-theme-bckground.jpg");
   color:rgb(0, 0, 0);
@@ -96,10 +82,10 @@
 }
 
 .dark #app {
-    background-color: rgb(57, 57, 57);
-    color:rgb(244, 244, 244);
-    background-image: url("assets/dark-theme-bckground.jpg");
-    transition: 0.3s;
+  background-color: rgb(57, 57, 57);
+  color:rgb(244, 244, 244);
+  background-image: url("assets/dark-theme-bckground.jpg");
+  transition: 0.3s;
 }
 
 nav {
@@ -124,6 +110,6 @@ nav a.router-link-exact-active {
 }
 
 .link {
-    padding-right: 27px;
+  padding-right: 27px;
 }
 </style>

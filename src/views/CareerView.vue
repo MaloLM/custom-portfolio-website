@@ -7,7 +7,7 @@
         <p class="description">{{description}}</p>
       </div>
       <div class="row-1-2" style="display: flex; justify-content: center;">
-        <img 
+        <img v-if="image != null && image != ''"
         v-bind:src="image"
         width="250"/>
       </div>

@@ -15,17 +15,18 @@ var pageTitle = "Get in touch"
 
 
 <style scoped>
-
 .main-content{
-margin-top: 100px;
-margin-left: 100px;
-margin-right: 100px;
-background-color: rgba(255, 255, 255, 1);
+  margin-top: 100px;
+  margin-left: 100px;
+  margin-right: 100px;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.getInTouch{
+  height: 100vh;
 }
 
 .dark .w-card {
   background-color: black;
  }
-
-
 </style>

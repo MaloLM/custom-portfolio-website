@@ -10,17 +10,8 @@
         <router-link to="/" class="link">
             <button class="GoHomeButton"> Go home</button>
         </router-link> 
-
-
     </div>
-
 </template>
-
-
-<script>
-
-</script>
-
 
 <style scoped>
 .main-content{
@@ -33,16 +24,16 @@
     display: flex; 
     flex-direction: column;
     align-items: center;
-  }
+}
 
 .NotFoundMessage {
-font-weight: bold;
-font-size: 20px;
-margin: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 10px;
 }
 
 .NotFoundTitle {
-font-size: 100px;
+    font-size: 100px;
 }
 
 .GoHomeButton {
@@ -51,7 +42,6 @@ font-size: 100px;
     padding: 10px 40px;
     margin-top: 20px;
     margin-left: 10px;
-    /* margin-left: 10px; */
     color: white;
     border-radius: 20px;
     font-size:13px;

@@ -9,9 +9,9 @@
             <p class="description">{{description}}</p>
           </div>
           <div class="row-1-2" style="display: flex; justify-content: center;" >
-            <img 
+            <img v-if="image != null && image != ''"
               v-bind:src="image"
-              width="250"/>
+              />
           </div>
         </div>
         <br/>
@@ -57,7 +57,8 @@
 
       }
     },
-    setup(){},
+    setup(){
+    },
     mounted() {
 
       databaseService.getAboutMeOrCareerData('about-me','title').on('value', (snapshot) => {
@@ -79,6 +80,8 @@
               let posts = snapshot.val()
               posts = this.sortByCreationDate(posts)
               this.hobbiesAndInterestsPosts = posts
+              console.log(this.image)
+
               
               }, (errorObject) => {
                 console.log('The read failed: ' + errorObject.name);
@@ -113,8 +116,8 @@
 .container {
   display: grid; 
   grid-auto-flow: row dense; 
-  grid-auto-columns: 1fr; 
-  grid-template-columns: 1fr 1fr; 
+  grid-auto-columns: 1.2fr; 
+  grid-template-columns: fr 1fr; 
   grid-template-rows: 1fr; 
   gap: 0px 0px; 
   grid-template-areas: 

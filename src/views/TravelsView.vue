@@ -16,13 +16,15 @@
 
 
 <style scoped>
-
   .map-content{
-  margin-top: 30px;
-  padding-bottom: 90%;
-  margin-left: 30px;
-  margin-right: 30px;
-  background-color: rgba(255, 255, 255, 1);
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+    background-color: rgba(255, 255, 255, 1);
+  }
+
+  .travels{
+    height: 100vh;
   }
 
   .information{
@@ -33,9 +35,5 @@
   .dark .w-card {
   background-color: black;
  }
-
-  /* .pageTitle{
-  font-size: 60px;
-} */
 </style>
   
