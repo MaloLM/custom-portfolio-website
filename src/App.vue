@@ -1,5 +1,10 @@
 <template>
 
+  <head>
+      <meta charset="utf-8">
+      <link rel="shortcut icon" type="image/png" href="./assets/favicon.png"/>
+      ...
+  </head>
   <w-app >
     <nav id="navbar">
       <router-link to="/" class="link">About me </router-link> 

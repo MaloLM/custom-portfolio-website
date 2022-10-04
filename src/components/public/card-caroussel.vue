@@ -4,6 +4,7 @@
     <Slide  v-for="(post) in posts" :key="post.createdAt">
       <div class="card-container">
         <w-card :image="post.image" class="caroussel-card">
+          <w-divider class="test mx-3"></w-divider>
           <h4 style="float:left">{{post.title}}</h4>
           <template #actions>
             <div class="spacer"></div>
@@ -49,8 +50,8 @@
         },
         breakpoints: {
           // 700px and up
-          700: {
-            itemsToShow: 3,
+          800: {
+            itemsToShow: 2,
             snapAlign: 'center',
           },
           // 1024 and up
@@ -101,5 +102,10 @@ button {
     color: white;
     border-radius: 6px;
     font-size:13px;
+}
+
+.test{
+  margin-top: -12px;
+  margin-bottom: 10px;
 }
 </style>

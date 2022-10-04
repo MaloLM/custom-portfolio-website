@@ -1,6 +1,6 @@
 <template>
   <div class="getInTouch">
-      <w-card class="map-content">
+      <w-card class="main-content">
         <h1 class="pageTitle">{{pageTitle}}</h1>
         <ContactForm></ContactForm>
       </w-card>
@@ -16,7 +16,7 @@ var pageTitle = "Get in touch"
 
 <style scoped>
 
-.map-content{
+.main-content{
 margin-top: 100px;
 margin-left: 100px;
 margin-right: 100px;

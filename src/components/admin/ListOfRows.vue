@@ -58,13 +58,10 @@ export default {
         this.isShow = !this.isShow
     },
     removePost(id){
-      console.log('emit recieved', id)
       databaseService.removePost(this.formType, id)
     }
   },
   mounted() {
-    console.log("PATH:", this.formType)
-
     databaseService.getPosts(this.formType).on('value', (snapshot) => {
         this.posts = snapshot.val()
         var indexes = Object.keys(this.posts)  
