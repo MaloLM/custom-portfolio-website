@@ -7,7 +7,7 @@ export default createStore({
       theme: {
         isDark: false,
         darkInputColor: 'white',
-        lightInputColor: 'grey',
+        lightInputColor: 'info',
       },
       
   },

@@ -21,11 +21,10 @@
 
             <w-input
             required
-            class="mb2 spacing"
+            class="mb2 spacing" 
             label="Password"
-            :validators="[validators.required]"
-            :type="isPassword ? 'password' : 'text'"
-            v-model="password">
+            v-model="password"
+            :validators="[validators.required]">
             </w-input>
 
             <div>

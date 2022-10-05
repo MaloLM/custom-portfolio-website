@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import CardCaroussel from '@/components/public/card-caroussel.vue';
+  import CardCaroussel from '@/components/public/Card-caroussel.vue';
   import databaseService from '@/services/databaseService';
   
   export default {

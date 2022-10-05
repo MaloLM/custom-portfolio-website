@@ -71,9 +71,4 @@
     input:checked ~ label {
       color: red;
     }
-
-    /* label {
-      color: red;
-    } */
-
     </style>

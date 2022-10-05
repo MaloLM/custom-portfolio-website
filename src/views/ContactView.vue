@@ -9,7 +9,7 @@
 
 
 <script setup>
-import ContactForm from '@/components/public/forms/ContactForm.vue';
+import ContactForm from '@/components/public/ContactForm.vue';
 var pageTitle = "Get in touch"
 </script>
 
@@ -20,6 +20,10 @@ var pageTitle = "Get in touch"
   margin-left: 100px;
   margin-right: 100px;
   background-color: rgba(255, 255, 255, 1);
+}
+
+.dark .main-content{
+  background-color: rgb(197, 29, 29);
 }
 
 .getInTouch{

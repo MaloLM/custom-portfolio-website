@@ -74,13 +74,13 @@
   background-image: url("assets/white-theme-bckground.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
-   color:rgb(0, 0, 0);
+  color:#2c3e50;
   transition: 0.3s;
 }
 
 .dark #app {
   background-color: rgb(57, 57, 57);
-  color:rgb(244, 244, 244);
+  color:rgb(206, 205, 205);
   background-image: url("assets/dark-theme-bckground.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;

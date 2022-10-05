@@ -17,16 +17,16 @@
         <br/>
       </div>
 
-      <CardCaroussel title="Personnal projects" :posts="personnalProjectsPosts"></CardCaroussel>
+      <CardCaroussel title="Personnal projects" v-if="personnalProjectsPosts != null" :posts="personnalProjectsPosts"></CardCaroussel>
 
-      <CardCaroussel title="Hobbies and interests" :posts="hobbiesAndInterestsPosts"></CardCaroussel>
+      <CardCaroussel title="Hobbies and interests" v-if="hobbiesAndInterestsPosts != null"  :posts="hobbiesAndInterestsPosts"></CardCaroussel>
       
     </div>
   </div>
 </template>
 
 <script>
-  import CardCaroussel from '@/components/public/card-caroussel.vue';
+  import CardCaroussel from '@/components/public/Card-caroussel.vue';
   import databaseService from '@/services/databaseService';
   
   export default {
@@ -43,16 +43,21 @@
     },
     methods: {
       sortByCreationDate(posts){
+        // console.log('BEFORE', posts)
         let array = []
 
         Object.entries(posts).forEach(([key, value]) => {
-              value['id'] = key
-              array.push(value)
+            // console.log('DURING', key)
+            value['id'] = key
+            // console.log('DURING', value)
+            array.push(value)
         })
 
         array = array.sort((a, b) => {
             return b.createdAt - a.createdAt;
         });
+
+        // console.log('AFTER', posts)
         return array
 
       }
@@ -73,7 +78,6 @@
               let posts = snapshot.val()
               posts = this.sortByCreationDate(posts)
               this.personnalProjectsPosts = posts
-
 
               databaseService.getHobbiesAndInterests('about-me', 'image').on('value', (snapshot) => {
 
@@ -115,7 +119,7 @@
   display: grid; 
   grid-auto-flow: row dense; 
   grid-auto-columns: 1.2fr; 
-  grid-template-columns: fr 1fr; 
+  grid-template-columns: 1fr 1fr; 
   grid-template-rows: 1fr; 
   gap: 0px 0px; 
   grid-template-areas: 

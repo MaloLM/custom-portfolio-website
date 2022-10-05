@@ -48,7 +48,7 @@
                     <w-input 
                         style="margin-top: 10px;"
                         outline
-                        label="Add Skills (separator = ';')"
+                        label="Add Skills (separator = '/')"
                         v-model="skills"
                         required>     
                     </w-input>
@@ -57,7 +57,7 @@
 
                     <w-input 
                         outline
-                        label="Add technologies/tools (separator = ';')"
+                        label="Add technologies/tools (separator = '/')"
                         v-model="ressources"
                         required>
                     </w-input>
