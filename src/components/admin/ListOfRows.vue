@@ -43,13 +43,9 @@ export default {
   props:{
     formType: String
   },
-  setup(props){
-    console.log("main", props.formType)
-
-  },
+  setup(){},
   methods: {
     toggleShow(postId){
-      console.log("TOGGLED: ", postId)
       if(postId == "null"){
         this.postToEditId = null
       } else {

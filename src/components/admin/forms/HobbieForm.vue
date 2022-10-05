@@ -20,9 +20,7 @@ export default {
   props:{
     formTypeToShare: String
   },
-  setup(props){
-    console.log("hobbie form setup", props.formTypeToShare)
-  },
+  setup(){},
   methods: {
 
   }

@@ -34,24 +34,16 @@
     methods: {
       signOut(){
         try{
-
           DatabaseService.signOut()
           this.router.push('/')
         }
         catch(err){
           console.log(err)
         }
-        
-
       }
     },
     mounted() {
-      // const store = useStore()
-      // this.router = useRouter()
-
-      const user_status = this.store.getters.status
-
-      if(user_status != true){ // TODO replace by auth data
+      if(!DatabaseService.isUserAuthenticated() ){
         this.router.push('/')
       }
     },

@@ -20,9 +20,7 @@ export default {
   props:{
     formTypeToShare: String
   },
-  setup(props){
-    console.log("main", props.formTypeToShare)
-  },
+  setup(){},
   methods: {
 
   }

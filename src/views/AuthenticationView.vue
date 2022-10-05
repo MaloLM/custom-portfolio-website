@@ -5,12 +5,12 @@
         <h3>{{authTitle}}</h3>
 
         <w-form 
-        action="#" 
-        v-model="valid"
-        @validate="validated++;success = error = false"
-        @success="success = true"
-        @error="error = true"
-        @submit.prevent="Login">
+            action="#" 
+            v-model="valid"
+            @validate="validated++;success = error = false"
+            @success="success = true"
+            @error="error = true"
+            @submit.prevent="Login">
         
             <w-input
                 label="E-mail adress"
@@ -27,7 +27,6 @@
             :type="isPassword ? 'password' : 'text'"
             v-model="password">
             </w-input>
-
 
             <div>
                 <button
@@ -49,92 +48,91 @@
 
 </template>
 
-<script setup>
-    import { ref } from 'vue'
-    import DatabaseService from '../services/databaseService';
-    import { useRouter } from 'vue-router'
-    import { useStore } from 'vuex'
 
-    const authTitle = 'Authentication'
-    const store = useStore()
-    const router = useRouter()
-  
-    const email = ref(null)
-    const password = ref(null)
-    const errorLabel = ref(null)
+<script>
+import DatabaseService from '../services/databaseService';
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+import databaseService from '../services/databaseService';
 
-    let isPassword = true
-    let success = null
-    let validated = 0
+export default {
+    name: "authentication",
+    components: {  },
+    data() {
+        return {
+            authTitle: 'Authentication',
+            store: useStore(),
+            router: useRouter(),
+            email: null,
+            password: null,
+            errorLabel: null,
+            isPassword: true,
+            success: null,
+            validated: 0,
+            valid:null,
+            validators: {
+                required: value => !!value || 'This field is required'
+            },
+        };
+    },
+    methods: {
+        Login(){
+            if(this.isEmailValid(this.email)){
+                this.login(this.email, this.password)
+            }
+            else{
+                this.errorLabel = "E-mail format is invalid, please correct it to login"
+                console.log(this.errorLabel)
+            }
+        },
+        async login(email, password){
+            try {
+                if(email != null && password != null){
+                    const authRes = await DatabaseService.logIn(email, password)
 
+                    if(authRes == true){
+                        this.router.push('/admin')
+                    }
+                    else {
+                        let errorMessage = authRes
 
-    if (store.getters.status) {
-        router.push('/admin') 
-    }
-    
-    let valid = null;
+                        errorMessage = errorMessage.substring(
+                            errorMessage.indexOf(":") + 1, 
+                            errorMessage.lastIndexOf("(")
+                        );
 
-
-    let validators = {
-        required: value => !!value || 'This field is required'
-      }
-
-
-    function isEmailValid(email) {
-        const emailRegexp = new RegExp(
-        /^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{1,}([\.\-]{0,1}[a-zA-Z]){0,}[a-zA-Z0-9]{0,}$/i
-        )
-        return emailRegexp.test(email)
-    }
-
-    function Login(){
-        if(isEmailValid(email.value)){
-            login(email.value, password.value)
-        }
-        else{
-            errorLabel.value = "E-mail format is invalid, please correct it to login"
-            console.log(errorLabel.value)
-        }
-    }
-
-    async function login(email, password){
-        try {
-            if(email != null && password != null){
-                const authRes = await DatabaseService.logIn(email, password)
-
-                if(authRes == true){
-                    store.commit('SET_LOGGED_IN', true)
-                    router.push('/admin')
-                }
-                else {
-                    let errorMessage = authRes
-
-                    errorMessage = errorMessage.substring(
-                        errorMessage.indexOf(":") + 1, 
-                        errorMessage.lastIndexOf("(")
-                    );
-
-                    errorLabel.value = errorMessage
+                        this.errorLabel = errorMessage
+                    }
                 }
             }
+            catch (err) {
+                let errorMessage = err.message
+                
+                errorMessage = errorMessage.substring(
+                    errorMessage.indexOf(":") + 1, 
+                    errorMessage.lastIndexOf("(")
+                );
+                
+                this.errorLabel = errorMessage
+            } 
+        },
+        isEmailValid(email) {
+            const emailRegexp = new RegExp(
+            /^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{1,}([\.\-]{0,1}[a-zA-Z]){0,}[a-zA-Z0-9]{0,}$/i
+            )
+            return emailRegexp.test(email)
+        },
+    },
+    mounted(){
+        if (databaseService.isUserAuthenticated()) {
+            this.router.push('/admin')
         }
-        catch (err) {
-            let errorMessage = err.message
-            
-            errorMessage = errorMessage.substring(
-                errorMessage.indexOf(":") + 1, 
-                errorMessage.lastIndexOf("(")
-            );
-            
-            errorLabel.value = errorMessage
-        } 
     }
-
+};
 </script>
 
 
     
-
 <style scoped>
 .authentication{
     height: 100vh;

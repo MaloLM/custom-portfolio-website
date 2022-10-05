@@ -18,9 +18,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/TravelsView.vue')
   },
   {
-    path: '/get-in-touch',
-    name: 'getInTouch',
-    component: () => import(/* webpackChunkName: "about" */ '../views/GetInTouchView.vue')
+    path: '/contact',
+    name: 'contact',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ContactView.vue')
   },
   {
     path: '/admin',

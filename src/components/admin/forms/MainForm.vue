@@ -131,8 +131,6 @@ export default {
     },
     setup(){},
     mounted(){
-        console.log("postid: ",this.postId,  typeof(this.postId))
-
         if(this.postId != null && this.postId != "null"){ 
             databaseService.getPostsByPathAndId(this.formTypePath, this.postId).on('value', (snapshot) => {
                 this.retrievedPost = snapshot.val()

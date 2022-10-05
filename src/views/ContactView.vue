@@ -29,4 +29,8 @@ var pageTitle = "Get in touch"
 .dark .w-card {
   background-color: black;
  }
+
+ .pageTitle {
+  margin-left: 10px;
+ }
 </style>

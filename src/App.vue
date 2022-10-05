@@ -1,10 +1,11 @@
 <template>
 
-    <nav id="navbar">
+<w-app>
+  <nav id="navbar">
       <router-link to="/" class="link">About me </router-link> 
       <router-link to="/career" class="link">Career </router-link> 
       <router-link to="/travels" class="link">Travels </router-link>
-      <router-link to="/get-in-touch" class="link">Get in touch </router-link> 
+      <router-link to="/contact" class="link">Get in touch </router-link> 
 
       <div style="float:right">
         <DarkThemeButton style="float:left" />
@@ -20,7 +21,8 @@
       </div>
     </nav>
     <router-view :key="$route.fullPath" />
-
+</w-app>
+  
 </template>
 
 <script>
@@ -72,7 +74,7 @@
   background-image: url("assets/white-theme-bckground.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
-  color:rgb(0, 0, 0);
+   color:rgb(0, 0, 0);
   transition: 0.3s;
 }
 

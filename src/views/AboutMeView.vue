@@ -80,8 +80,6 @@
               let posts = snapshot.val()
               posts = this.sortByCreationDate(posts)
               this.hobbiesAndInterestsPosts = posts
-              console.log(this.image)
-
               
               }, (errorObject) => {
                 console.log('The read failed: ' + errorObject.name);

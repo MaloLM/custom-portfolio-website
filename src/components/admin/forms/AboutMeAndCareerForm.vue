@@ -71,9 +71,7 @@ export default {
             imageFile: null,
         }
     },
-    setup(props){
-        console.log(props.formType)
-    },
+    setup(){},
     methods: {
         readFile() {
             this.file = this.$refs.file.files[0];
@@ -98,8 +96,6 @@ export default {
             
         },
         pushForm(){
-            console.log("attempt to push form")
-            console.log(this.isImage, this.imageFile)
             try{
                 if(this.isImage == null && this.imageFile == null){
                     var children = {
@@ -115,7 +111,6 @@ export default {
                 }
                
             } catch(err){
-                console.log('ERR: ',err)
                 this.showErrorAlert = true
             }
             

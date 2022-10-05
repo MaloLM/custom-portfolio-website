@@ -84,7 +84,7 @@
 }
 
 .dark .caroussel-card {
-  background-color: rgb(30, 30, 30);
+  background-color: rgb(50, 50, 50);
 }
 
 .card-container{

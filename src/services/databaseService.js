@@ -9,9 +9,13 @@ const auth = firebase.auth();
 
 class DatabaseService {
 
+  isUserAuthenticated(){
+    return (auth.currentUser !== null)
+  }
+
   signOut(){
     auth.signOut(user => {
-      console.log(user);
+      console.log('signed out', user);
     })
     .then(() => {
         console.log('User signed out successfully !');
@@ -42,7 +46,6 @@ class DatabaseService {
 
 
   async createPost(path, post){
-    console.log('right before creation', post)
     db.ref('/pages/' + path).push(post);
   }
   
@@ -135,12 +138,7 @@ class DatabaseService {
 
   async logIn( email, password ){
         const response = await firebase.auth().signInWithEmailAndPassword(email, password).then((userCredential) => {
-          const user = userCredential.user;
-          console.log('USER', user)
-          console.log(Object.keys(user['_delegate'])); // or 'multiFactor'
-
-          // user['_delegate']['uid'] // TODO
-
+          console.log(userCredential.user)
           return true
         })
         .catch((error) => {

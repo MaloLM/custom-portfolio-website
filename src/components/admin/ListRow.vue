@@ -44,12 +44,10 @@
     },
     methods: {
         editRow(){
-            console.log("ICIIIIIII:", this.rowId)
             window.scrollTo(0, 0);
             this.$emit('toggleShow', this.rowId)
         },
         removePost(){
-            console.log('emit for remove')
             this.$emit('removePost', this.rowId)
         }
     },
