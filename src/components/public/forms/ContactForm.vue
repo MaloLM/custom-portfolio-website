@@ -4,12 +4,13 @@
         <form @submit.prevent="sendEmail" id="contactForm">
             <w-input
                 required
-                class="mb3"
+                class="mb3" 
                 label="Name"
                 v-model="name"
                 color="info"
                 outline>
             </w-input>
+
             <w-input
                 required
                 class="mb3"
@@ -34,7 +35,7 @@
 
             <button style="float:right" value="Send" type="submit">Submit</button>
 
-            <w-alert v-if="showSuccessMessage" success dismiss>Message was sent!</w-alert>
+            <w-alert v-if="showSuccessMessage" success dismiss>Message was sent! Thank you for contacting me</w-alert>
             <w-alert  v-if="showErrorMessage" error dismiss>An error occured. Please contact me via social networks.</w-alert>
 
             <br> 
@@ -52,12 +53,12 @@ export default {
   components: {  },
   data() {
     return {
-        showSuccessMessage: false,
-        showErrorMessage: false,
-        name: '',
-        email: '',
-        message: '',
-        captchaKey:  process.env.VUE_APP_RECAPTCHA_PUBLIC_KEY,
+      showSuccessMessage: false,
+      showErrorMessage: false,
+      name: '',
+      email: '',
+      message: '',
+      captchaKey:  process.env.VUE_APP_RECAPTCHA_PUBLIC_KEY,
     }
   },
   methods: {
@@ -89,5 +90,9 @@ export default {
 <style scoped>
     .send {
         margin: 25px;
+    }
+
+    .test{
+      border-color: aliceblue;
     }
 </style>

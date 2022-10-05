@@ -47,7 +47,7 @@
     <br>
     <w-transition-expand y>
         <w-alert v-if="showSuccessAlert"  dismiss success class="alerts">Data was successfully submitted</w-alert>
-        <w-alert v-if="showErrorAlert" dismiss error>Data failted to get submitted</w-alert>
+        <w-alert v-if="showErrorAlert" dismiss error>Data failed to get submitted</w-alert>
     </w-transition-expand>
 </template>
 
@@ -66,6 +66,7 @@ export default {
             showErrorAlert: false,
             title: null,
             description: null,
+            isImage: null,
             image: null,
             imageFile: null,
         }
@@ -76,24 +77,45 @@ export default {
     methods: {
         readFile() {
             this.file = this.$refs.file.files[0];
-            if (
+            
+            if(this.file){
+                if (
                 this.file.name.includes(".png") ||
                 this.file.name.includes(".jpg") ||
                 this.file.name.includes(".jpeg")
-            ) {
-                this.image = true;
-                this.imageFile = this.file
-                this.preview = URL.createObjectURL(this.file);
+                ) {
+                    this.isImage = true
+                    this.image = true;
+                    this.imageFile = this.file
+                    this.preview = URL.createObjectURL(this.file);
+                } else {
+                    this.image = false;
+                    this.isImage = false;
+                }
             } else {
-                this.image = false;
+                this.showErrorAlert = true
             }
+            
         },
         pushForm(){
+            console.log("attempt to push form")
+            console.log(this.isImage, this.imageFile)
             try{
-                databaseService.uploadFileThenUpdateAboutMe(this.formType, this.imageFile, this.title, this.description)
-                // databaseService.updateAboutMeOrCareerData(this.formType, this.title, this.description, this.imageFile)
-                this.showSuccessAlert = true
+                if(this.isImage == null && this.imageFile == null){
+                    var children = {
+                        title: this.title,
+                        description: this.description,
+                        // image: downloadURL
+                    }
+                    databaseService.updatePost(this.formType, children)
+                    this.showSuccessAlert = true
+                } else if(this.imageFile != null){
+                    databaseService.uploadFileThenUpdateAboutMe(this.formType, this.imageFile, this.title, this.description)
+                    this.showSuccessAlert = true
+                }
+               
             } catch(err){
+                console.log('ERR: ',err)
                 this.showErrorAlert = true
             }
             

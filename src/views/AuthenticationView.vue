@@ -102,12 +102,19 @@
             if(email != null && password != null){
                 const authRes = await DatabaseService.logIn(email, password)
 
-                if(authRes){
+                if(authRes == true){
                     store.commit('SET_LOGGED_IN', true)
                     router.push('/admin')
                 }
-                else if (authRes.Promise.status == 'rejected'){
-                    errorLabel.value = 'Credentials are incorrect'
+                else {
+                    let errorMessage = authRes
+
+                    errorMessage = errorMessage.substring(
+                        errorMessage.indexOf(":") + 1, 
+                        errorMessage.lastIndexOf("(")
+                    );
+
+                    errorLabel.value = errorMessage
                 }
             }
         }
@@ -129,6 +136,10 @@
     
 
 <style scoped>
+.authentication{
+    height: 100vh;
+}
+
 .main-content{
     margin-top: 13%;
     margin-bottom: 100%;
@@ -144,7 +155,6 @@ button {
     padding: 10px 40px;
     margin-top: 20px;
     margin-left: 10px;
-    /* margin-left: 10px; */
     color: white;
     border-radius: 20px;
     font-size:13px;

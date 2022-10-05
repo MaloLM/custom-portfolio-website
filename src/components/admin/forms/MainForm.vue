@@ -96,11 +96,7 @@
                 </div>
         </div>
     </form>
-    <!-- <w-progress v-if="loading" class="mt4" color="green"></w-progress> -->
-    <!-- <w-transition-expand y>
-        <w-alert v-if="showSuccessAlert" dismiss success class="alerts">Data was successfully submitted</w-alert>
-        <w-alert v-if="showErrorAlert" dismiss error>Data failted to get submitted</w-alert>
-    </w-transition-expand> -->
+
 </template>
 
 <script>
@@ -253,7 +249,6 @@ export default {
     
 .container {
   display: grid; 
-  /* grid-auto-flow: row dense; */
   grid-auto-columns: 1fr; 
   grid-template-columns: 1fr 1fr; 
   grid-template-rows: 1fr 1fr 1fr 0.1fr; 
@@ -291,7 +286,6 @@ button {
     padding: 10px 40px;
     margin-top: 20px;
     margin-left: 10px;
-    /* margin-left: 10px; */
     color: white;
     border-radius: 20px;
     font-size:13px;

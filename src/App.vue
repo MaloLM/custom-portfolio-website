@@ -1,17 +1,11 @@
 <template>
 
-  <head>
-      <meta charset="utf-8">
-      <link rel="shortcut icon" type="image/png" href="./assets/favicon.png"/>
-      ...
-  </head>
-
     <nav id="navbar">
       <router-link to="/" class="link">About me </router-link> 
       <router-link to="/career" class="link">Career </router-link> 
       <router-link to="/travels" class="link">Travels </router-link>
       <router-link to="/get-in-touch" class="link">Get in touch </router-link> 
-      
+
       <div style="float:right">
         <DarkThemeButton style="float:left" />
         <router-link to="/authentication" class="link">
@@ -27,9 +21,7 @@
     </nav>
     <router-view :key="$route.fullPath" />
 
-  
 </template>
-
 
 <script>
   import 'font-awesome/css/font-awesome.min.css'
@@ -61,6 +53,7 @@
   color: #2c3e50;
   transition: 0.3s;
   background-color: #030303;
+  background-image: url("assets/white-theme-bckground.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   width: 100%;
@@ -77,6 +70,8 @@
 .light #app {
   background-color: white;
   background-image: url("assets/white-theme-bckground.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color:rgb(0, 0, 0);
   transition: 0.3s;
 }
@@ -85,6 +80,8 @@
   background-color: rgb(57, 57, 57);
   color:rgb(244, 244, 244);
   background-image: url("assets/dark-theme-bckground.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   transition: 0.3s;
 }
 
@@ -112,4 +109,6 @@ nav a.router-link-exact-active {
 .link {
   padding-right: 27px;
 }
+
+
 </style>

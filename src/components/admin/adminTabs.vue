@@ -86,7 +86,6 @@ data() {
 
 
 <style scoped>
-
 .tabDesign{
     margin-right: 10px;
 }

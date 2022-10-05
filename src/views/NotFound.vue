@@ -16,14 +16,13 @@
 <style scoped>
 .main-content{
     margin-top: 0%;
-    margin-bottom: 100%;
     margin-left: 70px;
     margin-right: 70px;
     transition: 0.3s;
-    /* text-align: center; */
     display: flex; 
     flex-direction: column;
     align-items: center;
+    height: 100vh;
 }
 
 .NotFoundMessage {

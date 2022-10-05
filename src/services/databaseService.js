@@ -1,13 +1,25 @@
 import firebase from "../firebase";
-import { toNumber } from "@vue/shared";
 import 'firebase/compat/auth';
 import 'firebase/compat/database';
 import 'firebase/compat/storage';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const db = firebase.database()
+const auth = firebase.auth();
 
 class DatabaseService {
+
+  signOut(){
+    auth.signOut(user => {
+      console.log(user);
+    })
+    .then(() => {
+        console.log('User signed out successfully !');
+    })
+    .catch(error => {
+        console.error(error);
+    });
+  }
 
   getAll() {
     return db.ref("/pages");
@@ -29,66 +41,15 @@ class DatabaseService {
   }
 
 
-  getIdCount(path){
-    return db.ref("/pages/"  + 'id-count/' + path + '/value');
-  }
-
-
-  incrementIdCount(path){
-    console.log('DA')
-    this.getIdCount(path).on('value', (snapshot) => {
-      console.log('DB')
-      console.log(snapshot.val())
-      console.log('DC')
-      if(isNaN(snapshot.val())){
-        console.log('DDA NaN')
-        var idCount = toNumber(snapshot.val()) + 1
-        console.log(idCount)
-        const res = {
-          value: idCount
-        } 
-        console.log('DEA', res)
-        db.ref("/pages/id-count/" + path + '/').update(res);
-        console.log('DFA')
-      } else {
-        console.log('DDB')
-        const res = {
-          value: snapshot.val() + 1
-        }
-        console.log('DEB', res)
-        // db.ref("/pages/id-count/" + path + '/').update(res);
-        console.log('DFB')
-      } 
-    }, (errorObject) => {
-        console.log('The read failed: ' + errorObject.name);
-    }); 
-  }
-
-
-  decrementIdCount(path){
-    this.getIdCount(path).on('value', (snapshot) => {
-      if(isNaN(snapshot.val())){
-        var idCount = toNumber(snapshot.val()) - 1
-        const res = {
-          value: idCount
-        }
-        db.ref("/pages/"  + 'id-count/' + path + '/').update(res);
-      } else {
-        const res = {
-          value: idCount
-        }
-        db.ref("/pages/"  + 'id-count/' + path + '/').update(res);
-      } 
-    }, (errorObject) => {
-        console.log('The read failed: ' + errorObject.name);
-    }); 
-  }
-
   async createPost(path, post){
     console.log('right before creation', post)
     db.ref('/pages/' + path).push(post);
   }
   
+  updatePost(path, children){
+    db.ref('/pages/' + path).update(children);
+  }
+
   getPersonnalProjects(){
     return db.ref("/pages/about-me/personnal-projects");
   }
@@ -122,15 +83,6 @@ class DatabaseService {
     return db.ref('/pages/'+ path + '/').child(id).remove();
   }
 
-  // updateAboutMeOrCareerData(path, title, description, image){
-    
-  //   var children = {
-  //     title: title,
-  //     description: description,
-  //     image: image
-  //   }
-  //   db.ref('/pages/' + path).update(children);
-  // }
 
   uploadFileThenUpdateAboutMe(path, file, title, description){
     // https://firebase.google.com/docs/storage/web/upload-files
@@ -170,10 +122,6 @@ class DatabaseService {
       );
   }
 
-  // createAboutMe(data) {
-  //   return db.push(data);
-  // }
-
 
   update(key, value) {
     return db.child(key).update(value);
@@ -186,12 +134,19 @@ class DatabaseService {
 
 
   async logIn( email, password ){
-        const response = await firebase.auth().signInWithEmailAndPassword(email, password)
-        if (response) {
-          return true  
-          } else {
-            return false
-          }
+        const response = await firebase.auth().signInWithEmailAndPassword(email, password).then((userCredential) => {
+          const user = userCredential.user;
+          console.log('USER', user)
+          console.log(Object.keys(user['_delegate'])); // or 'multiFactor'
+
+          // user['_delegate']['uid'] // TODO
+
+          return true
+        })
+        .catch((error) => {
+          return error.message
+        });
+        return response
       }
 
 
