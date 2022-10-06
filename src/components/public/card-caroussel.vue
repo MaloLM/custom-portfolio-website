@@ -24,14 +24,14 @@
     <w-dialog 
       v-model="dialog.show"
       :fullscreen="dialog.fullscreen"
-      width="60%"
+      width="45vw"
       :persistent="dialog.persistent"
       :persistent-no-animation="dialog.persistentNoAnimation"
       title-class="primary-light1--bg white">
 
       <img class="dialog-image" :src="dialog.image"/>
 
-      <w-divider class="my6 mx-3"></w-divider>
+      <w-divider class="my6 mx-3 divider"></w-divider>
 
       <div class="container">
         <div class="title">
@@ -85,6 +85,7 @@ export default defineComponent({
       let object = null
       Object.entries(this.posts).forEach(([key, value]) => {
           if(value['id'] == id){
+            console.log(key)
             object = value
           }
       });
@@ -234,9 +235,11 @@ button {
 }
 
 .dialog-image{
-  width: 800px;
+  width: 100%;
   height: auto;
 }
 
-
+.divider{
+  margin-bottom: 1px;
+}
 </style>
