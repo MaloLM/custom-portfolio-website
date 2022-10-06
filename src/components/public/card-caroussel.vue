@@ -8,7 +8,6 @@
           <h4 style="float:left">{{post.title}}</h4>
           <template #actions>
             <div class="spacer"></div>
-
             <w-button :id="post.id" class="px4" @click="loadDialog">Read more</w-button>
           </template>
         </w-card>
@@ -38,17 +37,18 @@
           <h1 style="float:left">{{dialog.title}}</h1>
         </div>
         <div class="date">
-          <p style="float:left ">date</p>
+          <p style="float:left ">{{dialog.date}}</p>
         </div>
         <div class="void-a"></div>
         <div class="description">
           <p class="dialog-description"> {{dialog.description}}</p>
         </div>
         <div class="ressources">
-          {{dialog.ressources}}
+          <TagsGroup :unparsedData="dialog.ressources" bgColor="success" textColor="white"></TagsGroup>
         </div>
         <div class="skills">
-          {{dialog.skills}}
+          <TagsGroup :unparsedData="dialog.skills" bgColor="deep-purple" textColor="white"></TagsGroup>
+          
         </div>
         <div class="ressource">
           <button @click="redirectToRessource" target="_blank"> {{dialog.ressource.name}} </button>
@@ -67,59 +67,13 @@
 import { defineComponent } from 'vue';
 import { Carousel, Navigation, Slide } from 'vue3-carousel';
 import 'vue3-carousel/dist/carousel.css';
+import TagsGroup from './TagsGroup.vue';
 
 export default defineComponent({
   name: 'Breakpoints',
   props:{
     title: String,
     posts : Object
-  },
-  components: {
-    Carousel,
-    Slide,
-    Navigation,
-  },
-  methods: {
-    loadDialog(event){
-      let id = event['srcElement']['id'];
-      let object = null
-      Object.entries(this.posts).forEach(([key, value]) => {
-          if(value['id'] == id){
-            console.log(key)
-            object = value
-          }
-      });
-
-      if(object != null){
-        this.dialog.title = object.title;
-        this.dialog.image = object.image;
-        this.dialog.description = object.description;
-        this.dialog.ressources = object.ressources;
-        this.dialog.skills = object.skills;
-        this.dialog.title = object.title;
-        this.dialog.ressource.name = object.ressource.name;
-        this.dialog.ressource.link = object.ressource.link;
-        
-        this.dialog.show = true
-      }
-      
-    },
-    unloadDialog(){
-      this.dialog.show = false
-
-      this.dialog.title = null;
-      this.dialog.image = null;
-      this.dialog.description = null;
-      this.dialog.ressources = null;
-      this.dialog.skills = null;
-      this.dialog.title = null;
-      this.dialog.ressource.name = null;
-      this.dialog.ressource.link = null;
-      console.log('unloaded')
-    },
-    redirectToRessource(){
-      window.open(this.dialog.ressource.link);
-    }
   },
   data: () => ({
     dialog: {
@@ -155,6 +109,55 @@ export default defineComponent({
       },
     },
   }),
+  components: {
+    Carousel,
+    Slide,
+    Navigation,
+    TagsGroup
+},
+  methods: {
+    loadDialog(event){
+      let id = event['srcElement']['id'];
+      let object = null
+      Object.entries(this.posts).forEach(([key, value]) => {
+          if(value['id'] == id){
+            console.log(key)
+            object = value
+          }
+      });
+
+      if(object != null){
+        this.dialog.title = object.title;
+        this.dialog.date = object.date;
+        this.dialog.image = object.image;
+        this.dialog.description = object.description;
+        this.dialog.ressources = object.ressources;
+        this.dialog.skills = object.skills;
+        this.dialog.title = object.title;
+        this.dialog.ressource.name = object.ressource.name;
+        this.dialog.ressource.link = object.ressource.link;
+        
+        this.dialog.show = true
+      }
+      
+    },
+    unloadDialog(){
+      this.dialog.show = false
+
+      this.dialog.title = null;
+      this.dialog.image = null;
+      this.dialog.description = null;
+      this.dialog.ressources = null;
+      this.dialog.skills = null;
+      this.dialog.title = null;
+      this.dialog.ressource.name = null;
+      this.dialog.ressource.link = null;
+      console.log('unloaded')
+    },
+    redirectToRessource(){
+      window.open(this.dialog.ressource.link);
+    }
+  },
   mounted(){},
 });
 </script>
@@ -188,7 +191,9 @@ export default defineComponent({
 .void-a { grid-area: void-a; }
 .description { 
   grid-area: description;
-  margin-top: 15px;
+  margin: 15px; 
+  text-align: justify;
+  text-justify: inter-word;
 }
 .ressources { grid-area: ressources; }
 .skills { grid-area: skills; }
@@ -200,7 +205,7 @@ export default defineComponent({
 }
 
 .caroussel-card{
-  margin-right: 40px;
+  margin: 0px 20px;
   background-color: rgba(255, 255, 255, 1);
 }
 

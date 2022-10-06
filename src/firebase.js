@@ -10,16 +10,18 @@ let firebaseConfig = {
     databaseURL: process.env.VUE_APP_DATABASE_URL,
     storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
     messagingSenderId: "xxx" , // process.env.VUE_APP_MESSAGING_SENDER_ID
-    appId: "xxx", // process.env.VUE_APP_APP_ID,
+    appId: process.env.VUE_APP_APP_ID,
 }; 
 
 const app = firebase.initializeApp(firebaseConfig);
 
 // Pass your reCAPTCHA v3 site key (public key) to activate(). Make sure this
 // key is the counterpart to the secret key you set in the Firebase console.
-initializeAppCheck(app, {
+const appCheck = initializeAppCheck(app, {
     provider: new ReCaptchaV3Provider(process.env.VUE_APP_RECAPTCHA_V3_PUBLIC_KEY),
     isTokenAutoRefreshEnabled: true
   });
+
+  console.log(appCheck)
 
 export default firebase;

@@ -12,6 +12,13 @@
                     required>
                 </w-input>
 
+                <w-input
+                    class="mb3"
+                    label="Date"
+                    outline
+                    v-model="date"
+                    required>
+                </w-input>
 
                 <w-textarea 
                     class="mt4"
@@ -114,6 +121,7 @@ export default {
             formTypePath: props.formType,
             postId: props.id,
             title: null,
+            date: null,
             description: null,
             image: false,
             example: null,
@@ -136,10 +144,11 @@ export default {
                 this.retrievedPost = snapshot.val()
 
                 this.title = this.retrievedPost.title
+                this.date = this.retrievedPost.date
+                this.description = this.retrievedPost.description
                 this.preview = this.retrievedPost.image
                 this.image = this.retrievedPost.image
                 this.isImage = true
-                this.description = this.retrievedPost.description
                 this.skills = this.retrievedPost.skills
                 this.ressources = this.retrievedPost.ressources
                 this.ressourceName = this.retrievedPost.ressource.name
@@ -177,6 +186,7 @@ export default {
                 const data = {
                     id: this.postId,
                     title: this.title,
+                    date: this.date,
                     description: this.description,
                     image: this.image,
                     skills: this.skills,
@@ -213,6 +223,7 @@ export default {
             } else if (this.postId == null || this.postId == 'null' ){
                 var data = {
                     title: this.title,
+                    date: this.date,
                     description: this.description,
                     image: "N/A",
                     skills: this.skills,
