@@ -2,11 +2,11 @@
     <div v-if="parsedData != null">
         <w-tag 
         v-for="(tag) in parsedData" :key="tag"
-        class="mr4"
+        class="spacing"
         :bg-color="bgColor"
         :color="textColor"
         round
-        lg>
+        xl>
         {{tag}}
         </w-tag>
     </div>
@@ -39,5 +39,7 @@ export default {
 
 
 <style scoped>
-    
+.spacing{
+    margin: 3px;
+}
 </style>

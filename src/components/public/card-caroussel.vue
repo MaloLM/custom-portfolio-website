@@ -1,23 +1,22 @@
 <template>
     <h1 v-if="posts != null"> {{title}} </h1>
     <Carousel class="caroussel-margin" :settings="settings" :breakpoints="breakpoints" v-if="posts">
-    <Slide  v-for="(post) in posts" :key="post.createdAt">
-      <div class="card-container">
-        <w-card  :image="post.image" class="caroussel-card" no-border>
-          <w-divider class="test mx-3"></w-divider>
-          <h4 style="float:left">{{post.title}}</h4>
-          <template #actions>
-            <div class="spacer"></div>
-            <w-button :id="post.id" class="px4" @click="loadDialog">Read more</w-button>
-          </template>
-        </w-card>
-      </div>
-        
-    </Slide>
+      <Slide  v-for="(post) in posts" :key="post.createdAt">
+        <div class="card-container">
+          <w-card  :image="post.image" class="caroussel-card" no-border>
+            <w-divider class="card-divider mx-3"></w-divider>
+            <h4 style="float:left">{{post.title}}</h4>
+            <template #actions>
+              <div class="spacer"></div>
+              <w-button :id="post.id" class="px4" @click="loadDialog" round lg>Read more</w-button>
+            </template>
+          </w-card>
+        </div>
+      </Slide>
 
-    <template #addons>
-        <Navigation />
-    </template>
+      <template #addons>
+          <Navigation />
+      </template>
     </Carousel>
 
     <w-dialog 
@@ -44,21 +43,28 @@
           <p class="dialog-description"> {{dialog.description}}</p>
         </div>
         <div class="ressources">
-          <TagsGroup :unparsedData="dialog.ressources" bgColor="success" textColor="white"></TagsGroup>
+          
+          <p style="font-weight: bold;">Skills</p>
+          <TagsGroup :unparsedData="dialog.skills " bgColor="success" textColor="white"></TagsGroup>
         </div>
         <div class="skills">
-          <TagsGroup :unparsedData="dialog.skills" bgColor="deep-purple" textColor="white"></TagsGroup>
+          <p style="font-weight: bold; margin-top: 7px;">Ressources & technologies</p>
           
+          <TagsGroup :unparsedData="dialog.ressources" bgColor="deep-purple" textColor="white"></TagsGroup>
         </div>
         <div class="ressource">
-          <button @click="redirectToRessource" target="_blank"> {{dialog.ressource.name}} </button>
+        
+          <a @click="redirectToRessource" target="_blank"> {{dialog.ressource.name}} </a>
+          <w-button 
+          @click="unloadDialog" 
+          class="ma1 text-bold" 
+          color="red" 
+          outline xl
+          style="float:right">
+          Close
+        </w-button>
         </div>
     </div>
-
-      <template #actions>
-        <div class="spacer"/>
-        <button @click="unloadDialog">Close</button>
-      </template>
     </w-dialog>
 </template>
 
@@ -79,7 +85,7 @@ export default defineComponent({
     dialog: {
       show: false,
       fullscreen: false,
-      persistent: true,
+      persistent: false,
       persistentNoAnimation: false,
       width: 'auto',
       title: null,
@@ -143,16 +149,15 @@ export default defineComponent({
     },
     unloadDialog(){
       this.dialog.show = false
-
-      this.dialog.title = null;
-      this.dialog.image = null;
-      this.dialog.description = null;
-      this.dialog.ressources = null;
-      this.dialog.skills = null;
-      this.dialog.title = null;
-      this.dialog.ressource.name = null;
-      this.dialog.ressource.link = null;
-      console.log('unloaded')
+      // this.dialog.title = null;
+      // this.dialog.image = null;
+      // this.dialog.description = null;
+      // this.dialog.ressources = null;
+      // this.dialog.skills = null;
+      // this.dialog.title = null;
+      // this.dialog.ressource.name = null;
+      // this.dialog.ressource.link = null;
+      // console.log('unloaded')
     },
     redirectToRessource(){
       window.open(this.dialog.ressource.link);
@@ -173,7 +178,7 @@ export default defineComponent({
 .container {
   display: grid; 
   grid-template-columns: 1fr 1fr 1fr; 
-  grid-template-rows: 0.5fr 0.2fr 2fr 0.5fr 0.5fr 0.4fr; 
+  grid-template-rows: 0.2fr 0.2fr 2fr 0.5fr 0.5fr 0.3fr; 
   gap: 0px 0px; 
   grid-template-areas: 
     "title title title"
@@ -185,19 +190,36 @@ export default defineComponent({
 }
 .title { grid-area: title; }
 .date { 
+  font-weight: bold;
   grid-area: date;
-  margin-left: 15px; 
+  margin-left: 10px; 
 }
 .void-a { grid-area: void-a; }
 .description { 
   grid-area: description;
-  margin: 15px; 
+  margin-left: 10px; 
+  margin-right: 10px;
+  margin-bottom: 10px;
   text-align: justify;
   text-justify: inter-word;
 }
-.ressources { grid-area: ressources; }
-.skills { grid-area: skills; }
-.ressource { grid-area: ressource; }
+.ressources {    
+  grid-area: ressources; 
+  margin-left: 10px; 
+}
+.skills { 
+  grid-area: skills;
+  margin-left: 10px; 
+ }
+.ressource { 
+  text-decoration: underline; 
+  grid-area: ressource;
+  margin: 10px; 
+ }
+
+ .ressource:hover a {
+    cursor: pointer;
+  }
 
 .caroussel-margin{
   margin-top: 20px;
@@ -229,7 +251,7 @@ button {
     font-size:13px;
 }
 
-.test{
+.card-divider{
   margin-top: -12px;
   margin-bottom: 10px;
 }
@@ -240,11 +262,14 @@ button {
 }
 
 .dialog-image{
-  width: 100%;
+  width: 90%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   height: auto;
 }
 
 .divider{
-  margin-bottom: 1px;
+  margin: -10px;
 }
 </style>

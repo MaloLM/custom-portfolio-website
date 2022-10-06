@@ -1,50 +1,48 @@
 <template>
-<div class="authentication">
-    <w-card class="main-content">
-        
-        <h3>{{authTitle}}</h3>
+    <div class="authentication">
+        <w-card class="main-content">
+            
+            <h3>{{authTitle}}</h3>
 
-        <w-form 
-            action="#" 
-            v-model="valid"
-            @validate="validated++;success = error = false"
-            @success="success = true"
-            @error="error = true"
-            @submit.prevent="Login">
-        
-            <w-input
-                label="E-mail adress"
-                type="email"
-                :validators="[validators.required]"
-                v-model="email"> 
-            </w-input>
+            <w-form 
+                action="#" 
+                v-model="valid"
+                @validate="validated++;success = error = false"
+                @success="success = true"
+                @error="error = true"
+                @submit.prevent="Login">
+            
+                <w-input
+                    label="E-mail adress"
+                    type="email"
+                    :validators="[validators.required]"
+                    v-model="email"> 
+                </w-input>
 
-            <w-input
-            required
-            class="mb2 spacing" 
-            label="Password"
-            v-model="password"
-            :validators="[validators.required]">
-            </w-input>
+                <w-input
+                required
+                class="mb2 spacing" 
+                label="Password"
+                :type="isPassword ? 'password' : 'text'"
+                v-model="password"
+                :validators="[validators.required]">
+                </w-input>
 
-            <div>
-                <button
-                    :disabled="valid === false"
-                    type="submit"
-                    style="float:right;">
-                    Login
-                </button>
-            </div>
-
-        </w-form>
-        <br>
-        <br>
-        <br>
-        <w-alert error v-if="errorLabel">{{errorLabel}}</w-alert>
-    </w-card>
-   
-</div>
-
+                <div>
+                    <button
+                        :disabled="valid === false"
+                        type="submit"
+                        style="float:right;">
+                        Login
+                    </button>
+                </div>
+            </w-form>
+            <br>
+            <br>
+            <br>
+            <w-alert error v-if="errorLabel">{{errorLabel}}</w-alert>
+        </w-card>
+    </div>
 </template>
 
 
@@ -94,24 +92,20 @@ export default {
                     }
                     else {
                         let errorMessage = authRes
-
                         errorMessage = errorMessage.substring(
                             errorMessage.indexOf(":") + 1, 
                             errorMessage.lastIndexOf("(")
                         );
-
                         this.errorLabel = errorMessage
                     }
                 }
             }
             catch (err) {
                 let errorMessage = err.message
-                
                 errorMessage = errorMessage.substring(
                     errorMessage.indexOf(":") + 1, 
                     errorMessage.lastIndexOf("(")
                 );
-                
                 this.errorLabel = errorMessage
             } 
         },

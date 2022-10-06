@@ -122,6 +122,7 @@ export default {
             postId: props.id,
             title: null,
             date: null,
+            createdAt: null,
             description: null,
             image: false,
             example: null,
@@ -131,7 +132,6 @@ export default {
             ressourceName: null,
             ressourceLink: null, 
             retrievedPost: null,
-            createdAt: null,
             imageFile: null,
             isImage: false,
             loading: false,
@@ -153,6 +153,7 @@ export default {
                 this.ressources = this.retrievedPost.ressources
                 this.ressourceName = this.retrievedPost.ressource.name
                 this.ressourceLink = this.retrievedPost.ressource.link
+                this.createdAt = this.retrievedPost.createdAt
 
             }, (errorObject) => {
                 console.log('The read failed: ' + errorObject.name);
@@ -213,6 +214,7 @@ export default {
                             this.postId = null;
                             this.loading = false
                             this.cancelForm()
+                            console.log('object created')
                         });
                     }
                    
@@ -243,6 +245,7 @@ export default {
                         this.postId = null;
                         this.loading = false;
                         this.cancelForm();
+                        console.log('object created')
                     });
                 } catch(err){
                     console.log(err)
