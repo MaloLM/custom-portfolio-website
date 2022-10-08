@@ -1,7 +1,7 @@
 <template>
     <div class="list-row">
         <w-card>
-        <h4 style="float:left;">{{viewTitle}} ({{rowId}})</h4>
+        <h4 style="float:left;">{{viewTitle}}</h4>
               
         <div style="float:right;" >
             <button 

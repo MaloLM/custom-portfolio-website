@@ -66,7 +66,8 @@
  }
 
  .logOutButton{
-    background-color: #ac1111;
+    font-weight: bold;
+    background-color: #ef270d;
     margin-right: 10px;
     color: white;
     border-radius: 20px;

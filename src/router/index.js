@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import AboutMe from '../views/AboutMeView.vue'
+import AboutMe from '../views/AboutMe.vue'
 
 const routes = [
   {
@@ -10,27 +10,27 @@ const routes = [
   {
     path: '/career',
     name: 'career',
-    component: () => import(/* webpackChunkName: "about" */ '../views/CareerView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Career.vue')
   },
   {
     path: '/travels',
     name: 'travels',
-    component: () => import(/* webpackChunkName: "about" */ '../views/TravelsView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Travels.vue')
   },
   {
     path: '/contact',
     name: 'contact',
-    component: () => import(/* webpackChunkName: "about" */ '../views/ContactView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Contact.vue')
   },
   {
     path: '/admin',
     name: 'admin',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AdminView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Admin.vue')
   },
   {
     path: '/authentication',
     name: 'authentication',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AuthenticationView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Authentication.vue')
   },
   {
     path: "/:pathMatch(.*)*",
