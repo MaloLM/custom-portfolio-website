@@ -14,7 +14,7 @@
 
                 <w-input
                     class="mb3"
-                    label="Date"
+                    label="Date, '-' for nothing"
                     outline
                     v-model="date"
                     required>
@@ -26,8 +26,10 @@
                     rows="10"
                     label="Text description"
                     v-model="description"
+                    @input="countDescriptionWords"
                     required>
                 </w-textarea>
+                <p :class=" descriptionWordCount <= 110 ? 'greenCount' :'redCount' ">{{descriptionWordCount}}</p>
 
                 <w-divider class="ma6"/>
                 </div>
@@ -55,7 +57,7 @@
                     <w-input 
                         style="margin-top: 10px;"
                         outline
-                        label="Add Skills (separator = '/')"
+                        label="Add Skills (separator = '/'), '-' for nothing"
                         v-model="skills"
                         required>     
                     </w-input>
@@ -64,7 +66,7 @@
 
                     <w-input 
                         outline
-                        label="Add technologies/tools (separator = '/')"
+                        label="Add technologies/tools (separator = '/'),'-' for nothing"
                         v-model="ressources"
                         required>
                     </w-input>
@@ -77,7 +79,7 @@
                     <w-input style="margin-top: 10px;"
                         outline
                         v-model="ressourceName"
-                        label="Ressource name"
+                        label="Ressource name , '-' for nothing"
                         required>
                     </w-input>
                     
@@ -86,7 +88,7 @@
                     <w-input
                         outline
                         v-model="ressourceLink"
-                        label="Ressource link"
+                        label="Ressource link, '-' for nothing"
                         required>
                     </w-input>
                 </w-card>
@@ -116,6 +118,7 @@ export default {
     },
     data(props){
         return {
+            descriptionWordCount: 0,
             showSuccessAlert: false,
             showErrorAlert: false,
             formTypePath: props.formType,
@@ -158,9 +161,13 @@ export default {
             }, (errorObject) => {
                 console.log('The read failed: ' + errorObject.name);
             }); 
+            this.countDescriptionWords()
         }
     },
     methods: {
+        countDescriptionWords(){
+            this.descriptionWordCount = this.description.split(' ').length;
+        },
         cancelForm(){
             this.postId = null;
             window.scrollTo(0, 0);
@@ -306,6 +313,16 @@ button {
 .orange{
     background-color: #ff7300;
     color: white;
+}
+
+.greenCount{
+    color: green;
+    font-weight: bold ;
+}
+
+.redCount{
+    color: red;
+    font-weight: bold ;
 }
 
 

@@ -3,12 +3,23 @@
     <Carousel class="caroussel-margin" :settings="settings" :breakpoints="breakpoints" v-if="posts">
       <Slide  v-for="(post) in posts" :key="post.createdAt">
         <div class="card-container">
-          <w-card  :image="post.image" class="caroussel-card" no-border>
+          <w-card
+          :image="post.image" 
+          onerror='this.onerror=null; this.image="https://cdn.discordapp.com/attachments/601416273892605983/1028011494891335801/failed_to_load.png"'
+          class="caroussel-card box sh6" 
+          no-border
+          shadow>
             <w-divider class="card-divider mx-3"></w-divider>
             <h4 style="float:left">{{post.title}}</h4>
             <template #actions>
               <div class="spacer"></div>
-              <w-button :id="post.id" class="px4" @click="loadDialog" round lg>Read more</w-button>
+              <w-button 
+              :id="post.id" 
+              class="px4" 
+              @click="loadDialog" 
+              round lg>
+              Read more
+              </w-button>
             </template>
           </w-card>
         </div>
@@ -27,7 +38,9 @@
       :persistent-no-animation="dialog.persistentNoAnimation"
       title-class="primary-light1--bg white">
 
-      <img class="dialog-image" :src="dialog.image"/>
+      <img class="dialog-image" 
+      :src="dialog.image"
+      onerror="this.onerror=null; this.src='../../assets/failed_to_load.png'" />
 
       <w-divider class="my6 mx-3 divider"></w-divider>
 
@@ -35,26 +48,32 @@
         <div class="title">
           <h1 style="float:left">{{dialog.title}}</h1>
         </div>
-        <div class="date">
+        <div class="date" v-if="dialog.date != null && dialog.date != '-'">
           <p style="float:left ">{{dialog.date}}</p>
         </div>
         <div class="void-a"></div>
         <div class="description">
           <p class="dialog-description"> {{dialog.description}}</p>
         </div>
-        <div class="ressources">
-          
+
+        <div class="skills" v-if="dialog.skills != null && dialog.skills != '-'">
           <p style="font-weight: bold;">Skills</p>
           <TagsGroup :unparsedData="dialog.skills " bgColor="success" textColor="white"></TagsGroup>
         </div>
-        <div class="skills">
+
+        <div class="ressources" v-if="dialog.ressources != null && dialog.ressources != '-'">
           <p style="font-weight: bold; margin-top: 7px;">Ressources & technologies</p>
-          
           <TagsGroup :unparsedData="dialog.ressources" bgColor="deep-purple" textColor="white"></TagsGroup>
         </div>
-        <div class="ressource">
-        
-          <a @click="redirectToRessource" target="_blank"> {{dialog.ressource.name}} </a>
+
+
+        <div class="ressource" v-if="dialog.ressource != null && dialog.ressource.name != '-' && dialog.ressource.link != '-'">
+          <a 
+          @click="redirectToRessource" 
+          target="_blank"> 
+          {{dialog.ressource.name}} 
+          </a>
+
           <w-button 
           @click="unloadDialog" 
           class="ma1 text-bold" 
@@ -103,7 +122,7 @@ export default defineComponent({
       snapAlign: 'center',
     },
     breakpoints: {
-      // 700px and up
+      // 800px and up
       800: {
         itemsToShow: 2,
         snapAlign: 'center',
@@ -145,19 +164,9 @@ export default defineComponent({
         
         this.dialog.show = true
       }
-      
     },
     unloadDialog(){
       this.dialog.show = false
-      // this.dialog.title = null;
-      // this.dialog.image = null;
-      // this.dialog.description = null;
-      // this.dialog.ressources = null;
-      // this.dialog.skills = null;
-      // this.dialog.title = null;
-      // this.dialog.ressource.name = null;
-      // this.dialog.ressource.link = null;
-      // console.log('unloaded')
     },
     redirectToRessource(){
       window.open(this.dialog.ressource.link);
@@ -210,6 +219,7 @@ export default defineComponent({
 .skills { 
   grid-area: skills;
   margin-left: 10px; 
+  margin-top: 15px;
  }
 .ressource { 
   text-decoration: underline; 
@@ -222,12 +232,12 @@ export default defineComponent({
   }
 
 .caroussel-margin{
-  margin-top: 20px;
-  margin-bottom: 50px;
+  margin-top: 10px;
+  margin-bottom: 30px;
 }
 
 .caroussel-card{
-  margin: 0px 20px;
+  margin: 30px;
   background-color: rgba(255, 255, 255, 1);
 }
 
@@ -238,6 +248,8 @@ export default defineComponent({
 .card-container{
   width: 100%;
   height: 100%;
+
+
 }
 
 button {
