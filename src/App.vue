@@ -54,7 +54,6 @@
       </nav>
     </w-drawer>
 </w-app>
-  
 </template>
 
 <script>
@@ -147,7 +146,7 @@
 
 .dark .w-card {
   border-style: solid;
-  border-color: white;
+  border-color: rgba(166, 166, 166, 0.5);
 }
 
 nav {

@@ -9,11 +9,12 @@
 <script setup>
     import { useStore } from 'vuex'
     const store = useStore()
-    const theme = store.getters.theme.isDark
 
     document.body.classList.toggle('light')
+
     function toggleTheme(){
-        store.commit('SET_DARK_THEME', !theme)
+        store.commit('SET_DARK_THEME', !(store.getters.theme.isDark))
+        console.log('is dark: ',store.getters.theme.isDark)
         document.body.classList.toggle('light')
         document.body.classList.toggle('dark')
     }

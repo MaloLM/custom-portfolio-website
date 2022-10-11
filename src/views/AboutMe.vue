@@ -1,7 +1,10 @@
 <template>
   <div class="aboutMe" >
     <div class="main-content">
+      <div>
         <h1 class="pageTitle">{{title}}</h1>
+      </div>
+        
         <p class="description">{{description}}</p>
         <img v-if="image != null && image != ''"
           v-bind:src="image"/>
@@ -83,7 +86,7 @@
   }
 
   .description{
-    font-size: 15px;
+    font-size: 20px;
     text-align: left;
   }
   

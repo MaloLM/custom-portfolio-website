@@ -5,12 +5,10 @@
         class="spacing"
         :bg-color="bgColor"
         :color="textColor"
-        round
-        xl>
+        round xl>
         {{tag}}
         </w-tag>
     </div>
-   
 </template>
 
 
@@ -25,14 +23,8 @@ export default {
   data: () => ({
     parsedData: null
   }),
-  components: {
-  },
-  methods: {
-  },
   mounted(){
-    console.log('before', this.unparsedData)
     this.parsedData = this.unparsedData.split("/");
-    console.log('after', this.parsedData)
   },
 };
 </script>

@@ -1,16 +1,17 @@
 <template>
     <h1 class="caroussel-title" v-if="posts != null"> {{title}} </h1>
-    <Carousel class="caroussel-margin" :settings="settings" :breakpoints="breakpoints" v-if="posts">
+    <Carousel class="caroussel" :settings="settings" :breakpoints="breakpoints" v-if="posts">
       <Slide  v-for="(post) in posts" :key="post.createdAt">
         <div class="card-container">
           <w-card
           :image="post.image" 
-          onerror='this.onerror=null; this.image="https://cdn.discordapp.com/attachments/601416273892605983/1028011494891335801/failed_to_load.png"'
+          onerror='this.onerror=null; 
+          this.image="https://cdn.discordapp.com/attachments/601416273892605983/1028011494891335801/failed_to_load.png"'
           class="caroussel-card box sh6" 
           no-border
           shadow>
             <w-divider class="card-divider mx-3"></w-divider>
-            <h4 style="float:left">{{post.title}}</h4>
+            <h2 style="float:left">{{post.title}}</h2>
             <template #actions>
               <div class="spacer"></div>
               <w-button 
@@ -30,10 +31,11 @@
       </template>
     </Carousel>
 
-    <w-dialog 
+    <w-dialog  
       v-model="dialog.show"
       :fullscreen="dialog.fullscreen"
       width="45vw"
+      :bg-color="dialog.dialogBgColor"
       :persistent="dialog.persistent"
       :persistent-no-animation="dialog.persistentNoAnimation"
       title-class="primary-light1--bg white">
@@ -42,7 +44,7 @@
       :src="dialog.image"
       onerror="this.onerror=null; this.src='../../assets/failed_to_load.png'" />
 
-      <w-divider class="my6 mx-3 divider"></w-divider>
+      <w-divider class="my6 mx-3 dialog-divider"></w-divider>
 
       <div class="container">
         <div class="title">
@@ -66,9 +68,8 @@
           <TagsGroup :unparsedData="dialog.ressources" bgColor="deep-purple" textColor="white"></TagsGroup>
         </div>
 
-
-        <div class="ressource" v-if="dialog.ressource != null && dialog.ressource.name != '-' && dialog.ressource.link != '-'">
-          <a 
+        <div class="ressource">
+          <a  v-if="dialog.ressource != null && dialog.ressource.name != '-' && dialog.ressource.link != '-'"
           @click="redirectToRessource" 
           target="_blank"> 
           {{dialog.ressource.name}} 
@@ -77,11 +78,12 @@
           <w-button 
           @click="unloadDialog" 
           class="ma1 text-bold" 
+          bg-color="white"
           color="red" 
           outline xl
           style="float:right">
           Close
-        </w-button>
+          </w-button>
         </div>
     </div>
     </w-dialog>
@@ -93,6 +95,7 @@ import { defineComponent } from 'vue';
 import { Carousel, Navigation, Slide } from 'vue3-carousel';
 import 'vue3-carousel/dist/carousel.css';
 import TagsGroup from './TagsGroup.vue';
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'Breakpoints',
@@ -101,7 +104,9 @@ export default defineComponent({
     posts : Object
   },
   data: () => ({
+    store: useStore(),
     dialog: {
+      dialogBgColor: null,
       show: false,
       fullscreen: false,
       persistent: false,
@@ -152,6 +157,15 @@ export default defineComponent({
       });
 
       if(object != null){
+        const isDark = this.store.getters.theme.isDark
+
+        if(isDark == true){
+          this.dialog.dialogBgColor = 'grey-dark5'
+        } else if (isDark == false){
+          this.dialog.dialogBgColor = 'white'
+        } else {
+          this.dialog.dialogBgColor = 'green'
+        }
         this.dialog.title = object.title;
         this.dialog.date = object.date;
         this.dialog.image = object.image;
@@ -170,9 +184,24 @@ export default defineComponent({
     },
     redirectToRessource(){
       window.open(this.dialog.ressource.link);
+    },
+    checkScreen(){
+      this.windowWidth = window.innerWidth;
+      if(this.windowWidth < 750){
+        this.mobile = true;
+        this.dialog.fullscreen = true;
+        return;
+      } 
+      this.mobile = false;
+      this.openDrawer = false;
+      this.dialog.fullscreen = false;
+      return;
     }
   },
-  mounted(){},
+  created(){
+    this.checkScreen()
+    window.addEventListener('resize', this.checkScreen)
+  },
 });
 </script>
     
@@ -188,26 +217,42 @@ export default defineComponent({
 }
 
 .carousel__next{
-  margin-right: 100px;
-  width: 50px;
-  height: 100px;
+  float: right;
+  margin-right: 25px;
+  width: 40px;
+  height: 200px;
   background-color: rgba(255, 255, 255, 0.5);
   border: solid;
-  border-color: black;
-  color: black;
-  border-radius: 10px;
+  border-color: rgb(90, 90, 90);
+  color: rgb(102, 102, 102);
+  border-radius: 20px;
+  transition: 0.5s;
 }
 
 .carousel__prev{
-  margin-left: 100px;
-  width: 50px;
-  height: 120px;
+  float: left;
+  margin-left: 25px;
+  width: 40px;
+  height: 200px;
   background-color: rgba(255, 255, 255, 0.5);
   border: solid;
-  border-color: black;
-  color: black;
-  border-radius: 10px;
+  border-color: rgb(90, 90, 90);
+  color: rgb(102, 102, 102);
+  border-radius: 20px;
+  transition: 0.5s;
 }
+
+.carousel__next:hover {
+  background-color: rgba(255, 255, 255, 0.921);
+  transition: 0.5s;
+}
+
+.carousel__prev:hover {
+  background-color: rgba(255, 255, 255, 0.921);
+  transition: 0.5s;
+}
+
+
 
 .container {
   display: grid; 
@@ -266,7 +311,7 @@ export default defineComponent({
     cursor: pointer;
   }
 
-.caroussel-margin{
+.caroussel{
   margin-top: 10px;
   margin-bottom: 30px;
 }
@@ -312,9 +357,10 @@ button {
   margin-left: auto;
   margin-right: auto;
   height: auto;
+  display:none;
 }
 
-.divider{
+.dialog-divider{
   margin: -10px;
 }
 /* most litle dimensions at the bottom*/
@@ -322,12 +368,26 @@ button {
     .carousel__next {
       display: none;
     }
+
     .carousel__prev {
       display: none;
     }
+
     .caroussel-title{
       margin-left: 0;
       text-align: center;
     } 
+
+    .dialog-image{
+      display: none;
+    }
+
+    .dialog-divider{
+      display: none;
+    }
+
+    .caroussel-card:focus {
+      position: fixed;
+    }
 }
 </style>

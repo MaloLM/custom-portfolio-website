@@ -30,13 +30,11 @@
                     required>
                 </w-textarea>
                 <p :class=" descriptionWordCount <= 110 ? 'greenCount' :'redCount' ">{{descriptionWordCount}}</p>
-
                 <w-divider class="ma6"/>
                 </div>
 
                 <div class="right">
                     <w-card title="Image" title-class="grey" class="fillSpace">
-
                         <input 
                         :required="!isImage"
                         type="file" 
@@ -45,9 +43,8 @@
                         accept="image/*" 
                         id="choose-file" 
                         name="choose-file">
-
                         <br><br>
-                            <img v-if="isImage" :src="preview" class="image"/>
+                        <img v-if="isImage" :src="preview" class="image"/>
                     </w-card>
                 </div>
 
@@ -55,20 +52,18 @@
                 <w-card class="fillSpace" >
                     Tags
                     <w-input 
-                        style="margin-top: 10px;"
-                        outline
-                        label="Add Skills (separator = '/'), '-' for nothing"
-                        v-model="skills"
-                        required>     
+                    style="margin-top: 10px;"
+                    outline
+                    label="Add Skills (separator = '/'), '-' for nothing"
+                    v-model="skills"
+                    required>     
                     </w-input>
-
                     <br>
-
                     <w-input 
-                        outline
-                        label="Add technologies/tools (separator = '/'),'-' for nothing"
-                        v-model="ressources"
-                        required>
+                    outline
+                    label="Add technologies/tools (separator = '/'),'-' for nothing"
+                    v-model="ressources"
+                    required>
                     </w-input>
                 </w-card>
                 </div>
@@ -77,31 +72,25 @@
                 <w-card class="fillSpace" >
                     Ressource
                     <w-input style="margin-top: 10px;"
-                        outline
-                        v-model="ressourceName"
-                        label="Ressource name , '-' for nothing"
-                        required>
+                    outline
+                    v-model="ressourceName"
+                    label="Ressource name , '-' for nothing"
+                    required>
                     </w-input>
-                    
                     <br>
-
                     <w-input
-                        outline
-                        v-model="ressourceLink"
-                        label="Ressource link, '-' for nothing"
-                        required>
+                    outline
+                    v-model="ressourceLink"
+                    label="Ressource link, '-' for nothing"
+                    required>
                     </w-input>
                 </w-card>
                 </div>
-
                 <div class="bottom">
                     <div style="float:right;">   
-
                         <button class="orange" type="button" @click='cancelForm'>Cancel</button>
-                        
                         <button style="float:right;">Submit</button>
                     </div>
-                    
                 </div>
         </div>
     </form>
@@ -142,7 +131,10 @@ export default {
     },
     setup(){},
     mounted(){
-        if(this.postId != null && this.postId != "null"){ 
+        console.log("mounting")
+        console.log("ID", this.id)
+        if(this.id != null && this.id != "null"){
+            
             databaseService.getPostsByPathAndId(this.formTypePath, this.postId).on('value', (snapshot) => {
                 this.retrievedPost = snapshot.val()
 

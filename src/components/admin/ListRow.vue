@@ -30,6 +30,7 @@ export default {
     },
     methods: {
         editRow(){
+            console.log('REQUEST FOR EDITING, ID:', this.id)
             window.scrollTo(0, 0);
             this.$emit('toggleShow', this.id)
         },

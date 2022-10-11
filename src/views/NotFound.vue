@@ -27,6 +27,7 @@ h1 {
 }
 
 p {
+    text-align: center;
     font-weight: bold;
     font-size: 20px;
     margin: 10px;
@@ -41,6 +42,7 @@ button {
     color: white;
     border-radius: 20px;
     font-size:13px;
+    margin-bottom: 20px;
 }
 
 img {

@@ -6,7 +6,7 @@
             @removePost="removePost($event)"
             v-for="post in posts"
             :key=post.id
-            :uid=post.id
+            :id=post.id
             :title="post.title">
             </ListRow>
         </div>
@@ -46,6 +46,7 @@ export default {
   setup(){},
   methods: {
     toggleShow(postId){
+      console.log("TOGGLE SHOW:", postId)
       if(postId == "null"){
         this.postToEditId = null
       } else {
