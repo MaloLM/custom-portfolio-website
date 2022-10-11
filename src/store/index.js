@@ -1,6 +1,4 @@
 import { createStore } from 'vuex'
-// import 'firebase/compat/auth'
-
 
 export default createStore({
   state: {
@@ -9,13 +7,11 @@ export default createStore({
         darkInputColor: 'white',
         lightInputColor: 'info',
       },
-      
   },
   getters: {
     theme(state){
       return state.theme
     },
-
   },
   mutations: {
     SET_DARK_THEME(state, value) {

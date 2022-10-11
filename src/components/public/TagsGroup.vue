@@ -14,9 +14,9 @@
 </template>
 
 
-<script>
+<script scoped>
 export default {
-  name: 'Breakpoints',
+  name: 'tag-group',
   props:{
     unparsedData: String,
     bgColor: String,

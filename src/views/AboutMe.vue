@@ -1,30 +1,15 @@
 <template>
   <div class="aboutMe" >
     <div class="main-content">
-      <div>
-        <h1 class="pageTitle">{{ title }}</h1>
-
-      <div class="container">
-          <div class="row-1-1">
-            <p class="description">{{description}}</p>
-          </div>
-          <div class="row-1-2" style="display: flex; justify-content: center;" >
-            <img v-if="image != null && image != ''"
-              v-bind:src="image"
-              />
-          </div>
-        </div>
-        <br/>
-      </div>
-
-     
+        <h1 class="pageTitle">{{title}}</h1>
+        <p class="description">{{description}}</p>
+        <img v-if="image != null && image != ''"
+          v-bind:src="image"/>
+      <br/>
     </div>
-
-    <CardCaroussel title="Personnal projects" v-if="personnalProjectsPosts != null" :posts="personnalProjectsPosts"></CardCaroussel>
-
-    <CardCaroussel title="Hobbies and interests" v-if="hobbiesAndInterestsPosts != null"  :posts="hobbiesAndInterestsPosts"></CardCaroussel>
-
   </div>
+  <CardCaroussel title="Personnal projects" v-if="personnalProjectsPosts != null" :posts="personnalProjectsPosts"></CardCaroussel>
+  <CardCaroussel title="Hobbies and interests" v-if="hobbiesAndInterestsPosts != null"  :posts="hobbiesAndInterestsPosts"></CardCaroussel>
 </template>
 
 <script>
@@ -45,29 +30,20 @@
     },
     methods: {
       sortByCreationDate(posts){
-        // console.log('BEFORE', posts)
         let array = []
 
         Object.entries(posts).forEach(([key, value]) => {
-            // console.log('DURING', key)
             value['id'] = key
-            // console.log('DURING', value)
             array.push(value)
         })
 
         array = array.sort((a, b) => {
             return b.createdAt - a.createdAt;
         });
-
-        // console.log('AFTER', posts)
         return array
-
       }
     },
-    setup(){
-    },
     mounted() {
-
       databaseService.getAboutMeOrCareerData('about-me','title').on('value', (snapshot) => {
         this.title = snapshot.val()
         databaseService.getAboutMeOrCareerData('about-me', 'description').on('value', (snapshot) => {
@@ -77,61 +53,45 @@
 
             databaseService.getPersonnalProjects('about-me', 'image').on('value', (snapshot) => {
             
-              let posts = snapshot.val()
-              posts = this.sortByCreationDate(posts)
+              let posts = this.sortByCreationDate(snapshot.val())
               this.personnalProjectsPosts = posts
 
               databaseService.getHobbiesAndInterests('about-me', 'image').on('value', (snapshot) => {
 
-              let posts = snapshot.val()
-              posts = this.sortByCreationDate(posts)
-              this.hobbiesAndInterestsPosts = posts
+                let posts = this.sortByCreationDate(snapshot.val())
+                this.hobbiesAndInterestsPosts = posts
               
-              }, (errorObject) => {
-                console.log('The read failed: ' + errorObject.name);
-              });
+              }, (errorObject) => { console.log('The read failed: ' + errorObject.name); });
             
-            }, (errorObject) => {
-              console.log('The read failed: ' + errorObject.name);
-            });
+            }, (errorObject) => { console.log('The read failed: ' + errorObject.name); });
             
-          }, (errorObject) => {
-            console.log('The read failed: ' + errorObject.name);
-          }); 
+          }, (errorObject) => { console.log('The read failed: ' + errorObject.name); }); 
 
-        }, (errorObject) => {
-          console.log('The read failed: ' + errorObject.name);
-        }); 
+        }, (errorObject) => { console.log('The read failed: ' + errorObject.name); }); 
       
-      }, (errorObject) => {
-        console.log('The read failed: ' + errorObject.name);
-      }); 
-
+      }, (errorObject) => { console.log('The read failed: ' + errorObject.name); }); 
     },
-
   };
-  </script>
+</script>
+
 
 <style scoped>
-.pageTitle{
-  font-size: 60px;
-}
+@media (max-width: 667px) {
+  .pageTitle{
+    text-align: center;
+    font-size: 50px;
+  }
 
-.container {
-  display: grid; 
-  grid-auto-flow: row dense; 
-  grid-auto-columns: 1.2fr; 
-  grid-template-columns: 1fr 1fr; 
-  grid-template-rows: 1fr; 
-  gap: 0px 0px; 
-  grid-template-areas: 
-    "row-1-1 row-1-2"; 
+  .description{
+    font-size: 15px;
+    text-align: left;
+  }
+  
+  .main-content{
+    margin-top: 15px;
+    margin-left: 12px;
+    margin-right: 12px;
+    transition: 0.3s;
+  }    
 }
-.row-1-1 { grid-area: row-1-1; }
-.row-1-2 { grid-area: row-1-2; }
-
-.description{
-  font-size: 18px;
-}
-
 </style>

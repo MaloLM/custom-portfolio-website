@@ -1,8 +1,8 @@
 import firebase from "../firebase";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import 'firebase/compat/auth';
 import 'firebase/compat/database';
 import 'firebase/compat/storage';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const db = firebase.database()
 const auth = firebase.auth();
@@ -17,9 +17,6 @@ class DatabaseService {
     auth.signOut(user => {
       console.log('signed out', user);
     })
-    .then(() => {
-        console.log('User signed out successfully !');
-    })
     .catch(error => {
         console.error(error);
     });
@@ -29,21 +26,17 @@ class DatabaseService {
     return db.ref("/pages");
   }
 
-  
   getAboutMeOrCareerData(path, dataType){
     return db.ref("/pages/"+ path +"/" + dataType);
   }
-
 
   getPostsByPathAndId(path, id){
     return db.ref("/pages/" + path + '/' + id);
   }
 
-
   async updatePostByPathAndId(path, id, children){
     db.ref('/pages/' + path + '/' + id).update(children);
   }
-
 
   async createPost(path, post){
     db.ref('/pages/' + path).push(post);
@@ -57,21 +50,17 @@ class DatabaseService {
     return db.ref("/pages/about-me/personnal-projects");
   }
 
-
   getHobbiesAndInterests(){
     return db.ref("/pages/about-me/hobbies-and-interests");
   }
 
-
   getEducation(){
      return db.ref("/pages/career/education");
   }
-  
 
   getProfessionalProjects(){
      return db.ref("/pages/career/professional-projects");
   }
-
   
   getJobExperiences(){
     return db.ref("/pages/career/job-experiences");
@@ -81,11 +70,9 @@ class DatabaseService {
     return db.ref('/pages/'+ path + '/');
   }
 
-
   removePost(path, id) {
     return db.ref('/pages/'+ path + '/').child(id).remove();
   }
-
 
   uploadFileThenUpdateAboutMe(path, file, title, description){
     // https://firebase.google.com/docs/storage/web/upload-files
@@ -125,16 +112,13 @@ class DatabaseService {
       );
   }
 
-
   update(key, value) {
     return db.child(key).update(value);
   }
 
-
   deleteAll() {
     return db.remove();
   }
-
 
   async logIn( email, password ){
         const response = await firebase.auth().signInWithEmailAndPassword(email, password).then((userCredential) => {
@@ -146,7 +130,6 @@ class DatabaseService {
         });
         return response
       }
-
 
   uploadFileThenPushPost(file, filename, formType) {
     // https://firebase.google.com/docs/storage/web/upload-files
@@ -169,8 +152,7 @@ class DatabaseService {
         }, 
         (error) => {
           console.log("error: ", error)
-        }, 
-        () => {
+        }, () => {
           getDownloadURL(uploadTask.snapshot.ref)
           .then((downloadURL) => {
             console.log('File available at', downloadURL);
@@ -197,13 +179,11 @@ class DatabaseService {
 
           }, (errorObject) => {
               console.log('The read failed: ' + errorObject.name);
-          }); 
-            
+            });  
           });
         }
       );
   }
-
 
   uploadFileThenUpdatePost(file, formType, postId, filename) {
     // https://firebase.google.com/docs/storage/web/upload-files
@@ -231,7 +211,6 @@ class DatabaseService {
         () => {
           getDownloadURL(uploadTask.snapshot.ref)
           .then((downloadURL) => {
-
             let dataToUpdate = {
                 image: downloadURL
             }
@@ -239,9 +218,7 @@ class DatabaseService {
            });
         }
       );
-
   }
-
 }
 
 export default new DatabaseService();

@@ -1,7 +1,7 @@
 <template>
     <div class="list-row">
         <w-card>
-        <h4 style="float:left;">{{viewTitle}}</h4>
+        <h4 style="float:left;">{{title}}</h4>
               
         <div style="float:right;" >
             <button 
@@ -17,43 +17,26 @@
             style="float:right;">
                 Delete
             </button>
-
         </div>
         </w-card>
     </div>
 </template>
 
 <script>
-    export default {
-    data(props) {
-        return {
-            viewTitle: props.title,
-            rowId: props.uid
-        }
-    },
-    components: {
-    
-    },
-    props:{
+export default {
+    props: {
         title: String,
-        uid: String,
-    },
-    setup(){
-        
-
+        id: String,
     },
     methods: {
         editRow(){
             window.scrollTo(0, 0);
-            this.$emit('toggleShow', this.rowId)
+            this.$emit('toggleShow', this.id)
         },
         removePost(){
-            this.$emit('removePost', this.rowId)
-        }
+            this.$emit('removePost', this.id)
+        },
     },
-    mounted() {
-        
-    }
 }
 </script>
 
@@ -62,7 +45,6 @@
 .editButton{
     margin-right: 10px;
     background-color: #4cb119;
-    
 }
 
 .deleteButton{

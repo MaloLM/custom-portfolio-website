@@ -2,52 +2,47 @@
     <div class="contact-form">
         <w-form v-model="valid" @submit.prevent="sendEmail" id="contactForm">
             <w-input 
-                required
-                class="mb3 spacing" 
-                label="Name"
-                v-model="name"
-                bg-color=""
-                outline
-                :validators="[validators.required]">
+            required
+            class="mb3 spacing" 
+            label="Name"
+            v-model="name"
+            outline
+            :validators="[validators.required]">
             </w-input>
 
             <w-input
-                required
-                :validators="[validators.required]"
-                class="mb3 spacing"
-                label="E-mail address"
-                v-model="email"
-                bg-color=""
-                outline>
+            required
+            :validators="[validators.required]"
+            class="mb3 spacing"
+            label="E-mail address"
+            v-model="email"
+            outline>
             </w-input>
 
             <w-divider class="mx6 spacing">Your message</w-divider>
 
             <w-textarea
-                :validators="[validators.required]"
-                class="mt4 spacing"
-                v-model="message"
-                label="Tell me..."
-                bg-color=""
-                rows="10"
-                outline>
+            :validators="[validators.required]"
+            class="mt4 spacing"
+            v-model="message"
+            label="Tell me..."
+            rows="10"
+            outline>
             </w-textarea>
 
-            <w-alert class="spacing" v-if="showSuccessMessage" success dismiss>Message was sent! Thank you for contacting me</w-alert>
+            <w-alert class="spacing" v-if="showSuccessMessage" success dismiss>{{successLabel}}</w-alert>
             <w-alert class="spacing" v-if="errorLabel" error dismiss>{{errorLabel}}</w-alert>
-
-            <button style="float:right" value="Send" type="submit" class="spacing">Submit</button>
+            <button value="Send" type="submit">Submit</button>
         </w-form>
     </div>
 </template>
 
 
-<script >
+<script>
 import emailjs from 'emailjs-com';
   
 export default {
-  name: 'ContactUs',
-  components: {  },
+  name: 'contact',
   data() {
     return {
       showSuccessMessage: false,
@@ -56,35 +51,36 @@ export default {
       message: '',
       captchaKey:  process.env.VUE_APP_RECAPTCHA_PUBLIC_KEY,
       errorLabel: null,
+      successLabel: 'Message was sent! Thank you for contacting me',
       valid: null,
       validators: {
         required: value => !!value || 'This field is required'
       },
-
     }
   },
   methods: {
     sendEmail() {
       try {
-        if(this.name != '' && this.email != '' && this.message != null){
+        if(this.name != '' && this.email != '' && this.message != null && this.message != ''){
           if(this.isEmailValid(this.email)){
+            // sending mail
             emailjs.sendForm(
               process.env.VUE_APP_EMAILJS_SERVICE_ID,
               process.env.VUE_APP_EMAILJS_TEMPLATE_ID, 
               '#contactForm',
-              process.env.VUE_APP_EMAILJS_USER_ID)
-            this.showSuccessMessage = true;
-
-            this.name = ''
-            this.email = ''
-            this.message = ''
+              process.env.VUE_APP_EMAILJS_USER_ID
+              )
+              this.showSuccessMessage = true;
+              // reseting form values
+              this.name = ''
+              this.email = ''
+              this.message = ''
           }
           else {
             this.errorLabel = 'E-mail format is invalid. Please correct it to send your message.';
             console.log(this.errorLabel)
           }
         }
-       
       } catch(error) {
         this.errorLabel = 'An error occured. Please contact me via social networks.';
       }
@@ -95,15 +91,40 @@ export default {
       )
       return emailRegexp.test(email)
     },
-  },
-  mounted(){
   }
 }
 </script>
 
 
 <style scoped>
-    .spacing{
-      margin: 17px;
-    }
+.spacing{
+  margin: 17px;
+}
+
+button {
+  background-color: #2d467d;
+  border: 0;
+  padding: 10px 40px;
+  margin-top: 20px;
+  margin-left: 10px;
+  color: white;
+  border-radius: 20px;
+  font-size:13px;
+  float:right;
+}
+
+@media (max-width: 667px) {
+  .spacing{
+    margin: 17px;
+  }
+
+  button {  
+    float: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    width: 70%;
+  }
+}
 </style>

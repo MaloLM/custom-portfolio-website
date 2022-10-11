@@ -1,16 +1,27 @@
 <template>
   <div class="getInTouch">
       <w-card class="main-content">
-        <h1 class="pageTitle">{{pageTitle}}</h1>
+        <h1 class="title">{{title}}</h1>
         <ContactForm></ContactForm>
       </w-card>
   </div>
 </template>
 
 
-<script setup>
+<script>
 import ContactForm from '@/components/public/ContactForm.vue';
-var pageTitle = "Get in touch"
+
+export default {
+  name: "contact-view",
+  components: {
+    ContactForm
+    },
+  data() {
+    return {
+      title: "Get in touch",
+    };
+  },
+};
 </script>
 
 
@@ -22,10 +33,6 @@ var pageTitle = "Get in touch"
   background-color: rgba(255, 255, 255, 1);
 }
 
-.dark .main-content{
-  background-color: rgb(197, 29, 29);
-}
-
 .getInTouch{
   height: 100vh;
 }
@@ -34,7 +41,23 @@ var pageTitle = "Get in touch"
   background-color: black;
  }
 
- .pageTitle {
+ .title {
   margin-left: 10px;
+  font-size: 40px;
  }
+
+ @media (max-width: 667px) {
+  .title {
+    text-align: center;
+    margin: 0;
+    font-size: 40px;
+  }
+  .main-content{
+    margin-top: 15px;
+    margin-left: 12px;
+    margin-right: 12px;
+    transition: 0.3s;
+  }
+}
+
 </style>

@@ -11,6 +11,7 @@
         color="grey-light4">
         fa fa-bars
       </w-icon> 
+      
       <router-link to="/" class="link" v-show="!mobile">About me </router-link> 
       <router-link to="/career" class="link" v-show="!mobile">Career </router-link> 
       <router-link to="/travels" class="link" v-show="!mobile">Travels </router-link>
@@ -72,6 +73,7 @@
         mobile: null,
         windowWidth: null,
         openDrawer: false,
+        pageTitle: "Malo Le Mestre",
       }
     },
     computed: {
@@ -81,7 +83,7 @@
     },
     created(){
       this.checkScreen()
-      document.title = "Malo Le Mestre"
+      document.title = this.pageTitle
       window.addEventListener('resize', this.checkScreen)
     },
     methods:{
@@ -143,6 +145,11 @@
   transition: 0.3s;
 }
 
+.dark .w-card {
+  border-style: solid;
+  border-color: white;
+}
+
 nav {
   padding: 20px;
   background-color: black;
@@ -154,6 +161,14 @@ nav {
   border-bottom-color: rgb(55, 51, 51);
   border-left-width: 0px;
   width: 100vw;
+}
+
+.pageTitle{
+  font-size: 60px;
+}
+
+.description{
+  font-size: 18px;
 }
 
 nav a {
@@ -178,5 +193,4 @@ nav a.router-link-exact-active {
   margin-top: 20px;
   font-size: 30px;
 }
-
 </style>

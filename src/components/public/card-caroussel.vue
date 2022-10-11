@@ -1,5 +1,5 @@
 <template>
-    <h1 v-if="posts != null"> {{title}} </h1>
+    <h1 class="caroussel-title" v-if="posts != null"> {{title}} </h1>
     <Carousel class="caroussel-margin" :settings="settings" :breakpoints="breakpoints" v-if="posts">
       <Slide  v-for="(post) in posts" :key="post.createdAt">
         <div class="card-container">
@@ -178,10 +178,35 @@ export default defineComponent({
     
 
 <style>
+.caroussel-title{
+  margin-left: 30px;
+} 
 
 .carousel__prev--in-active,
 .carousel__next--in-active {
   display: none;
+}
+
+.carousel__next{
+  margin-right: 100px;
+  width: 50px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: solid;
+  border-color: black;
+  color: black;
+  border-radius: 10px;
+}
+
+.carousel__prev{
+  margin-left: 100px;
+  width: 50px;
+  height: 120px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: solid;
+  border-color: black;
+  color: black;
+  border-radius: 10px;
 }
 
 .container {
@@ -197,13 +222,20 @@ export default defineComponent({
     "skills skills skills"
     "ressource ressource ressource"; 
 }
-.title { grid-area: title; }
+.title {
+  grid-area: title;
+}
+
 .date { 
   font-weight: bold;
   grid-area: date;
   margin-left: 10px; 
 }
-.void-a { grid-area: void-a; }
+
+.void-a {
+  grid-area: void-a;
+}
+
 .description { 
   grid-area: description;
   margin-left: 10px; 
@@ -212,15 +244,18 @@ export default defineComponent({
   text-align: justify;
   text-justify: inter-word;
 }
+
 .ressources {    
   grid-area: ressources; 
   margin-left: 10px; 
 }
+
 .skills { 
   grid-area: skills;
   margin-left: 10px; 
   margin-top: 15px;
  }
+
 .ressource { 
   text-decoration: underline; 
   grid-area: ressource;
@@ -248,19 +283,17 @@ export default defineComponent({
 .card-container{
   width: 100%;
   height: 100%;
-
-
 }
 
 button {
-    background-color: #2d467d;
-    border: 0;
-    padding: 10px 25px;
-    margin-top: 20px;
-    margin-left: 10px;
-    color: white;
-    border-radius: 6px;
-    font-size:13px;
+  background-color: #2d467d;
+  border: 0;
+  padding: 10px 25px;
+  margin-top: 20px;
+  margin-left: 10px;
+  color: white;
+  border-radius: 6px;
+  font-size:13px;
 }
 
 .card-divider{
@@ -283,5 +316,18 @@ button {
 
 .divider{
   margin: -10px;
+}
+/* most litle dimensions at the bottom*/
+@media screen and (max-width: 667px) {
+    .carousel__next {
+      display: none;
+    }
+    .carousel__prev {
+      display: none;
+    }
+    .caroussel-title{
+      margin-left: 0;
+      text-align: center;
+    } 
 }
 </style>

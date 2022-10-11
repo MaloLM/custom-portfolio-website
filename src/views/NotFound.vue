@@ -1,41 +1,38 @@
 <template>
-
     <div class="main-content">
-        <h1 class="NotFoundTitle">404</h1>
-        <p class="NotFoundMessage"> OOPS ! You have found the uncharted page. </p>
+        <h1 class="title">404</h1>
+        <p class="message"> OOPS ! You have found the uncharted page. </p>
         
-
         <img src="../assets/not_found.gif">
 
         <router-link to="/" class="link">
-            <button class="GoHomeButton"> Go home</button>
+            <button> Go home</button>
         </router-link> 
     </div>
 </template>
 
 <style scoped>
-.main-content{
-    margin-top: 0%;
+.main-content {
     margin-left: 70px;
     margin-right: 70px;
-    transition: 0.3s;
+
     display: flex; 
     flex-direction: column;
     align-items: center;
     height: 100vh;
 }
 
-.NotFoundMessage {
+h1 {
+    font-size: 100px;
+}
+
+p {
     font-weight: bold;
     font-size: 20px;
     margin: 10px;
 }
 
-.NotFoundTitle {
-    font-size: 100px;
-}
-
-.GoHomeButton {
+button {
     background-color: #2d467d;
     border: 0;
     padding: 10px 40px;
@@ -44,5 +41,9 @@
     color: white;
     border-radius: 20px;
     font-size:13px;
+}
+
+img {
+    border-style: solid;
 }
 </style>
