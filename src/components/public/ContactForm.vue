@@ -5,6 +5,8 @@
             required
             class="mb3 spacing" 
             label="Name"
+            color="info"
+            bg-color="grey-light5"
             v-model="name"
             outline
             :validators="[validators.required]">
@@ -15,6 +17,8 @@
             :validators="[validators.required]"
             class="mb3 spacing"
             label="E-mail address"
+            color="info"
+            bg-color="grey-light5"
             v-model="email"
             outline>
             </w-input>
@@ -26,6 +30,8 @@
             class="mt4 spacing"
             v-model="message"
             label="Tell me..."
+            color="info"
+            bg-color="grey-light5"
             rows="10"
             outline>
             </w-textarea>

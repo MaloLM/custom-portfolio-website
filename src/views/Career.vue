@@ -1,12 +1,8 @@
 <template>
   <div class="main-content">
     <h1 class="pageTitle">{{ title }}</h1>
-    <div>
-      <div>
-        <p class="description">{{description}}</p>
-      </div>
-      <div  style="display: flex; justify-content: center;">
-      </div>
+    <div class="container">
+       <p class="description">{{description}}</p>
     </div>
   </div>
 
@@ -99,6 +95,18 @@ export default {
   
   
 <style scoped>
+
+.container {
+  display: grid; 
+  grid-auto-columns: 1fr; 
+  grid-template-columns: 0.5fr 0.5fr; 
+  grid-template-rows: 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "description void"; 
+}
+.description { grid-area: description; }
+.void { grid-area: void; }
 .row-3 {
   margin-top: 25px;
 }
@@ -110,7 +118,7 @@ export default {
   }
 
   .description{
-    font-size: 15px;
+    font-size: 20px;
     text-align: left;
   }
   
@@ -119,7 +127,21 @@ export default {
     margin-left: 12px;
     margin-right: 12px;
     transition: 0.3s;
-  }    
+  }   
+
+  .container {
+  display: grid; 
+  grid-auto-columns: 1fr; 
+  grid-template-columns: 1fr 0fr; 
+  grid-template-rows: 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "description void"; 
+}
+  
+  .void {
+    display: none;
+  }
 }
 </style>
   

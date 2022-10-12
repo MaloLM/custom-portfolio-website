@@ -10,6 +10,7 @@
 
 <script>
 import ContactForm from '@/components/public/ContactForm.vue';
+import { useStore } from 'vuex'
 
 export default {
   name: "contact-view",
@@ -19,8 +20,9 @@ export default {
   data() {
     return {
       title: "Get in touch",
+      store: useStore()
     };
-  },
+  }
 };
 </script>
 

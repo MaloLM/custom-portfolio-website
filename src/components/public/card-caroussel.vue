@@ -40,12 +40,6 @@
       :persistent-no-animation="dialog.persistentNoAnimation"
       title-class="primary-light1--bg white">
 
-      <img class="dialog-image" 
-      :src="dialog.image"
-      onerror="this.onerror=null; this.src='../../assets/failed_to_load.png'" />
-
-      <w-divider class="my6 mx-3 dialog-divider"></w-divider>
-
       <div class="container">
         <div class="title">
           <h1 style="float:left">{{dialog.title}}</h1>
@@ -78,7 +72,7 @@
           <w-button 
           @click="unloadDialog" 
           class="ma1 text-bold" 
-          bg-color="white"
+          bg-color="transparent"
           color="red" 
           outline xl
           style="float:right">
@@ -161,11 +155,9 @@ export default defineComponent({
 
         if(isDark == true){
           this.dialog.dialogBgColor = 'grey-dark5'
-        } else if (isDark == false){
-          this.dialog.dialogBgColor = 'white'
         } else {
-          this.dialog.dialogBgColor = 'green'
-        }
+          this.dialog.dialogBgColor = 'white'
+        } 
         this.dialog.title = object.title;
         this.dialog.date = object.date;
         this.dialog.image = object.image;
@@ -208,7 +200,7 @@ export default defineComponent({
 
 <style>
 .caroussel-title{
-  margin-left: 30px;
+  margin-left: 50px;
 } 
 
 .carousel__prev--in-active,
@@ -218,41 +210,43 @@ export default defineComponent({
 
 .carousel__next{
   float: right;
-  margin-right: 25px;
-  width: 40px;
-  height: 200px;
-  background-color: rgba(255, 255, 255, 0.5);
+  margin-right: 40px;
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  background-color: rgb(44, 70, 125);
   border: solid;
-  border-color: rgb(90, 90, 90);
-  color: rgb(102, 102, 102);
-  border-radius: 20px;
+  border-color: rgba(255, 255, 255, 0.921);
+  color: rgba(255, 255, 255, 0.921);
   transition: 0.5s;
 }
 
 .carousel__prev{
   float: left;
-  margin-left: 25px;
-  width: 40px;
-  height: 200px;
-  background-color: rgba(255, 255, 255, 0.5);
+  margin-left: 40px;
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  background-color: rgb(44, 70, 125);
   border: solid;
-  border-color: rgb(90, 90, 90);
-  color: rgb(102, 102, 102);
-  border-radius: 20px;
+  border-color: rgba(255, 255, 255, 0.921);
+  color: rgba(255, 255, 255, 0.921);
   transition: 0.5s;
 }
 
 .carousel__next:hover {
-  background-color: rgba(255, 255, 255, 0.921);
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color:rgb(44, 70, 125);
+  color: rgb(44, 70, 125);
   transition: 0.5s;
 }
 
 .carousel__prev:hover {
-  background-color: rgba(255, 255, 255, 0.921);
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: rgb(44, 70, 125);
+  color: rgb(44, 70, 125);
   transition: 0.5s;
 }
-
-
 
 .container {
   display: grid; 
@@ -267,6 +261,7 @@ export default defineComponent({
     "skills skills skills"
     "ressource ressource ressource"; 
 }
+
 .title {
   grid-area: title;
 }
@@ -307,9 +302,9 @@ export default defineComponent({
   margin: 10px; 
  }
 
- .ressource:hover a {
-    cursor: pointer;
-  }
+.ressource:hover a {
+  cursor: pointer;
+}
 
 .caroussel{
   margin-top: 10px;
@@ -351,18 +346,6 @@ button {
   height: auto;
 }
 
-.dialog-image{
-  width: 90%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  height: auto;
-  display:none;
-}
-
-.dialog-divider{
-  margin: -10px;
-}
 /* most litle dimensions at the bottom*/
 @media screen and (max-width: 667px) {
     .carousel__next {
@@ -377,17 +360,5 @@ button {
       margin-left: 0;
       text-align: center;
     } 
-
-    .dialog-image{
-      display: none;
-    }
-
-    .dialog-divider{
-      display: none;
-    }
-
-    .caroussel-card:focus {
-      position: fixed;
-    }
 }
 </style>

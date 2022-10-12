@@ -186,10 +186,38 @@ nav a.router-link-exact-active {
 .navMenu{
   display: flex;
   flex-direction: column;
+  position: sticky;
+  top: 0;
 }
 
 .navMenu .link{
   margin-top: 20px;
   font-size: 30px;
+}
+
+@media (max-width: 667px) {
+  #app {
+    background-image: none;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  .light #app {
+  background-image: none;
+  background-color: rgba(234, 234, 234, 0.9);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color:#2c3e50;
+  transition: 0.3s;
+}
+
+.dark #app {
+  background-color: rgba(50, 50, 50, 0.9);
+  color:rgb(206, 205, 205);
+  background-image: none;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: 0.3s;
+}
 }
 </style>
