@@ -68,10 +68,9 @@
           target="_blank"> 
           {{dialog.ressource.name}} 
           </a>
-
           <w-button 
-          @click="unloadDialog" 
-          class="ma1 text-bold" 
+          @click="unloadDialog"  
+          class="ma1 text-bold close-buttom" 
           bg-color="transparent"
           color="red" 
           outline xl
@@ -79,7 +78,7 @@
           Close
           </w-button>
         </div>
-    </div>
+      </div>
     </w-dialog>
 </template>
 
@@ -359,6 +358,6 @@ button {
     .caroussel-title{
       margin-left: 0;
       text-align: center;
-    } 
+    }
 }
 </style>
