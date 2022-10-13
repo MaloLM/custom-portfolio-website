@@ -1,6 +1,6 @@
 <template>
   <div class="aboutMe" >
-    <div class="main-content">
+    <div class="main-content" v-if="dialog.show != null && dialog.show != true">
       <img class="mobile-image" v-if="image != null && image != ''"
           v-bind:src="image"/>
       <div>
@@ -17,22 +17,42 @@
   </div>
   <CardCaroussel title="Personnal projects" v-if="personnalProjectsPosts != null" :posts="personnalProjectsPosts"></CardCaroussel>
   <CardCaroussel title="Hobbies and interests" v-if="hobbiesAndInterestsPosts != null"  :posts="hobbiesAndInterestsPosts"></CardCaroussel>
+  
+  <w-dialog  
+  :model-value="dialog.show == true"
+  :fullscreen= "loadingFullscreen">
+
+  <div class="loading-dialog-content">
+    <w-progress 
+    class="ma1 dialog-progress" 
+    circle :model-value="undefined">
+  </w-progress>
+    <h2 class="dialog-text">Loading experience</h2>
+  </div>
+  </w-dialog>
 </template>
 
 <script>
-  import CardCaroussel from '@/components/public/Card-caroussel.vue';
-  import databaseService from '@/services/databaseService';
+import CardCaroussel from '@/components/public/Card-caroussel.vue';
+import databaseService from '@/services/databaseService';
+import { useStore } from 'vuex';
   
   export default {
     name: "about-me-view",
     components: { CardCaroussel, },
     data() {
       return {
+        store: useStore(),
         title: null,
         description: null,
         image: null,
         personnalProjectsPosts: null,
         hobbiesAndInterestsPosts: null,
+        loadingFullscreen: true,
+        windowWidth: null,
+        dialog: {
+          show: null,
+        }
       };
     },
     methods: {
@@ -48,7 +68,10 @@
             return b.createdAt - a.createdAt;
         });
         return array
-      }
+      },
+    },
+    created() {
+      this.dialog.show = this.store.getters.showDialog;
     },
     mounted() {
       databaseService.getAboutMeOrCareerData('about-me','title').on('value', (snapshot) => {
@@ -67,7 +90,10 @@
 
                 let posts = this.sortByCreationDate(snapshot.val())
                 this.hobbiesAndInterestsPosts = posts
-              
+
+                this.store.commit('SET_SHOW_DIALOG', false)
+                this.dialog.show = false
+
               }, (errorObject) => { console.log('The read failed: ' + errorObject.name); });
             }, (errorObject) => { console.log('The read failed: ' + errorObject.name); });
           }, (errorObject) => { console.log('The read failed: ' + errorObject.name); }); 
@@ -79,6 +105,17 @@
 
 
 <style scoped>
+.loading-dialog-content {
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.dialog-text {
+font-size: 30px;
+}
 .container {
   display: grid; 
   grid-auto-columns: 1fr; 
@@ -111,6 +148,7 @@
   .pageTitle{
     text-align: center;
     font-size: 50px;
+    margin: 10px 0px;
   }
 
   .void {
@@ -146,6 +184,10 @@
     margin-right: auto;
     width: 70%;
     margin-bottom: 15px;
+  }
+  .dialog-text {
+    margin: 10px;
+    font-size: 24px;
   }
 }
 </style>

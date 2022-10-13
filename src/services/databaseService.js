@@ -219,6 +219,55 @@ class DatabaseService {
         }
       );
   }
+
+  getCurriculumVitaeLink(){
+    return db.ref("/pages/curriculumVitae/");
+  }
+
+  downloadCurriculumVitae(filename){
+    console.log('link to download:', filename)
+  }
+
+  updateCurriculumVitaeLink(children){
+    db.ref('/pages/curriculumVitae/').update(children);
+  }
+
+  uploadCurriculumVitae(file, filename,){
+    console.log('to upload')    
+
+    // https://firebase.google.com/docs/storage/web/upload-files
+    const storage = getStorage();
+    const storageRef = ref(storage, 'cv/'+ filename + '.pdf');
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on('state_changed', 
+        (snapshot) => {
+  
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+          switch (snapshot.state) {
+            case 'paused':
+              console.log('Upload is paused');
+              break;
+            case 'running':
+              console.log('Upload is running');
+              break;
+          }
+        }, 
+        (error) => {
+          console.log("error: ", error)
+        }, 
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref)
+          .then((downloadURL) => {
+            let dataToUpdate = {
+                link: downloadURL
+            }
+            this.updateCurriculumVitaeLink(dataToUpdate)
+           });
+        }
+      );
+  }
 }
 
 export default new DatabaseService();

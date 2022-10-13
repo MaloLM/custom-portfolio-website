@@ -7,15 +7,22 @@ export default createStore({
         darkInputColor: 'white',
         lightInputColor: 'info',
       },
+      showDialog: true,
   },
   getters: {
     theme(state){
       return state.theme
     },
+    showDialog(state){
+      return state.showDialog
+    }
   },
   mutations: {
     SET_DARK_THEME(state, value) {
       state.theme.isDark = value;
+    },
+    SET_SHOW_DIALOG(state, value) {
+      state.showDialog = value;
     }
   }
 })

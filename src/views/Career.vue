@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content">
+  <div class="main-content" v-if="dialog.show != null && dialog.show != true">
     <h1 class="pageTitle">{{ title }}</h1>
     <div class="container">
        <p class="description">{{description}}</p>
@@ -15,11 +15,24 @@
   <div class="row-5">
     <CardCaroussel title="Education" :posts="education"></CardCaroussel>
   </div>
+  <w-dialog  
+  :model-value="dialog.show == true"
+  :fullscreen= "loadingFullscreen">
+
+  <div class="loading-dialog-content">
+    <w-progress 
+    class="ma1 dialog-progress" 
+    circle :model-value="undefined">
+  </w-progress>
+    <h2 class="dialog-text">Loading experience</h2>
+  </div>
+  </w-dialog>
 </template>
 
 <script>
 import CardCaroussel from '@/components/public/Card-caroussel.vue';
 import databaseService from '@/services/databaseService';
+import { useStore } from 'vuex';
 
 export default {
   name: "career",
@@ -28,12 +41,17 @@ export default {
     },
   data() {
     return {
+      store: useStore(),
       title: null,
       description: null,
       image: null,
       jobExperiences: null,
       professionalProjects: null,
       education: null,
+      loadingFullscreen: true,
+      dialog: {
+          show: null,
+      }
     };
   },
   methods: {
@@ -57,6 +75,9 @@ export default {
         console.log("error: empty object")
       }
     }
+  },
+  created() {
+    this.dialog.show = this.store.getters.showDialog;
   },
   mounted() {
     databaseService.getAboutMeOrCareerData('career','title').on('value', (snapshot) => {
@@ -83,6 +104,9 @@ export default {
                 let posts = this.sortByCreationDate(snapshot.val())
                 this.education  = posts
 
+                this.store.commit('SET_SHOW_DIALOG', false)
+                this.dialog.show = false
+
               }, (errorObject) => { console.log('The read failed: ' + errorObject.name); });
             }, (errorObject) => { console.log('The read failed: ' + errorObject.name); });
           }, (errorObject) => { console.log('The read failed: ' + errorObject.name); });
@@ -95,6 +119,17 @@ export default {
   
   
 <style scoped>
+.loading-dialog-content {
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.dialog-text {
+font-size: 30px;
+}
 
 .container {
   display: grid; 
@@ -138,9 +173,12 @@ export default {
   grid-template-areas: 
     "description void"; 
 }
-  
   .void {
     display: none;
+  }
+  .dialog-text {
+    margin: 10px;
+    font-size: 24px;
   }
 }
 </style>

@@ -42,6 +42,11 @@
             <h3>Travels list</h3>
             <TravelsAdministration formTypeToShare="travels"></TravelsAdministration>
         </template>
+        <template v-slot:tabPanel-9> 
+            <br>
+            <h3>Curriculum Vitae</h3>
+            <CurriculumVitae formType="curriculumVitae"></CurriculumVitae>
+        </template>
       </app-tabs>
     </div>
 </template>
@@ -55,6 +60,7 @@ import ProfessionnalProjectsForm from "./forms/ProfessionnalProjectsForm.vue";
 import JobExperiencesForm from "./forms/JobExperiencesForm.vue";
 import EducationForm from "./forms/EducationForm.vue";
 import TravelsAdministration from "./forms/TravelsAdministation.vue";
+import CurriculumVitae from "./forms/CurriculumVitae.vue";
 export default {
 components: {
     AppTabs,
@@ -64,7 +70,8 @@ components: {
     ProfessionnalProjectsForm,
     JobExperiencesForm,
     EducationForm,
-    TravelsAdministration
+    TravelsAdministration,
+    CurriculumVitae
 },
 
 data() {
@@ -77,7 +84,8 @@ data() {
      "Professional projects",
      "Job experience",
      "Education",
-     "Travels"
+     "Travels",
+     "CV",
     ],
     };
 },

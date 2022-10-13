@@ -16,6 +16,7 @@
       <router-link to="/career" class="link" v-show="!mobile">Career </router-link> 
       <router-link to="/travels" class="link" v-show="!mobile">Travels </router-link>
       <router-link to="/contact" class="link" v-show="!mobile">Get in touch </router-link> 
+      <a class="link getCV" :onclick="downloadCV"  v-show="!mobile">Get my CV </a>
 
       <div style="float:right" >
         <DarkThemeButton style="float:left" />
@@ -50,6 +51,7 @@
         <router-link to="/career" class="link" @click="toggleMobileNav">Career </router-link> 
         <router-link to="/travels" class="link" @click="toggleMobileNav">Travels </router-link>
         <router-link to="/contact" class="link" @click="toggleMobileNav">Get in touch </router-link> 
+        <p class="link">Get my CV </p>
         <router-link to="/authentication" class="link" @click="toggleMobileNav">Sign-in </router-link>
       </nav>
     </w-drawer>
@@ -61,6 +63,8 @@
   import DarkThemeButton from "./components/public/DarkThemeButton.vue";
   import {useRoute} from 'vue-router'
   import {computed} from 'vue'
+  // import axios from 'axios';
+  import databaseService from './services/databaseService';
 
   export default{
     components: {
@@ -76,14 +80,14 @@
       }
     },
     computed: {
-    position () {
-      return this.openDrawer || 'left'
-      }
+      position () {
+        return this.openDrawer || 'left'
+        }
     },
     created(){
       this.checkScreen()
       document.title = this.pageTitle
-      window.addEventListener('resize', this.checkScreen)
+      window.addEventListener('resize', this.checkScreen) 
     },
     methods:{
       toggleMobileNav(){
@@ -98,6 +102,27 @@
         this.mobile = false;
         this.openDrawer = false;
         return;
+      },
+      downloadCV() {
+        databaseService.getCurriculumVitaeLink().on('value', (snapshot) => {
+          let cvLink = snapshot.val()
+          console.log('cvLink', cvLink)
+          // axios({
+          //   url: 'https://firebasestorage.googleapis.com/v0/b/my-portefolio-application.appspot.com/o/cv%2Ftest123.pdf?alt=media&token=cc3f2d58-e0f8-4175-9ea9-e70da1597579',
+          //   method: 'GET',
+          //   responseType: 'blob',
+          // }).then((response) => {
+          //   var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+          //   var fURL = document.createElement('a');
+
+          //   fURL.href = fileURL;
+          //   fURL.setAttribute('download', 'malo_le_mestre_CV.pdf');
+          //   document.body.appendChild(fURL);
+
+          //   fURL.click();
+          // });
+        });
+        
       }
     }
   }
@@ -179,6 +204,10 @@ nav a.router-link-exact-active {
   color: #b3b3b3;
 }
 
+.getCV {
+  cursor: pointer;
+}
+
 .link {
   padding-right: 27px;
 }
@@ -203,21 +232,21 @@ nav a.router-link-exact-active {
   }
 
   .light #app {
-  background-image: none;
-  background-color: rgba(234, 234, 234, 0.9);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  color:#2c3e50;
-  transition: 0.3s;
-}
+    background-image: none;
+    background-color: rgba(234, 234, 234, 0.9);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color:#2c3e50;
+    transition: 0.3s;
+  }
 
-.dark #app {
-  background-color: rgba(50, 50, 50, 0.9);
-  color:rgb(206, 205, 205);
-  background-image: none;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  transition: 0.3s;
-}
+  .dark #app {
+    background-color: rgba(50, 50, 50, 0.9);
+    color:rgb(206, 205, 205);
+    background-image: none;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    transition: 0.3s;
+  }
 }
 </style>
