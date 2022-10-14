@@ -221,7 +221,7 @@ class DatabaseService {
   }
 
   getCurriculumVitaeLink(){
-    return db.ref("/pages/curriculumVitae/");
+    return db.ref("/pages/curriculumVitae/link");
   }
 
   downloadCurriculumVitae(filename){

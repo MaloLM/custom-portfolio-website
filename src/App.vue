@@ -107,6 +107,7 @@
         databaseService.getCurriculumVitaeLink().on('value', (snapshot) => {
           let cvLink = snapshot.val()
           console.log('cvLink', cvLink)
+
           // axios({
           //   url: 'https://firebasestorage.googleapis.com/v0/b/my-portefolio-application.appspot.com/o/cv%2Ftest123.pdf?alt=media&token=cc3f2d58-e0f8-4175-9ea9-e70da1597579',
           //   method: 'GET',
