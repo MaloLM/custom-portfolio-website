@@ -51,8 +51,8 @@
         <router-link to="/career" class="link" @click="toggleMobileNav">Career </router-link> 
         <router-link to="/travels" class="link" @click="toggleMobileNav">Travels </router-link>
         <router-link to="/contact" class="link" @click="toggleMobileNav">Get in touch </router-link> 
-        <p class="link">Get my CV </p>
-        <router-link to="/authentication" class="link" @click="toggleMobileNav">Sign-in </router-link>
+        <a class="link getCV" :onclick="downloadCV">Get my CV </a>
+        <router-link to="/authentication" v-show="!mobile" class="link" @click="toggleMobileNav">Sign-in </router-link>
       </nav>
     </w-drawer>
 </w-app>
@@ -63,7 +63,7 @@
   import DarkThemeButton from "./components/public/DarkThemeButton.vue";
   import {useRoute} from 'vue-router'
   import {computed} from 'vue'
-  // import axios from 'axios';
+  import axios from 'axios';
   import databaseService from './services/databaseService';
 
   export default{
@@ -106,22 +106,23 @@
       downloadCV() {
         databaseService.getCurriculumVitaeLink().on('value', (snapshot) => {
           let cvLink = snapshot.val()
+          cvLink = process.env.VUE_APP_CV_LINK
           console.log('cvLink', cvLink)
 
-          // axios({
-          //   url: 'https://firebasestorage.googleapis.com/v0/b/my-portefolio-application.appspot.com/o/cv%2Ftest123.pdf?alt=media&token=cc3f2d58-e0f8-4175-9ea9-e70da1597579',
-          //   method: 'GET',
-          //   responseType: 'blob',
-          // }).then((response) => {
-          //   var fileURL = window.URL.createObjectURL(new Blob([response.data]));
-          //   var fURL = document.createElement('a');
+          axios({
+            url: cvLink,
+            method: 'GET',
+            responseType: 'blob',
+          }).then((response) => {
+            var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+            var fURL = document.createElement('a');
 
-          //   fURL.href = fileURL;
-          //   fURL.setAttribute('download', 'malo_le_mestre_CV.pdf');
-          //   document.body.appendChild(fURL);
+            fURL.href = fileURL;
+            fURL.setAttribute('download', 'malo_le_mestre_CV.pdf');
+            document.body.appendChild(fURL);
 
-          //   fURL.click();
-          // });
+            fURL.click();
+          });
         });
         
       }
