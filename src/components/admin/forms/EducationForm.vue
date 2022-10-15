@@ -10,9 +10,7 @@ import ListOfRows from '../ListOfRows.vue';
 
 export default {
   data() {
-    return {
-        // formType: props.formTypeToShare
-    }
+    return {}
   },
   components: {
     ListOfRows
@@ -20,14 +18,9 @@ export default {
   props:{
     formTypeToShare: String
   },
-  setup(){},
-  methods: {
-
-  }
 }
 </script>
 
 
 <style scoped>
-
 </style>

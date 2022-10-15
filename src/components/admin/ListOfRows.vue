@@ -16,7 +16,6 @@
             <MainForm v-else :formType="formType" @toggleShow="toggleShow($event)"  :id="postToEditId"></MainForm>
         </div>
     </div>
-    
 </template>
 
 
@@ -25,7 +24,6 @@ import ListRow from "./ListRow.vue";
 import MainForm from './forms/MainForm.vue';
 import TravelForm from './forms/TravelForm.vue';
 import databaseService from '@/services/databaseService';
-
 
 export default {
   data() {
@@ -60,37 +58,30 @@ export default {
   },
   mounted() {
     databaseService.getPosts(this.formType).on('value', (snapshot) => {
-        this.posts = snapshot.val()
-        var indexes = Object.keys(this.posts)  
-        if(indexes.length){
-          indexes.forEach(element => {
-            this.posts[element]['id'] = element
-          });
-        }
-      }, (errorObject) => {
-        console.log('The read failed: ' + errorObject.name);
-      }); 
+      this.posts = snapshot.val()
+      var indexes = Object.keys(this.posts)  
+      if(indexes.length){
+        indexes.forEach(element => {
+          this.posts[element]['id'] = element
+        });
+      }
+    }, (errorObject) => {
+      console.log('The read failed: ' + errorObject.name);
+    }); 
   }
 }
-
 </script>
 
 
 <style scoped>
-
-.button {
-    margin-bottom: 8px;
-    margin-top: 20px;
-    background-color: #282586;
-}
-
 button {
     border: 0;
     padding: 10px 26px;
     color: white;
     border-radius: 5px;
     font-size:13px;
+    margin-bottom: 8px;
+    margin-top: 20px;
+    background-color: #282586;
 }
-
-
 </style>

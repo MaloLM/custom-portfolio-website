@@ -257,7 +257,6 @@ export default {
 
 
 <style scoped>
-    
 .container {
   display: grid; 
   grid-auto-columns: 1fr; 
@@ -316,6 +315,4 @@ button {
     color: red;
     font-weight: bold ;
 }
-
-
 </style>

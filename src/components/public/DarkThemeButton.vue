@@ -14,11 +14,11 @@
 
     function toggleTheme(){
         store.commit('SET_DARK_THEME', !(store.getters.theme.isDark))
-        console.log('is dark: ',store.getters.theme.isDark)
         document.body.classList.toggle('light')
         document.body.classList.toggle('dark')
     }
 </script>
+
 
 <style scoped>
 .switch {

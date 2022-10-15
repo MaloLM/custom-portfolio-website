@@ -1,48 +1,44 @@
 <template>
     <div class="travels">
         <div class="container">
-
             <div class="top">
                 <p>Countries names documentation: <a href="https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes" target="_blank"> Documentation</a> </p>
                 <br>
             </div>
-            <form class="travel-form" @submit.prevent="logFormData()">
+            <form class="travel-form" @submit.prevent>
                 <div>
-                    
-                        <w-input
-                        class="mb6"
-                        label="Country name"
-                        outline
-                        v-model="countryName"
-                        required>
-                        </w-input>
+                    <w-input
+                    class="mb6"
+                    label="Country name"
+                    outline
+                    v-model="countryName"
+                    required>
+                    </w-input>
 
-                        <w-input
-                        class="mb6"
-                        label="Country code"
-                        outline
-                        v-model="countryCode"
-                        required>
-                        </w-input>
+                    <w-input
+                    class="mb6"
+                    label="Country code"
+                    outline
+                    v-model="countryCode"
+                    required>
+                    </w-input>
 
-                        <w-input
-                        class="mb6"
-                        label="Duration (days)"
-                        outline
-                        v-model="duration"
-                        required>
-                        </w-input>
+                    <w-input
+                    class="mb6"
+                    label="Duration (days)"
+                    outline
+                    v-model="duration"
+                    required>
+                    </w-input>
 
-                        <w-input
-                        class="mb6"
-                        label="Date (month & year)"
-                        outline
-                        v-model="date"
-                        required>
-                        </w-input>
-                    
+                    <w-input
+                    class="mb6"
+                    label="Date (month & year)"
+                    outline
+                    v-model="date"
+                    required>
+                    </w-input>
                 </div>
-
                 <div class="buttons">
                     <div class="buttons">
                         <button class="orange" type="button" @click='passEvent'>Cancel</button>
@@ -51,8 +47,6 @@
                     </div>
                 </div>
             </form>
-            <div class="void"></div>
-
         </div>
     </div>
 </template>
@@ -73,13 +67,10 @@
                 window.scrollTo(0, 0);
                 this.$emit('toggleShow', 'hello')
             },
-            logFormData(){
-                
-            }
         }
     }
-
 </script>
+
 
 <style scoped>
 .container {

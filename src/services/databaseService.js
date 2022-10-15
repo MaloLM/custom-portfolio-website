@@ -22,10 +22,6 @@ class DatabaseService {
     });
   }
 
-  getAll() {
-    return db.ref("/pages");
-  }
-
   getAboutMeOrCareerData(path, dataType){
     return db.ref("/pages/"+ path +"/" + dataType);
   }
@@ -114,10 +110,6 @@ class DatabaseService {
 
   update(key, value) {
     return db.child(key).update(value);
-  }
-
-  deleteAll() {
-    return db.remove();
   }
 
   async logIn( email, password ){
@@ -222,10 +214,6 @@ class DatabaseService {
 
   getCurriculumVitaeLink(){
     return db.ref("/pages/curriculumVitae/link");
-  }
-
-  downloadCurriculumVitae(filename){
-    console.log('link to download:', filename)
   }
 
   updateCurriculumVitaeLink(children){

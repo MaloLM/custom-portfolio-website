@@ -101,7 +101,6 @@ export default {
                     var children = {
                         title: this.title,
                         description: this.description,
-                        // image: downloadURL
                     }
                     databaseService.updatePost(this.formType, children)
                     this.showSuccessAlert = true

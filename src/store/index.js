@@ -4,8 +4,6 @@ export default createStore({
   state: {
       theme: {
         isDark: false,
-        darkInputColor: 'white',
-        lightInputColor: 'info',
       },
       showDialog: true,
   },

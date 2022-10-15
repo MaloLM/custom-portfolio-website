@@ -1,23 +1,23 @@
 <template>
     <div class="list-row">
         <w-card>
-        <h4 style="float:left;">{{title}}</h4>
-              
-        <div style="float:right;" >
-            <button 
-            class="editButton" 
-            style="float:left;"
-            @click='editRow'>
+            <h4 style="float:left;">{{title}}</h4>
+                
+            <div style="float:right;" >
+                <button 
+                class="editButton" 
+                style="float:left;"
+                @click='editRow'>
                 Edit
-            </button>
+                </button>
 
-            <button  
-            @click='removePost'
-            class="deleteButton"
-            style="float:right;">
+                <button  
+                @click='removePost'
+                class="deleteButton"
+                style="float:right;">
                 Delete
-            </button>
-        </div>
+                </button>
+            </div>
         </w-card>
     </div>
 </template>

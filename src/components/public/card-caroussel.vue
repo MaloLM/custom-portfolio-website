@@ -32,6 +32,7 @@
     </Carousel>
 
     <w-dialog  
+      id="dialog"
       v-model="dialog.show"
       :fullscreen="dialog.fullscreen"
       width="45vw"
@@ -52,12 +53,12 @@
           <p class="dialog-description"> {{dialog.description}}</p>
         </div>
 
-        <div class="skills" v-if="dialog.skills != null && dialog.skills != '-'">
+        <div ref="skills" class="skills" v-if="dialog.skills != null && dialog.skills != '-'">
           <p style="font-weight: bold;">Skills</p>
           <TagsGroup :unparsedData="dialog.skills " bgColor="success" textColor="white"></TagsGroup>
         </div>
 
-        <div class="ressources" v-if="dialog.ressources != null && dialog.ressources != '-'">
+        <div ref="ressources" class="ressources" v-if="dialog.ressources != null && dialog.ressources != '-'">
           <p style="font-weight: bold; margin-top: 7px;">Ressources & technologies</p>
           <TagsGroup :unparsedData="dialog.ressources" bgColor="deep-purple" textColor="white"></TagsGroup>
         </div>
@@ -116,7 +117,7 @@ export default defineComponent({
       }
     },
     settings: {
-      itemsToShow: 1,
+      itemsToShow: 1.15,
       snapAlign: 'center',
     },
     breakpoints: {
@@ -125,8 +126,8 @@ export default defineComponent({
         itemsToShow: 2,
         snapAlign: 'center',
       },
-      // 1024 and up
-      1024: {
+    
+      1024: { // 1024 and up
         itemsToShow: 3.15,
         snapAlign: 'center',
       },
@@ -142,6 +143,9 @@ export default defineComponent({
     loadDialog(event){
       let id = event['srcElement']['id'];
       let object = null
+      console.log(this.$refs)
+
+
       Object.entries(this.posts).forEach(([key, value]) => {
           if(value['id'] == id){
             console.log(key)
@@ -198,6 +202,10 @@ export default defineComponent({
     
 
 <style>
+.hide {
+  display: none;
+}
+
 .caroussel-title{
   margin-left: 50px;
 } 

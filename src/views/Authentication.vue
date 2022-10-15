@@ -17,7 +17,6 @@
                     required
                     label="E-mail address"
                     type="email"
-                    color="info"
                     bg-color="grey-light5"
                     :validators="[validators.required]"
                     v-model="email"> 
@@ -26,7 +25,6 @@
                 <w-input
                 required
                 class="mb2 spacing" 
-                color="info"
                 bg-color="grey-light5"
                 label="Password"
                 type='password' 
