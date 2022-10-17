@@ -122,18 +122,14 @@ export default {
 font-size: 30px;
 }
 .container {
-  display: grid; 
-  margin-bottom: 0px;
-  grid-auto-columns: 1fr; 
-  grid-template-columns: 0.5fr 0.5fr; 
-  grid-template-rows: 1fr; 
-  gap: 0px 0px; 
-  grid-template-areas: 
-    "description void"; 
+  display: flex;
+  flex-direction: row ;
 }
-.void { grid-area: void; }
+.void { 
+  margin: auto;
+ }
 .description { 
-  grid-area: description;
+  width: 50%;
   float: left;
   font-size: 25px;
   text-align: left;
@@ -147,8 +143,7 @@ font-size: 30px;
 .desktop-image {
   display:block;
   margin:auto;
-  height: auto;
-  display: none;
+  height: 260px;
 }
 
 .linebreak {
@@ -169,21 +164,16 @@ font-size: 30px;
     display: none; 
   }
 
+  .description {
+    width: 100%;
+  }
+
   .main-content{
     margin-top: 15px;
     margin-left: 12px;
     margin-right: 12px;
     transition: 0.3s;
   }    
-  .container {
-    display: grid; 
-    grid-auto-columns: 1fr; 
-    grid-template-columns: 1fr 0fr; 
-    grid-template-rows: 1fr; 
-    gap: 0px 0px; 
-    grid-template-areas: 
-      "description"; 
-  }
   .mobile-image {
     pointer-events: none;
     display:block;
