@@ -4,36 +4,44 @@
       <app-tabs :tabList="tabList" >
         <template v-slot:tabPanel-1> 
             <h3>About me form</h3>
-            <AboutMeAndCareerForm formType="about-me"></AboutMeAndCareerForm>
+            <AboutMeForm formType="about-me"></AboutMeForm>
         </template>
+
         <template v-slot:tabPanel-2> 
             <h3>Hobbies list</h3>
             <HobbieForm formTypeToShare="about-me/hobbies-and-interests"></HobbieForm>
         </template>
+
+        <template v-slot:tabPanel-4> 
+            <h3>Career form</h3>
+            <CareerForm formType="career"></CareerForm>
+        </template>
+
         <template v-slot:tabPanel-3> 
             <h3>Personnal projects list</h3>
             <PersonnalProjectsForm formTypeToShare="about-me/personnal-projects"></PersonnalProjectsForm>
         </template>
-        <template v-slot:tabPanel-4> 
-            <h3>Career form</h3>
-            <AboutMeAndCareerForm formType="career"></AboutMeAndCareerForm>
-        </template>
+
         <template v-slot:tabPanel-5>
             <h3>Professional projects list</h3>
             <ProfessionnalProjectsForm formTypeToShare="career/professional-projects"></ProfessionnalProjectsForm>
         </template>
+
         <template v-slot:tabPanel-6> 
             <h3>Job experiences list</h3>
             <JobExperiencesForm formTypeToShare="career/job-experiences"></JobExperiencesForm>
         </template>
+
         <template v-slot:tabPanel-7> 
             <h3>Education list</h3>
             <EducationForm formTypeToShare="career/education"></EducationForm>
         </template>
+
         <template v-slot:tabPanel-8> 
             <h3>Travels list</h3>
             <TravelsAdministration formTypeToShare="travels"></TravelsAdministration>
         </template>
+
         <template v-slot:tabPanel-9> 
             <h3>Curriculum Vitae</h3>
             <CurriculumVitae formType="curriculumVitae"></CurriculumVitae>
@@ -44,7 +52,8 @@
   
 <script>
 import AppTabs from "./AppTabs.vue";
-import AboutMeAndCareerForm from "./forms/AboutMeAndCareerForm.vue";
+import AboutMeForm from "./forms/AboutMeForm.vue";
+import CareerForm from "./forms/CareerForm.vue";
 import HobbieForm from "./forms/HobbieForm.vue";
 import PersonnalProjectsForm from "./forms/PersonnalProjectsForm.vue";
 import ProfessionnalProjectsForm from "./forms/ProfessionnalProjectsForm.vue";
@@ -52,19 +61,20 @@ import JobExperiencesForm from "./forms/JobExperiencesForm.vue";
 import EducationForm from "./forms/EducationForm.vue";
 import TravelsAdministration from "./forms/TravelsAdministation.vue";
 import CurriculumVitae from "./forms/CurriculumVitae.vue";
+
 export default {
     components: {
         AppTabs,
-        AboutMeAndCareerForm,
+        AboutMeForm,
+        CareerForm,
         HobbieForm,
         PersonnalProjectsForm,
         ProfessionnalProjectsForm,
         JobExperiencesForm,
         EducationForm,
         TravelsAdministration,
-        CurriculumVitae
+        CurriculumVitae,
     },
-
     data() {
         return {
             tabList: [

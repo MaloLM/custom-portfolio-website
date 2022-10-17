@@ -41,7 +41,7 @@
         variant: {
           type: String,
           required: false,
-          default: () => "horizontal",
+          default: () => "vertical",
           validator: (value) => ["horizontal", "vertical"].includes(value),
         },
       },

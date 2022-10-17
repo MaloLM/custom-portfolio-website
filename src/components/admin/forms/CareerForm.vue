@@ -1,5 +1,4 @@
 <template>
-    
     <br>
     <form @submit.prevent="this.pushForm()">
         <w-input
@@ -7,6 +6,7 @@
         outline
         label= "Title"
         v-model="title"
+        bg-color="grey-light5"
         required>
         </w-input>
 
@@ -16,6 +16,7 @@
         rows="10"
         label= "Description"
         v-model="description"
+        bg-color="grey-light5"
         required>
         </w-textarea>
 
@@ -107,12 +108,10 @@ export default {
                 } else if(this.imageFile != null){
                     databaseService.uploadFileThenUpdateAboutMe(this.formType, this.imageFile, this.title, this.description)
                     this.showSuccessAlert = true
-                }
-               
+                }  
             } catch(err){
                 this.showErrorAlert = true
-            }
-            
+            }  
         },
         
     },
@@ -137,25 +136,16 @@ export default {
         }, (errorObject) => {
             console.log('The read failed: ' + errorObject.name);
         }); 
-
-        
-
-       
     }
-
 }
 </script>
 
 
 <style scoped> 
 button {
-    background-color: #2d467d;
-    border: 0;
+    /* override */
     padding: 10px 40px;
     margin-top: 0px;
-    color: white;
-    border-radius: 20px;
-    font-size:13px;
 }
 
 .image{

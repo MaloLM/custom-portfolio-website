@@ -4,7 +4,7 @@
       <img class="mobile-image" v-if="image != null && image != ''"
           v-bind:src="image"/>
       <div>
-        <h1 class="pageTitle">Malo <br class="linebreak"/>Le Mestre</h1>
+        <h1 class="pageTitle"> {{firstName}} <br class="linebreak"/> {{lastName}} </h1>
         <div class="container">
           <div class="description">
             <p class="description">{{description}}</p>
@@ -15,6 +15,7 @@
       <br/>
     </div>
   </div>
+
   <CardCaroussel title="Hobbies and interests" v-if="hobbiesAndInterestsPosts != null"  :posts="hobbiesAndInterestsPosts"></CardCaroussel>
   <CardCaroussel title="Personnal projects" v-if="personnalProjectsPosts != null" :posts="personnalProjectsPosts"></CardCaroussel>
   
@@ -37,56 +38,59 @@ import CardCaroussel from '@/components/public/Card-caroussel.vue';
 import databaseService from '@/services/databaseService';
 import { useStore } from 'vuex';
   
-  export default {
-    name: "about-me-view",
-    components: { CardCaroussel, },
-    data() {
-      return {
-        store: useStore(),
-        title: null,
-        description: null,
-        image: null,
-        personnalProjectsPosts: null,
-        hobbiesAndInterestsPosts: null,
-        loadingFullscreen: true,
-        windowWidth: null,
-        dialog: {
-          show: null,
-        }
-      };
-    },
-    methods: {
-      sortByCreationDate(posts){
-        let array = []
+export default {
+  name: "about-me-view",
+  components: { CardCaroussel, },
+  data() {
+    return {
+      store: useStore(),
+      firstName: null,
+      lastName: null,
+      description: null,
+      image: null,
+      personnalProjectsPosts: null,
+      hobbiesAndInterestsPosts: null,
+      loadingFullscreen: true,
+      windowWidth: null,
+      dialog: {
+        show: null,
+      }
+    };
+  },
+  methods: {
+    sortByCreationDate(posts){
+      let array = []
 
-        Object.entries(posts).forEach(([key, value]) => {
-            value['id'] = key
-            array.push(value)
-        })
+      Object.entries(posts).forEach(([key, value]) => {
+          value['id'] = key
+          array.push(value)
+      })
 
-        array = array.sort((a, b) => {
-            return b.createdAt - a.createdAt;
-        });
-        return array
-      },
+      array = array.sort((a, b) => {
+          return b.createdAt - a.createdAt;
+      });
+      return array
     },
-    created() {
-      this.dialog.show = this.store.getters.showDialog;
-    },
-    mounted() {
-      databaseService.getAboutMeOrCareerData('about-me','title').on('value', (snapshot) => {
-        this.title = snapshot.val()
+  },
+  created() {
+    this.dialog.show = this.store.getters.showDialog;
+  },
+  mounted() {
+    databaseService.getAboutMeOrCareerData('about-me','firstName').on('value', (snapshot) => {
+      this.firstName = snapshot.val()
+      databaseService.getAboutMeOrCareerData('about-me','lastName').on('value', (snapshot) => {
+        this.lastName = snapshot.val()
         databaseService.getAboutMeOrCareerData('about-me', 'description').on('value', (snapshot) => {
           this.description = snapshot.val()
           databaseService.getAboutMeOrCareerData('about-me', 'image').on('value', (snapshot) => {
             this.image = snapshot.val()
 
-            databaseService.getPersonnalProjects('about-me', 'image').on('value', (snapshot) => {
-            
+            databaseService.getPersonnalProjects().on('value', (snapshot) => {
+              
               let posts = this.sortByCreationDate(snapshot.val())
               this.personnalProjectsPosts = posts
 
-              databaseService.getHobbiesAndInterests('about-me', 'image').on('value', (snapshot) => {
+              databaseService.getHobbiesAndInterests().on('value', (snapshot) => {
 
                 let posts = this.sortByCreationDate(snapshot.val())
                 this.hobbiesAndInterestsPosts = posts
@@ -96,11 +100,12 @@ import { useStore } from 'vuex';
 
               }, (errorObject) => { console.log('The read failed: ' + errorObject.name); });
             }, (errorObject) => { console.log('The read failed: ' + errorObject.name); });
-          }, (errorObject) => { console.log('The read failed: ' + errorObject.name); }); 
+          }, (errorObject) => { console.log('The read failed: ' + errorObject.name); });
         }, (errorObject) => { console.log('The read failed: ' + errorObject.name); }); 
       }, (errorObject) => { console.log('The read failed: ' + errorObject.name); }); 
-    },
-  };
+    }, (errorObject) => { console.log('The read failed: ' + errorObject.name); }); 
+  },
+};
 </script>
 
 
@@ -118,6 +123,7 @@ font-size: 30px;
 }
 .container {
   display: grid; 
+  margin-bottom: 0px;
   grid-auto-columns: 1fr; 
   grid-template-columns: 0.5fr 0.5fr; 
   grid-template-rows: 1fr; 
@@ -129,10 +135,12 @@ font-size: 30px;
 .description { 
   grid-area: description;
   float: left;
+  font-size: 25px;
+  text-align: left;
 }
 
 .mobile-image {
-  display:none;
+  display: none;
   pointer-events: none;
 }
 
@@ -150,14 +158,8 @@ font-size: 30px;
     font-size: 50px;
     margin: 10px 0px;
   }
-
   .void {
     display: none; 
-  }
-
-  .description{
-    font-size: 20px;
-    text-align: left;
   }
 
   .main-content{
@@ -166,7 +168,6 @@ font-size: 30px;
     margin-right: 12px;
     transition: 0.3s;
   }    
-
   .container {
     display: grid; 
     grid-auto-columns: 1fr; 
@@ -176,7 +177,6 @@ font-size: 30px;
     grid-template-areas: 
       "description"; 
   }
-
   .mobile-image {
     pointer-events: none;
     display:block;

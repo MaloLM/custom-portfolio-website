@@ -1,95 +1,93 @@
 <template>
-    <h1 class="caroussel-title" v-if="posts != null"> {{title}} </h1>
-    <Carousel class="caroussel" :settings="settings" :breakpoints="breakpoints" v-if="posts">
-      <Slide  v-for="(post) in posts" :key="post.createdAt">
-        <div class="card-container">
-          <w-card
-          :image="post.image" 
-          onerror='this.onerror=null; 
-          this.image="https://cdn.discordapp.com/attachments/601416273892605983/1028011494891335801/failed_to_load.png"'
-          class="caroussel-card box sh6" 
-          no-border
-          shadow>
-            <w-divider class="card-divider mx-3"></w-divider>
-            <h2 style="float:left">{{post.title}}</h2>
-            <template #actions>
-              <div class="spacer"></div>
-              <w-button 
-              :id="post.id" 
-              class="px4" 
-              @click="loadDialog" 
-              round lg>
-              Read more
-              </w-button>
-            </template>
-          </w-card>
-        </div>
-      </Slide>
-
-      <template #addons>
-          <Navigation />
-      </template>
-    </Carousel>
-
-    <w-dialog  
-      id="dialog"
-      v-model="dialog.show"
-      :fullscreen="dialog.fullscreen"
-      width="45vw"
-      :bg-color="dialog.dialogBgColor"
-      :persistent="dialog.persistent"
-      :persistent-no-animation="dialog.persistentNoAnimation"
-      title-class="primary-light1--bg white">
-
-      <div class="container">
-        <div class="title">
-          <h1 style="float:left">{{dialog.title}}</h1>
-        </div>
-        <div class="date" v-if="dialog.date != null && dialog.date != '-'">
-          <p style="float:left ">{{dialog.date}}</p>
-        </div>
-        <div class="void-a"></div>
-        <div class="description">
-          <p class="dialog-description"> {{dialog.description}}</p>
-        </div>
-
-        <div ref="skills" class="skills" v-if="dialog.skills != null && dialog.skills != '-'">
-          <p style="font-weight: bold;">Skills</p>
-          <TagsGroup :unparsedData="dialog.skills " bgColor="success" textColor="white"></TagsGroup>
-        </div>
-
-        <div ref="ressources" class="ressources" v-if="dialog.ressources != null && dialog.ressources != '-'">
-          <p style="font-weight: bold; margin-top: 7px;">Ressources & technologies</p>
-          <TagsGroup :unparsedData="dialog.ressources" bgColor="deep-purple" textColor="white"></TagsGroup>
-        </div>
-
-        <div class="ressource">
-          <a  v-if="dialog.ressource != null && dialog.ressource.name != '-' && dialog.ressource.link != '-'"
-          @click="redirectToRessource" 
-          target="_blank"> 
-          {{dialog.ressource.name}} 
-          </a>
-          <w-button 
-          @click="unloadDialog"  
-          class="ma1 text-bold close-buttom" 
-          bg-color="transparent"
-          color="red" 
-          outline xl
-          style="float:right">
-          Close
-          </w-button>
-        </div>
+  <h1 class="caroussel-title" v-if="posts != null"> {{title}} <span class="arrow"> > </span> </h1>
+  <Carousel class="caroussel" :settings="settings" :breakpoints="breakpoints" v-if="posts">
+    <Slide  v-for="(post) in posts" :key="post.createdAt">
+      <div class="card-container"  @click="loadDialog(post.id)">
+        <w-card
+        :image="post.image" 
+        onerror='this.onerror=null; 
+        this.image="https://cdn.discordapp.com/attachments/601416273892605983/1028011494891335801/failed_to_load.png"'
+        class="caroussel-card box sh6" 
+        no-border
+        shadow>
+          <w-divider class="card-divider mx-3"></w-divider>
+          <h2 style="float:left">{{post.title}}</h2>
+          <template #actions>
+            <div class="spacer"></div>
+            <button class="card-button">
+            Read more
+            </button>
+          </template>
+        </w-card>
       </div>
-    </w-dialog>
+    </Slide>
+
+    <template #addons>
+        <Navigation />
+    </template>
+  </Carousel>
+
+  <w-dialog  
+    @close="unloadDialog"
+    id="dialog"
+    v-model="dialog.show"
+    :fullscreen="dialog.fullscreen"
+    width="45vw"
+    :bg-color="dialog.dialogBgColor"
+    :persistent="dialog.persistent"
+    :persistent-no-animation="dialog.persistentNoAnimation"
+    title-class="primary-light1--bg white">
+
+    <div class="container">
+      <div class="title">
+        <h1 style="float:left">{{dialog.title}}</h1>
+      </div>
+      <div class="date" v-if="dialog.date != null && dialog.date != '-'">
+        <p style="float:left ">{{dialog.date}}</p>
+      </div>
+      <div class="void-a"></div>
+      <div class="description">
+        <p class="dialog-description"> {{dialog.description}}</p>
+      </div>
+
+      <div ref="skills" class="skills" v-if="dialog.skills != null && dialog.skills != '-'">
+        <p style="font-weight: bold;">Skills</p>
+        <TagsGroup :unparsedData="dialog.skills" bgColor="green"></TagsGroup>
+      </div>
+
+      <div ref="ressources" class="ressources" v-if="dialog.ressources != null && dialog.ressources != '-'">
+        <p style="font-weight: bold; margin-top: 7px;">Ressources & technologies</p>
+        <TagsGroup :unparsedData="dialog.ressources" bgColor="purple"></TagsGroup>
+      </div>
+
+      <div class="ressource">
+        <a  v-if="dialog.ressource != null && dialog.ressource.name != '-' && dialog.ressource.link != '-'"
+        @click="redirectToRessource" 
+        target="_blank"> 
+        {{dialog.ressource.name}} 
+        </a>
+        <button v-if="mobile != true"
+        @click="unloadDialog"   
+        style="float:right">
+        Close
+        </button>
+      </div>
+      <button class="mobile-close-dialog-button"
+      v-if="mobile == true"
+      @click="unloadDialog">
+      Close
+      </button>
+    </div>
+  </w-dialog>
 </template>
 
 
 <script>
 import { defineComponent } from 'vue';
 import { Carousel, Navigation, Slide } from 'vue3-carousel';
-import 'vue3-carousel/dist/carousel.css';
 import TagsGroup from './TagsGroup.vue';
 import { useStore } from 'vuex'
+import 'vue3-carousel/dist/carousel.css';
 
 export default defineComponent({
   name: 'Breakpoints',
@@ -99,6 +97,7 @@ export default defineComponent({
   },
   data: () => ({
     store: useStore(),
+    mobile: null,
     dialog: {
       dialogBgColor: null,
       show: false,
@@ -120,10 +119,9 @@ export default defineComponent({
       itemsToShow: 1.15,
       snapAlign: 'center',
     },
-    breakpoints: {
-      // 800px and up
-      800: {
-        itemsToShow: 2,
+    breakpoints: { 
+      800: { // 800px and up
+        itemsToShow: 2.15,
         snapAlign: 'center',
       },
     
@@ -140,14 +138,14 @@ export default defineComponent({
     TagsGroup
 },
   methods: {
-    loadDialog(event){
-      let id = event['srcElement']['id'];
+   
+    loadDialog(postId){ 
+      let body = document.body
+      body.classList.add('no-scroll')
       let object = null
-      console.log(this.$refs)
-
 
       Object.entries(this.posts).forEach(([key, value]) => {
-          if(value['id'] == id){
+          if(value['id'] == postId){
             console.log(key)
             object = value
           }
@@ -175,6 +173,8 @@ export default defineComponent({
       }
     },
     unloadDialog(){
+      let body = document.body
+      body.classList.remove('no-scroll')
       this.dialog.show = false
     },
     redirectToRessource(){
@@ -202,8 +202,9 @@ export default defineComponent({
     
 
 <style>
-.hide {
-  display: none;
+
+.no-scroll {
+  overflow:hidden;
 }
 
 .caroussel-title{
@@ -255,34 +256,32 @@ export default defineComponent({
   transition: 0.5s;
 }
 
+button:hover {
+  cursor: pointer;
+  background-color: #3c5ca2;
+}
+
+.mobile-close-dialog-button {
+  margin: auto;
+  width: 70%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 .container {
-  display: grid; 
-  grid-template-columns: 1fr 1fr 1fr; 
-  grid-template-rows: 0.2fr 0.2fr 2fr 0.5fr 0.5fr 0.3fr; 
-  gap: 0px 0px; 
-  grid-template-areas: 
-    "title title title"
-    "date date void-a"
-    "description description description"
-    "ressources ressources ressources"
-    "skills skills skills"
-    "ressource ressource ressource"; 
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
   grid-area: title;
 }
-
 .date { 
   font-weight: bold;
   grid-area: date;
   margin-left: 10px; 
+  margin-bottom: 5px;
 }
-
-.void-a {
-  grid-area: void-a;
-}
-
 .description { 
   grid-area: description;
   margin-left: 10px; 
@@ -291,24 +290,20 @@ export default defineComponent({
   text-align: justify;
   text-justify: inter-word;
 }
-
 .ressources {    
   grid-area: ressources; 
   margin-left: 10px; 
 }
-
 .skills { 
   grid-area: skills;
   margin-left: 10px; 
   margin-top: 15px;
  }
-
 .ressource { 
   text-decoration: underline; 
   grid-area: ressource;
   margin: 10px; 
  }
-
 .ressource:hover a {
   cursor: pointer;
 }
@@ -321,6 +316,13 @@ export default defineComponent({
 .caroussel-card{
   margin: 30px;
   background-color: rgba(255, 255, 255, 1);
+  transition: 0.2s;
+}
+
+.caroussel-card:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+  transition: 0.3s;
 }
 
 .dark .caroussel-card {
@@ -333,14 +335,11 @@ export default defineComponent({
 }
 
 button {
-  background-color: #2d467d;
-  border: 0;
-  padding: 10px 25px;
+  padding: 10px 26px;
   margin-top: 20px;
   margin-left: 10px;
-  color: white;
-  border-radius: 6px;
-  font-size:13px;
+  border-radius: 22px;
+  font-size: 17px;
 }
 
 .card-divider{
@@ -355,17 +354,35 @@ button {
 
 /* most litle dimensions at the bottom*/
 @media screen and (max-width: 667px) {
-    .carousel__next {
-      display: none;
-    }
 
-    .carousel__prev {
-      display: none;
-    }
+  .carousel__next {
+    display: none;
+  }
 
-    .caroussel-title{
-      margin-left: 0;
-      text-align: center;
-    }
+  .carousel__prev {
+    display: none;
+  }
+
+  .caroussel-title{
+    margin-left: 0;
+    text-align: center;
+  }
+
+  button {
+    padding: 12px 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+  
+  .arrow {
+    display: none;
+  }
 }
 </style>

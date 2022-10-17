@@ -6,8 +6,8 @@
       @click="openDrawer = 'left'"
         class="burgerMenu" 
         xl
-        style="float:left; 
-        margin-left: 8px;" 
+        style="float:left;
+        margin-left: 8px;"
         color="grey-light4">
         fa fa-bars
       </w-icon> 
@@ -16,7 +16,7 @@
       <router-link to="/career" class="link" v-show="!mobile">Career </router-link> 
       <router-link to="/travels" class="link" v-show="!mobile">Travels </router-link>
       <router-link to="/contact" class="link" v-show="!mobile">Get in touch </router-link> 
-      <a class="link getCV" :onclick="downloadCV"  v-show="!mobile">Get my CV </a>
+      <a class="link linkButton" :onclick="downloadCV" v-show="!mobile">Get my CV </a>
 
       <div style="float:right" >
         <DarkThemeButton style="float:left" />
@@ -42,8 +42,8 @@
         @click="toggleMobileNav"
         class="burgerMenu" 
         xl
-        style="float:left; 
-        margin-left: 8px;" 
+        style="float:left;
+        margin-left: 8px;"
         color="grey-light4">
         fa fa-bars
         </w-icon> 
@@ -51,7 +51,7 @@
         <router-link to="/career" class="link" @click="toggleMobileNav">Career </router-link> 
         <router-link to="/travels" class="link" @click="toggleMobileNav">Travels </router-link>
         <router-link to="/contact" class="link" @click="toggleMobileNav">Get in touch </router-link> 
-        <a class="link getCV" :onclick="downloadCV">Get my CV </a>
+        <a class="link linkButton" :onclick="downloadCV">Get my CV </a>
         <router-link to="/authentication" v-show="!mobile" class="link" @click="toggleMobileNav">Sign-in </router-link>
       </nav>
     </w-drawer>
@@ -147,9 +147,7 @@
 }
 
 .main-content{
-  margin-top: 25px;
-  margin-left: 70px;
-  margin-right: 70px;
+  margin: 25px 70px;
   transition: 0.3s;
 }
 
@@ -206,7 +204,7 @@ nav a.router-link-exact-active {
   color: #b3b3b3;
 }
 
-.getCV {
+.linkButton {
   cursor: pointer;
 }
 
@@ -224,6 +222,16 @@ nav a.router-link-exact-active {
 .navMenu .link{
   margin-top: 20px;
   font-size: 30px;
+}
+
+button {
+    background-color: #2d467d;
+    border: 0;
+    padding: 10px 40px;
+    margin-top: 0px;
+    color: white;
+    border-radius: 20px;
+    font-size:13px;
 }
 
 @media (max-width: 667px) {

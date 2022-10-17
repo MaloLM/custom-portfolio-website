@@ -29,6 +29,10 @@ background-color: rgb(39, 38, 38);
 position: relative;
 }
 
+.switch:hover {
+    cursor: pointer;
+}
+
 .flicker {
 width: 20px;
 height: 20px;

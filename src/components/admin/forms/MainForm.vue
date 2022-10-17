@@ -1,100 +1,105 @@
 <template>
     <form @submit.prevent="submitData()">
         <div class="container">
+            <div class="top">
+            <br>
+            <w-input 
+                class="mb3"
+                outline
+                label="Title"
+                v-model="title"
+                bg-color="grey-light5"
+                required>
+            </w-input>
 
-                <div class="top">
+            <w-input
+                class="mb3"
+                label="Date, '-' for nothing"
+                outline
+                v-model="date"
+                bg-color="grey-light5"
+                required>
+            </w-input>
+
+            <w-textarea 
+                class="mt4"
+                outline
+                rows="10"
+                label="Text description"
+                v-model="description"
+                bg-color="grey-light5"
+                @input="countDescriptionWords"
+                required>
+            </w-textarea>
+            <p :class=" descriptionWordCount <= 110 ? 'greenCount' :'redCount' ">{{descriptionWordCount}} words</p>
+            <w-divider class="ma6"/>
+            </div>
+
+            <div class="right">
+                <w-card title="Image" title-class="grey" class="fillSpace">
+                    <input 
+                    :required="!isImage"
+                    type="file" 
+                    ref="file" 
+                    @change="readFile()"
+                    accept="image/*" 
+                    id="choose-file" 
+                    name="choose-file">
+                    <br><br>
+                    <img v-if="isImage" :src="preview" class="image"/>
+                </w-card>
+            </div>
+
+            <div class="top-left">
+            <w-card class="fillSpace" >
+                Tags
+                <w-input 
+                style="margin-top: 10px;"
+                outline
+                label="Add Skills (separator = '/'), '-' for nothing"
+                v-model="skills"
+                bg-color="grey-light5"
+                required>     
+                </w-input>
                 <br>
                 <w-input 
-                    class="mb3"
-                    outline
-                    label="Title"
-                    v-model="title"
-                    required>
+                outline
+                label="Add technologies/tools (separator = '/'),'-' for nothing"
+                v-model="ressources"
+                bg-color="grey-light5"
+                required>
                 </w-input>
+            </w-card>
+            </div>
 
+            <div class="bottom-left">
+            <w-card class="fillSpace" >
+                Ressource
+                <w-input style="margin-top: 10px;"
+                outline
+                v-model="ressourceName"
+                bg-color="grey-light5"
+                label="Ressource name , '-' for nothing"
+                required>
+                </w-input>
+                <br>
                 <w-input
-                    class="mb3"
-                    label="Date, '-' for nothing"
-                    outline
-                    v-model="date"
-                    required>
+                outline
+                v-model="ressourceLink"
+                bg-color="grey-light5"
+                label="Ressource link, '-' for nothing"
+                required>
                 </w-input>
-
-                <w-textarea 
-                    class="mt4"
-                    outline
-                    rows="10"
-                    label="Text description"
-                    v-model="description"
-                    @input="countDescriptionWords"
-                    required>
-                </w-textarea>
-                <p :class=" descriptionWordCount <= 110 ? 'greenCount' :'redCount' ">{{descriptionWordCount}}</p>
-                <w-divider class="ma6"/>
+            </w-card>
+            </div>
+            <div class="bottom">
+                <div style="float:right;">   
+                    <button class="orange" type="button" @click='cancelForm'>Cancel</button>
+                    <button style="float:right;">Submit</button>
                 </div>
-
-                <div class="right">
-                    <w-card title="Image" title-class="grey" class="fillSpace">
-                        <input 
-                        :required="!isImage"
-                        type="file" 
-                        ref="file" 
-                        @change="readFile()"
-                        accept="image/*" 
-                        id="choose-file" 
-                        name="choose-file">
-                        <br><br>
-                        <img v-if="isImage" :src="preview" class="image"/>
-                    </w-card>
-                </div>
-
-                <div class="top-left">
-                <w-card class="fillSpace" >
-                    Tags
-                    <w-input 
-                    style="margin-top: 10px;"
-                    outline
-                    label="Add Skills (separator = '/'), '-' for nothing"
-                    v-model="skills"
-                    required>     
-                    </w-input>
-                    <br>
-                    <w-input 
-                    outline
-                    label="Add technologies/tools (separator = '/'),'-' for nothing"
-                    v-model="ressources"
-                    required>
-                    </w-input>
-                </w-card>
-                </div>
-
-                <div class="bottom-left">
-                <w-card class="fillSpace" >
-                    Ressource
-                    <w-input style="margin-top: 10px;"
-                    outline
-                    v-model="ressourceName"
-                    label="Ressource name , '-' for nothing"
-                    required>
-                    </w-input>
-                    <br>
-                    <w-input
-                    outline
-                    v-model="ressourceLink"
-                    label="Ressource link, '-' for nothing"
-                    required>
-                    </w-input>
-                </w-card>
-                </div>
-                <div class="bottom">
-                    <div style="float:right;">   
-                        <button class="orange" type="button" @click='cancelForm'>Cancel</button>
-                        <button style="float:right;">Submit</button>
-                    </div>
-                </div>
+            </div>
         </div>
     </form>
-
 </template>
 
 <script>
@@ -129,7 +134,6 @@ export default {
             loading: false,
         }
     },
-    setup(){},
     mounted(){
         console.log("mounting")
         console.log("ID", this.id)
@@ -276,29 +280,21 @@ export default {
 .right { grid-area: right; }
 .top-left { grid-area: top-left; }
 .bottom-left { grid-area: bottom-left; }
-
-
 .fillSpace{
     display: flex;
     flex-flow: column;
     margin: 10px;
     height: 90%;
 }
-
 .image{
     max-width: 100% ;
     height: auto;
 }
 
 button {
-    background-color: #2d467d;
-    border: 0;
     padding: 10px 40px;
     margin-top: 20px;
     margin-left: 10px;
-    color: white;
-    border-radius: 20px;
-    font-size:13px;
 }
 
 .orange{
@@ -308,11 +304,13 @@ button {
 
 .greenCount{
     color: green;
-    font-weight: bold ;
+    font-weight: bold;
+    margin-left: 10px;
 }
 
 .redCount{
     color: red;
-    font-weight: bold ;
+    font-weight: bold;
+    margin-left: 10px;
 }
 </style>

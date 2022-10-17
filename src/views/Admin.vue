@@ -1,12 +1,10 @@
 <template>
   <div class="admin">
     <w-card class="main-content">
-      <div>
         <h1 style="float:left"> {{ title }}</h1> 
         <button @click="signOut" class="logOutButton" style="float:right">Logout</button>
-      </div>
       <div class="spacing">
-        <AdminTabs ></AdminTabs>
+        <AdminTabs></AdminTabs>
       </div>
     </w-card>  
   </div>
@@ -15,7 +13,7 @@
 
 <script>
   import AdminTabs from '@/components/admin/AdminTabs.vue';
-  import DatabaseService from '../services/databaseService';
+  import databaseService from '../services/databaseService';
   import { useStore } from 'vuex'
   import { useRouter } from 'vue-router'
 
@@ -32,7 +30,7 @@
     methods: {
       signOut(){
         try{
-          DatabaseService.signOut()
+          databaseService.signOut()
           this.router.push('/')
         }
         catch(err){
@@ -41,7 +39,7 @@
       }
     },
     mounted() {
-      if(!DatabaseService.isUserAuthenticated() ){
+      if(!databaseService.isUserAuthenticated() ){
         this.router.push('/')
       }
     },
@@ -58,16 +56,13 @@
   background-color: rgba(255, 255, 255, 1);
 }
 .dark .w-card {
-  background-color: black;
+  background-color: rgba(66, 66, 66, 1);
  }
 
 .logOutButton{
   font-weight: bold;
   background-color: #ef270d;
   margin-right: 10px;
-  color: white;
-  border-radius: 20px;
-  font-size:10px;
 }
 
 .spacing{

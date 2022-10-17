@@ -5,6 +5,7 @@
         outline
         label= "File name"
         v-model="filename"
+        bg-color="grey-light5"
         required>
         </w-input>
 
@@ -17,14 +18,13 @@
             @change="readFile()"
             accept=".pdf" 
             id="choose-file" 
+            bg-color="grey-light5"
             name="choose-file"
             required>
 
             <div v-if="file">
                 <h3>{{filename}}</h3>
             </div>
-            
-            
         </w-card>
 
         <br>

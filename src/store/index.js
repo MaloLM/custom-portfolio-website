@@ -6,6 +6,7 @@ export default createStore({
         isDark: false,
       },
       showDialog: true,
+      isUserLoggedIn: null,
   },
   getters: {
     theme(state){
@@ -13,6 +14,9 @@ export default createStore({
     },
     showDialog(state){
       return state.showDialog
+    },
+    isUserLoggedIn(state){
+      return state.isUserLoggedIn
     }
   },
   mutations: {
@@ -21,6 +25,9 @@ export default createStore({
     },
     SET_SHOW_DIALOG(state, value) {
       state.showDialog = value;
+    },
+    SET_IS_USER_LOGGED_IN(state, value) {
+      state.isUserLoggedIn = value;
     }
   }
 })

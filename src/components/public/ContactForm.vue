@@ -108,14 +108,8 @@ export default {
 }
 
 button {
-  background-color: #2d467d;
-  border: 0;
   padding: 10px 40px;
-  margin-top: 20px;
-  margin-left: 10px;
-  color: white;
-  border-radius: 20px;
-  font-size:13px;
+  margin: 17px;
   float:right;
 }
 

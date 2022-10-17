@@ -5,7 +5,7 @@ const routes = [
   {
     path: '/',
     name: 'aboutMe',
-    component: AboutMe
+    component: AboutMe,
   },
   {
     path: '/career',

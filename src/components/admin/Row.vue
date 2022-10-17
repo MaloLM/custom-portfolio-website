@@ -53,11 +53,10 @@ export default {
 }
 
 button {
-    border: 0;
     padding: 10px 26px;
-    color: white;
     border-radius: 5px;
     font-size:13px;
+    margin: 0px 2px;
 }
 
 .list-row {

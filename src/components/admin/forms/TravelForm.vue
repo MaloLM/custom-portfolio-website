@@ -85,21 +85,15 @@
 }
 .top { grid-area: top; }
 .travel-form { grid-area: travel-form; }
-.buttons { grid-area: buttons; }
-.void { grid-area: void; }
-.buttons{
+.buttons { 
+    grid-area: buttons;
     float:right;
-}
+ }
+.void { grid-area: void; }
 
 button {
-    background-color: #2d467d;
-    border: 0;
-    padding: 10px 40px;
     margin-top: 20px;
     margin-left: 10px;
-    color: white;
-    border-radius: 20px;
-    font-size:13px;
 }
 
 .orange{

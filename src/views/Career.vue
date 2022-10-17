@@ -140,7 +140,11 @@ font-size: 30px;
   grid-template-areas: 
     "description void"; 
 }
-.description { grid-area: description; }
+.description { 
+  grid-area: description;
+  font-size: 25px;
+  text-align: left;
+ }
 .void { grid-area: void; }
 .row-3 {
   margin-top: 25px;
@@ -151,12 +155,6 @@ font-size: 30px;
     text-align: center;
     font-size: 50px;
   }
-
-  .description{
-    font-size: 20px;
-    text-align: left;
-  }
-  
   .main-content{
     margin-top: 15px;
     margin-left: 12px;
@@ -165,13 +163,13 @@ font-size: 30px;
   }   
 
   .container {
-  display: grid; 
-  grid-auto-columns: 1fr; 
-  grid-template-columns: 1fr 0fr; 
-  grid-template-rows: 1fr; 
-  gap: 0px 0px; 
-  grid-template-areas: 
-    "description void"; 
+    display: grid; 
+    grid-auto-columns: 1fr; 
+    grid-template-columns: 1fr 0fr; 
+    grid-template-rows: 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "description void"; 
 }
   .void {
     display: none;

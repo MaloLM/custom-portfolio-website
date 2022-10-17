@@ -1,13 +1,11 @@
 <template>
-    <div v-if="parsedData != null">
-        <w-tag 
+    <div v-if="parsedData != null" class="break">
+        <span
         v-for="(tag) in parsedData" :key="tag"
         class="spacing"
-        :bg-color="bgColor"
-        :color="textColor"
-        round xl>
+        :style="style">
         {{tag}}
-        </w-tag>
+        </span>
     </div>
 </template>
 
@@ -18,14 +16,20 @@ export default {
   props:{
     unparsedData: String,
     bgColor: String,
-    textColor: String,
   },
   data: () => ({
-    parsedData: null
+    parsedData: null,
+    backgroundColor: null,
   }),
   mounted(){
     this.parsedData = this.unparsedData.split("/");
+    this.backgroundColor = this.bgColor
   },
+  computed: {
+    style () {
+        return 'background-color: ' + this.backgroundColor;
+      }
+  }
 };
 </script>
 
@@ -33,5 +37,14 @@ export default {
 <style scoped>
 .spacing{
     margin: 3px;
+    color:white;
+    border: 0;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 16px;
+}
+.break {
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>

@@ -5,21 +5,20 @@
             <h3>{{title}}</h3>
 
             <w-form 
-                action="#" 
-                v-model="valid"
-                @validate="validated++;success = error = false"
-                @success="success = true"
-                @error="error = true"
-                @submit.prevent="loginProcess">
-            
+            action="#" 
+            v-model="valid"
+            @validate="validated++;success = error = false"
+            @success="success = true"
+            @error="error = true"
+            @submit.prevent="loginProcess">
                 <w-input
-                    class="spacing"
-                    required
-                    label="E-mail address"
-                    type="email"
-                    bg-color="grey-light5"
-                    :validators="[validators.required]"
-                    v-model="email"> 
+                class="spacing"
+                required
+                label="E-mail address"
+                type="email"
+                bg-color="grey-light5"
+                :validators="[validators.required]"
+                v-model="email"> 
                 </w-input>
 
                 <w-input
@@ -86,6 +85,7 @@ export default {
                         const authRes = await databaseService.logIn(email, password)
                         if(authRes == true){
                             this.router.push('/admin')
+                            this.$forceUpdate();
                         }
                         else {
                             let errorMessage = authRes
@@ -141,14 +141,9 @@ export default {
   }
 
 button {
-    background-color: #2d467d;
-    border: 0;
-    padding: 10px 40px;
     margin-top: 20px;
     margin-left: 10px;
-    color: white;
     border-radius: 20px;
-    font-size:13px;
     float:right;
 }
 
@@ -167,7 +162,6 @@ button {
         margin-right: 12px;
         transition: 0.3s;
     }
-
     button {  
         float: none;
         display: block;
@@ -175,7 +169,6 @@ button {
         margin-right: auto;
         width: 70%;
     }
-
     .spacing {
         margin-top: 20px;
     }

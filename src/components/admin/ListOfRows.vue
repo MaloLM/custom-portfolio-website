@@ -1,7 +1,8 @@
 <template>
     <div class="list-of-rows">
         <div v-if="isShow">
-            <w-button class="ma1 button" @click="isShow = !isShow"  bg-color="primary" >Add new</w-button>
+            <button @click="isShow = !isShow">Add new</button>
+  
             <ListRow @toggleShow="toggleShow($event)" 
             @removePost="removePost($event)"
             v-for="post in posts"
@@ -20,7 +21,7 @@
 
 
 <script>
-import ListRow from "./ListRow.vue";
+import ListRow from "./Row.vue";
 import MainForm from './forms/MainForm.vue';
 import TravelForm from './forms/TravelForm.vue';
 import databaseService from '@/services/databaseService';
@@ -75,13 +76,9 @@ export default {
 
 <style scoped>
 button {
-    border: 0;
     padding: 10px 26px;
-    color: white;
     border-radius: 5px;
-    font-size:13px;
-    margin-bottom: 8px;
-    margin-top: 20px;
-    background-color: #282586;
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
 </style>
