@@ -2,14 +2,14 @@
   <div class="aboutMe" >
     <div class="main-content" v-if="dialog.show != null && dialog.show != true">
       <img class="mobile-image" v-if="image != null && image != ''"
-          v-bind:src="image"/>
+      v-bind:src="image"/>
       <div>
         <h1 class="pageTitle"> {{firstName}} <br class="linebreak"/> {{lastName}} </h1>
         <div class="container">
-          <div class="description">
             <p class="description">{{description}}</p>
+          <div class="void">
+            <img class="desktop-image" v-bind:src="image"/>
           </div>
-          <div class="void"></div>
         </div>   
       </div>
       <br/>
@@ -142,6 +142,13 @@ font-size: 30px;
 .mobile-image {
   display: none;
   pointer-events: none;
+}
+
+.desktop-image {
+  display:block;
+  margin:auto;
+  height: auto;
+  display: none;
 }
 
 .linebreak {

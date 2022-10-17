@@ -1,5 +1,5 @@
 <template>
-  <h1 class="caroussel-title" v-if="posts != null"> {{title}} <span class="arrow"> > </span> </h1>
+  <h1 class="caroussel-title" v-if="posts != null"> {{title}} </h1>
   <Carousel class="caroussel" :settings="settings" :breakpoints="breakpoints" v-if="posts">
     <Slide  v-for="(post) in posts" :key="post.createdAt">
       <div class="card-container"  @click="loadDialog(post.id)">
@@ -379,10 +379,6 @@ button {
 
   h1 {
     font-size: 26px;
-  }
-  
-  .arrow {
-    display: none;
   }
 }
 </style>
