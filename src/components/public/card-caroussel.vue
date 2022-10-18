@@ -261,9 +261,9 @@ export default defineComponent({
 .carousel__next{
   float: right;
   margin-right: 40px;
-  width: 60px;
-  height: 60px;
-  border-radius: 60px;
+  width: 70px;
+  height: 70px;
+  border-radius: 70px;
   background-color: rgb(44, 70, 125);
   border: solid;
   border-color: rgba(255, 255, 255, 0.921);
@@ -274,9 +274,9 @@ export default defineComponent({
 .carousel__prev{
   float: left;
   margin-left: 40px;
-  width: 60px;
-  height: 60px;
-  border-radius: 60px;
+  width: 70px;
+  height: 70px;
+  border-radius: 70px;
   background-color: rgb(44, 70, 125);
   border: solid;
   border-color: rgba(255, 255, 255, 0.921);

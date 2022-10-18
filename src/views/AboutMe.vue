@@ -4,8 +4,9 @@
     <img class="mobile-image" v-if="image != null && image != ''"
     v-bind:src="image"/>
     <div>
-      <h1 class="pageTitle"> {{firstName}} <br class="linebreak"/> {{lastName}} </h1>
+      
       <div class="container">
+        <h1 class="pageTitle"> {{firstName}} <br class="linebreak"/> {{lastName}} </h1>
         <p class="description">{{description}}</p>
         <div class="void">
           <img class="desktop-image" v-bind:src="image"/>
@@ -121,20 +122,37 @@ export default {
 .dialog-text {
   font-size: 30px;
 }
-.container {
+
+/* .container {
   display: flex;
   flex-direction: row ;
+} */
+  
+.container {
+  display: grid; 
+  grid-auto-columns: 1fr; 
+  grid-template-columns: 1.2fr 0.8fr; 
+  grid-template-rows: 0.3fr 0.3fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "pageTitle void"
+    "description void"; 
 }
-.void { 
-  margin: auto;
- }
+
+.pageTitle { grid-area: pageTitle; }
 .description { 
-  width: 50%;
+  grid-area: description;
+  font-weight: bold;
+  color: rgb(77, 77, 77);
   float: left;
   font-size: 25px;
   text-align: left;
   margin: 0;
   margin-left: 15px;
+ }
+.void { 
+  grid-area: void;
+  margin: auto; 
 }
 
 .mobile-image {
@@ -159,8 +177,27 @@ export default {
     display: block;
   }
 
-  .description {
+  .container {
+  display: grid; 
+  grid-auto-columns: 1fr; 
+  grid-template-columns: 1.2fr 0fr; 
+  grid-template-rows: 0.3fr 0.3fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "pageTitle void"
+    "description void"; 
+  }
+
+  .pageTitle{
+    text-align: center;
     width: 100%;
+    font-size: 50px;
+    margin: 10px 0px;
+  }
+
+  .description {
+    width: 90%;
+    text-align:justify;
     font-size: 20px;
   }
 
@@ -168,14 +205,7 @@ export default {
     display: none; 
   }
 
-  .pageTitle{
-    text-align: center;
-    font-size: 50px;
-    margin: 10px 0px;
-  }
-
   
-
   .main-content{
     margin-top: 15px;
     margin-left: 12px;
@@ -192,6 +222,7 @@ export default {
     width: 70%;
     margin-bottom: 15px;
   }
+
   .dialog-text {
     margin: 10px;
     font-size: 24px;
