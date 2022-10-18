@@ -1,7 +1,7 @@
 <template>
   <div class="admin">
     <w-card class="main-content">
-        <h1 style="float:left"> {{ title }}</h1> 
+        <h1 style="float:left"> {{ title }} </h1> 
         <button @click="signOut" class="logOutButton" style="float:right">Logout</button>
       <div class="spacing">
         <AdminTabs></AdminTabs>
@@ -19,7 +19,7 @@
 
   export default {
     name: "admin-view",
-    components: { AdminTabs, },
+    components: { AdminTabs },
     data() {
       return {
         title: 'Admin',
@@ -66,6 +66,6 @@
 }
 
 .spacing{
-  margin-top: 70px;
+  margin-top: 50px;
 }
 </style>

@@ -1,44 +1,37 @@
 <template>
 <form @submit.prevent="this.uploadCV()">
-        <w-input
-        class="mb3"
-        outline
-        label= "File name"
-        v-model="filename"
+    <w-card 
+    title="Upload CV - pdf file only" 
+    title-class="grey"  
+    bg-color="grey-light5">
+        <input 
+        type="file" 
+        ref="file" 
+        @change="readFile()"
+        accept=".pdf" 
+        id="choose-file" 
         bg-color="grey-light5"
+        name="choose-file"
         required>
-        </w-input>
 
-        <br>
-
-        <w-card title="Upload CV - pdf file only" title-class="grey">
-            <input 
-            type="file" 
-            ref="file" 
-            @change="readFile()"
-            accept=".pdf" 
-            id="choose-file" 
-            bg-color="grey-light5"
-            name="choose-file"
-            required>
-
-            <div v-if="file">
-                <h3>{{filename}}</h3>
-            </div>
-        </w-card>
-
-        <br>
-        
-        <div style="float:right;">
-            <button>Submit</button>
+        <div v-if="file">
+            <h3>{{filename}}</h3>
         </div>
-    </form>
+    </w-card>
+
     <br>
-    <br>
-    <w-transition-expand y>
-        <w-alert v-if="showSuccessAlert"  dismiss success class="alerts">Data was successfully submitted</w-alert>
-        <w-alert v-if="showErrorAlert" dismiss error>Data failed to get submitted</w-alert>
-    </w-transition-expand>
+    
+    <div style="float:right;">
+        <button>Submit</button>
+    </div>
+</form>
+<br>
+<br>
+<br>
+<w-transition-expand y>
+    <w-alert v-if="showSuccessAlert"  dismiss success class="alerts">Data was successfully submitted</w-alert>
+    <w-alert v-if="showErrorAlert" dismiss error>Data failed to get submitted</w-alert>
+</w-transition-expand>
 </template>
 
 
@@ -46,66 +39,66 @@
 import databaseService from '@/services/databaseService';
 
 export default {
-  data() {
-    return {
-        showSuccessAlert: false,
-        showErrorAlert: false,
-        isCV: null,
-        filename: null,
-        file: null,
-        preview: null,
-    }
-  },
-  props:{
-    formType: String
-  },
-  methods: {
-    readFile() {
-        this.file = this.$refs.file.files[0];
-        
-        if(this.file){
-            if (this.file.name.includes(".pdf")) {
-                this.isCV = true
-                this.preview = URL.createObjectURL(this.file);
-            } else {
-                this.isCV = false;
-                this.isImage = false;
-                this.filename = false;
-            }
-        } else {
-            this.showErrorAlert = true
+    data() {
+        return {
+            showSuccessAlert: false,
+            showErrorAlert: false,
+            isCV: null,
+            filename: null,
+            file: null,
         }
     },
-    uploadCV(){
-        try{
-            if(this.file != null && this.filename != null){
-                let filename = this.filename
-                console.log('ICIII', filename)
-                if(this.confirmEnding(filename, '.pdf')){
-                    filename = filename.replace(/.pdf+$/, ''); 
+    props:{
+        formType: String
+    },
+    methods: {
+        readFile() {
+            this.file = this.$refs.file.files[0];
+            
+            if(this.file){
+                if (this.file.name.includes(".pdf")) {
+                    this.filename = this.file.name
+                    this.isCV = true
+                } else {
+                    this.isCV = false;
+                    this.filename = false;
                 }
-                console.log('LAAAAAA', filename)
-                databaseService.uploadCurriculumVitae(this.file, filename)
-                this.showSuccessAlert = true
+            } else {
+                this.showErrorAlert = true
             }
-        } catch(err){
-            this.showErrorAlert = true
-        }
-    },
-    confirmEnding(string, target) {
-        if (string.substr(-target.length) === target) {
-            return true;
-        } else {
-            return false;
+        },
+        uploadCV(){
+            try{
+                if(this.file != null && this.filename != null){
+                    let filename = this.filename
+                    if(this.confirmEnding(filename, '.pdf')){
+                        filename = filename.replace(/.pdf+$/, ''); 
+                    }
+                    databaseService.uploadCurriculumVitae(this.file, filename)
+                    this.showSuccessAlert = true
+                }
+            } catch(err){
+                this.showErrorAlert = true
+            }
+        },
+        confirmEnding(string, target) {
+            if (string.substr(-target.length) === target) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
-  }
 }
 </script>
 
 
 <style scoped>
 form {
-    margin-top: 10px;
+    margin-top: 20px;
+}
+
+w-alert {
+    margin: 20px;
 }
 </style>

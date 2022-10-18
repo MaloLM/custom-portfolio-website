@@ -8,7 +8,7 @@
         </template>
 
         <template v-slot:tabPanel-2> 
-            <h3>Hobbies list</h3>
+            <h3>Hobbies</h3>
             <HobbieForm formTypeToShare="about-me/hobbies-and-interests"></HobbieForm>
         </template>
 
@@ -18,27 +18,27 @@
         </template>
 
         <template v-slot:tabPanel-3> 
-            <h3>Personnal projects list</h3>
+            <h3>Personnal projects</h3>
             <PersonnalProjectsForm formTypeToShare="about-me/personnal-projects"></PersonnalProjectsForm>
         </template>
 
-        <template v-slot:tabPanel-5>
-            <h3>Professional projects list</h3>
-            <ProfessionnalProjectsForm formTypeToShare="career/professional-projects"></ProfessionnalProjectsForm>
-        </template>
-
-        <template v-slot:tabPanel-6> 
-            <h3>Job experiences list</h3>
+        <template v-slot:tabPanel-5> 
+            <h3>Job experiences</h3>
             <JobExperiencesForm formTypeToShare="career/job-experiences"></JobExperiencesForm>
         </template>
 
+        <template v-slot:tabPanel-6>
+            <h3>Professional projects</h3>
+            <ProfessionnalProjectsForm formTypeToShare="career/professional-projects"></ProfessionnalProjectsForm>
+        </template>
+        
         <template v-slot:tabPanel-7> 
             <h3>Education list</h3>
             <EducationForm formTypeToShare="career/education"></EducationForm>
         </template>
 
         <template v-slot:tabPanel-8> 
-            <h3>Travels list</h3>
+            <h3>Travels</h3>
             <TravelsAdministration formTypeToShare="travels"></TravelsAdministration>
         </template>
 
@@ -82,8 +82,8 @@ export default {
                 "Hobbies",
                 "Personnal projects",
                 "Career", 
-                "Professional projects",
                 "Job experience",
+                "Professional projects",
                 "Education",
                 "Travels",
                 "CV",

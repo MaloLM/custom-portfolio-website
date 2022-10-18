@@ -1,9 +1,7 @@
 <template>
-    <br>
     <form @submit.prevent="this.pushForm()">
-
         <w-input
-        class="mb3"
+        class="mb3 spacing"
         outline
         label= "First name"
         v-model="firstName"
@@ -12,7 +10,7 @@
         </w-input>
 
         <w-input
-        class="mb3"
+        class="mb3 spacing"
         outline
         label= "Last name"
         v-model="lastName"
@@ -21,18 +19,20 @@
         </w-input>
 
         <w-textarea
-        class="mt4"
+        class="mt4 spacing"
         outline
-        rows="10"
+        rows="4"
         label= "Description"
         v-model="description"
         bg-color="grey-light5"
         required>
         </w-textarea>
 
-        <br>
-
-        <w-card title="Image" title-class="grey">
+        <w-card 
+        title="Image"
+        title-class="grey" 
+        bg-color="grey-light5"
+        class="spacing">
             <input 
             type="file" 
             ref="file" 
@@ -47,10 +47,8 @@
             <img v-if="image" :src="preview" class="image" />
             
         </w-card>
-
-        <br>
         
-        <div style="float:right;">
+        <div class="spacing" style="float:right;">
             <button>Submit</button>
         </div>
     </form>
@@ -158,7 +156,7 @@ button {
 }
 
 .image{
-    max-width: 100% ;
+    max-width: 250px ;
     height: auto;
 }
 
@@ -166,5 +164,8 @@ button {
     margin-right: 10px;
 }
 
+.spacing {
+    margin: 20px;
+}
 
 </style>

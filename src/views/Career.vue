@@ -57,16 +57,12 @@ export default {
   methods: {
     sortByCreationDate(posts) {
       let size = Object.keys(posts).length;
-
       if(size > 0) {
-
         let array = []
-
         Object.entries(posts).forEach(([key, value]) => {
               value['id'] = key
               array.push(value)
         })
-
         array = array.sort((a, b) => {
             return b.createdAt - a.createdAt;
         });
@@ -134,18 +130,25 @@ font-size: 30px;
 .container {
   display: grid; 
   grid-auto-columns: 1fr; 
-  grid-template-columns: 0.5fr 0.5fr; 
+  grid-template-columns: 0.6fr 0.3fr; 
   grid-template-rows: 1fr; 
   gap: 0px 0px; 
   grid-template-areas: 
     "description void"; 
 }
+
 .description { 
   grid-area: description;
   font-size: 25px;
   text-align: left;
+  margin: 0;
+  margin-left: 15px;
  }
-.void { grid-area: void; }
+
+.void { 
+  grid-area: void;
+ }
+
 .row-3 {
   margin-top: 25px;
 }
@@ -155,6 +158,7 @@ font-size: 30px;
     text-align: center;
     font-size: 50px;
   }
+
   .main-content{
     margin-top: 15px;
     margin-left: 12px;
@@ -169,11 +173,13 @@ font-size: 30px;
     grid-template-rows: 1fr; 
     gap: 0px 0px; 
     grid-template-areas: 
-      "description void"; 
-}
+    "description void"; 
+  }
+
   .void {
     display: none;
   }
+
   .dialog-text {
     margin: 10px;
     font-size: 24px;

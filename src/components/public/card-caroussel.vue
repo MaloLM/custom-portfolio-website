@@ -11,7 +11,15 @@
         no-border
         shadow>
           <w-divider class="card-divider mx-3"></w-divider>
-          <h2 style="float:left">{{post.title}}</h2>
+          <div class="card-top-info">
+            <h2>{{post.title}}</h2>
+            <h3 class="card-date" v-if="post.date != null && post.date != '-'">
+              {{post.date}}
+            </h3>
+            <p v-else class="card-date" style="visibility: hidden" >
+              -
+            </p>
+          </div>
           <template #actions>
             <div class="spacer"></div>
             <button class="card-button">
@@ -106,6 +114,7 @@ export default defineComponent({
       persistentNoAnimation: false,
       width: 'auto',
       title: null,
+      date: null,
       image: null,
       description: null,
       ressources: null,
@@ -142,6 +151,10 @@ export default defineComponent({
     loadDialog(postId){ 
       let body = document.body
       body.classList.add('no-scroll')
+      if (this.isBrowserSafari()){
+        body.classList.add('safari-no-scroll')
+      }
+
       let object = null
 
       Object.entries(this.posts).forEach(([key, value]) => {
@@ -175,6 +188,9 @@ export default defineComponent({
     unloadDialog(){
       let body = document.body
       body.classList.remove('no-scroll')
+      if (this.isBrowserSafari()){
+        body.classList.remove('safari-no-scroll')
+      }
       this.dialog.show = false
     },
     redirectToRessource(){
@@ -191,6 +207,16 @@ export default defineComponent({
       this.openDrawer = false;
       this.dialog.fullscreen = false;
       return;
+    },
+    isBrowserSafari() {
+      var ua = navigator.userAgent.toLowerCase(); 
+      if (ua.indexOf('safari') != -1) { 
+        if (ua.indexOf('chrome') > -1) {
+          return false // Chrome
+        } else {
+          return true // Safari
+        }
+      }
     }
   },
   created(){
@@ -202,13 +228,29 @@ export default defineComponent({
     
 
 <style>
+.card-top-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.card-date {
+  margin-left: 9px;
+  color: rgb(100, 114, 130);
+}
 
 .no-scroll {
   overflow:hidden;
 }
 
+.safari-no-scroll {
+  touch-action: none;
+  -ms-touch-action: none;
+}
+
 .caroussel-title{
   margin-left: 50px;
+  font-size: 46px;
 } 
 
 .carousel__prev--in-active,
@@ -366,6 +408,7 @@ button {
   .caroussel-title{
     margin-left: 0;
     text-align: center;
+    font-size: 28px;
   }
 
   button {

@@ -78,9 +78,9 @@ export default {
               )
               this.showSuccessMessage = true;
               // reseting form values
-              this.name = ''
-              this.email = ''
-              this.message = ''
+              this.name = ' '
+              this.email = ' '
+              this.message = ' '
           }
           else {
             this.errorLabel = 'E-mail format is invalid. Please correct it to send your message.';

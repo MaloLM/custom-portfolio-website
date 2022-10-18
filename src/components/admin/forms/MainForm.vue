@@ -24,19 +24,23 @@
             <w-textarea 
                 class="mt4"
                 outline
-                rows="10"
+                rows="5"
                 label="Text description"
                 v-model="description"
                 bg-color="grey-light5"
                 @input="countDescriptionWords"
                 required>
             </w-textarea>
-            <p :class=" descriptionWordCount <= 110 ? 'greenCount' :'redCount' ">{{descriptionWordCount}} words</p>
+            <p :class=" descriptionWordCount <= 140 ? 'greenCount' :'redCount' ">{{descriptionWordCount}} words</p>
             <w-divider class="ma6"/>
             </div>
 
             <div class="right">
-                <w-card title="Image" title-class="grey" class="fillSpace">
+                <w-card 
+                title="Image"
+                title-class="grey"
+                bg-color="grey-light5"
+                class="fillSpace">
                     <input 
                     :required="!isImage"
                     type="file" 
@@ -265,7 +269,7 @@ export default {
   display: grid; 
   grid-auto-columns: 1fr; 
   grid-template-columns: 1fr 1fr; 
-  grid-template-rows: 1fr 1fr 1fr 0.1fr; 
+  grid-template-rows: 1fr 0.4fr 0.4fr 0.1fr; 
   gap: 0px 0px; 
   grid-template-areas: 
     "top top"
@@ -287,7 +291,7 @@ export default {
     height: 90%;
 }
 .image{
-    max-width: 100% ;
+    max-width: 50% ;
     height: auto;
 }
 

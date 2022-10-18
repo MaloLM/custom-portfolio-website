@@ -1,19 +1,18 @@
 <template>
-  <div class="aboutMe" >
-    <div class="main-content" v-if="dialog.show != null && dialog.show != true">
-      <img class="mobile-image" v-if="image != null && image != ''"
-      v-bind:src="image"/>
-      <div>
-        <h1 class="pageTitle"> {{firstName}} <br class="linebreak"/> {{lastName}} </h1>
-        <div class="container">
-            <p class="description">{{description}}</p>
-          <div class="void">
-            <img class="desktop-image" v-bind:src="image"/>
-          </div>
-        </div>   
-      </div>
-      <br/>
+<div class="aboutMe" >
+  <div class="main-content" v-if="dialog.show != null && dialog.show != true">
+    <img class="mobile-image" v-if="image != null && image != ''"
+    v-bind:src="image"/>
+    <div>
+      <h1 class="pageTitle"> {{firstName}} <br class="linebreak"/> {{lastName}} </h1>
+      <div class="container">
+        <p class="description">{{description}}</p>
+        <div class="void">
+          <img class="desktop-image" v-bind:src="image"/>
+        </div>
+      </div>   
     </div>
+    <br/>
   </div>
 
   <CardCaroussel title="Hobbies and interests" v-if="hobbiesAndInterestsPosts != null"  :posts="hobbiesAndInterestsPosts"></CardCaroussel>
@@ -31,6 +30,7 @@
     <h2 class="dialog-text">Loading experience</h2>
   </div>
   </w-dialog>
+</div>  
 </template>
 
 <script>
@@ -119,7 +119,7 @@ export default {
 }
 
 .dialog-text {
-font-size: 30px;
+  font-size: 30px;
 }
 .container {
   display: flex;
@@ -133,6 +133,8 @@ font-size: 30px;
   float: left;
   font-size: 25px;
   text-align: left;
+  margin: 0;
+  margin-left: 15px;
 }
 
 .mobile-image {
@@ -141,9 +143,10 @@ font-size: 30px;
 }
 
 .desktop-image {
-  display:block;
-  margin:auto;
+  display: block;
+  margin: auto;
   height: 260px;
+  pointer-events: none;
 }
 
 .linebreak {
@@ -155,25 +158,32 @@ font-size: 30px;
   .linebreak {
     display: block;
   }
+
+  .description {
+    width: 100%;
+    font-size: 20px;
+  }
+
+  .void {
+    display: none; 
+  }
+
   .pageTitle{
     text-align: center;
     font-size: 50px;
     margin: 10px 0px;
   }
-  .void {
-    display: none; 
-  }
 
-  .description {
-    width: 100%;
-  }
+  
 
   .main-content{
     margin-top: 15px;
     margin-left: 12px;
     margin-right: 12px;
+    margin-bottom: 0px;
     transition: 0.3s;
-  }    
+  }   
+   
   .mobile-image {
     pointer-events: none;
     display:block;
