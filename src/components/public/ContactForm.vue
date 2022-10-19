@@ -70,10 +70,15 @@ export default {
         if(this.name != '' && this.email != '' && this.message != null && this.message != ''){
           if(this.isEmailValid(this.email)){
             // sending mail
-            emailjs.sendForm(
+            var templateParams = {
+              name: this.name,
+              email: this.email,
+              message : this.message
+            };
+            emailjs.send(
               process.env.VUE_APP_EMAILJS_SERVICE_ID,
               process.env.VUE_APP_EMAILJS_TEMPLATE_ID, 
-              '#contactForm',
+              templateParams, //'#contactForm',
               process.env.VUE_APP_EMAILJS_USER_ID
               )
               this.showSuccessMessage = true;
@@ -88,6 +93,7 @@ export default {
           }
         }
       } catch(error) {
+        console.log(error)
         this.errorLabel = 'An error occured. Please contact me via social networks.';
       }
     },
