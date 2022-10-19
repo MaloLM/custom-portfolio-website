@@ -140,6 +140,7 @@ font-size: 30px;
 .description { 
   grid-area: description;
   font-size: 25px;
+  font-weight: 500;
   text-align: left;
   margin: 0;
   margin-left: 15px;

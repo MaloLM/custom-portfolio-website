@@ -9,7 +9,12 @@
         <h1 class="pageTitle"> {{firstName}} <br class="linebreak"/> {{lastName}} </h1>
         <p class="description">{{description}}</p>
         <div class="void">
-          <img class="desktop-image" v-bind:src="image"/>
+        <w-image
+        :src="`${image}`"
+        class="desktop-image"
+        width="280px"
+        height="260px">
+        </w-image>
         </div>
       </div>   
     </div>
@@ -142,7 +147,7 @@ export default {
 .pageTitle { grid-area: pageTitle; }
 .description { 
   grid-area: description;
-  font-weight: bold;
+  font-weight: 500;
   color: rgb(77, 77, 77);
   float: left;
   font-size: 25px;
@@ -161,9 +166,10 @@ export default {
 }
 
 .desktop-image {
-  display: block;
+  /* display: block;
   margin: auto;
   height: 260px;
+  width: auto; */
   pointer-events: none;
 }
 
@@ -197,7 +203,7 @@ export default {
 
   .description {
     width: 90%;
-    text-align:justify;
+    text-align: left;
     font-size: 20px;
   }
 

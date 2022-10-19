@@ -177,13 +177,13 @@
 
 nav {
   padding: 20px;
-  background-color: black;
+  background-color: rgb(47, 47, 47);
   border-color: #070707;
   border: 2px solid;
   border-top-width: 0px;
   border-right-width: 0px;
   border-bottom-width: 1px;
-  border-bottom-color: rgb(55, 51, 51);
+  border-bottom-color: rgb(36, 35, 35);
   border-left-width: 0px;
   width: 100vw;
 }

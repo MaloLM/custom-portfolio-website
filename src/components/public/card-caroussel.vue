@@ -2,12 +2,12 @@
   <h1 class="caroussel-title" v-if="posts != null"> {{title}} </h1>
   <Carousel class="caroussel" :settings="settings" :breakpoints="breakpoints" v-if="posts">
     <Slide  v-for="(post) in posts" :key="post.createdAt">
-      <div class="card-container"  @click="loadDialog(post.id)">
+      <div class="card-container">
         <w-card
+        @click="loadDialog(post.id)"
         :image="post.image" 
-        onerror='this.onerror=null; 
-        this.image="https://cdn.discordapp.com/attachments/601416273892605983/1028011494891335801/failed_to_load.png"'
-        class="caroussel-card box sh6" 
+        class="caroussel-card box sh6"
+        :image-props=imageProps
         no-border
         shadow>
           <w-divider class="card-divider mx-3"></w-divider>
@@ -21,8 +21,10 @@
             </p>
           </div>
           <template #actions>
-            <div class="spacer"></div>
-            <button class="card-button">
+            <div class="spacer">
+
+            </div>
+            <button>
             Read more
             </button>
           </template>
@@ -106,6 +108,9 @@ export default defineComponent({
   data: () => ({
     store: useStore(),
     mobile: null,
+    imageProps: { 
+      fallback: "https://firebasestorage.googleapis.com/v0/b/my-portefolio-application.appspot.com/o/images%2Ffailed_to_load.png?alt=media&token=92c67b38-9260-46eb-95f2-17e3ed69bce4"
+    },
     dialog: {
       dialogBgColor: null,
       show: false,
@@ -378,7 +383,6 @@ button:hover {
 
 button {
   padding: 10px 26px;
-  margin-top: 20px;
   margin-left: 10px;
   border-radius: 22px;
   font-size: 17px;
@@ -413,7 +417,6 @@ button {
 
   button {
     padding: 12px 20px;
-    margin-top: 10px;
     margin-left: 10px;
     border-radius: 20px;
     font-size: 13px;
