@@ -152,7 +152,6 @@ export default defineComponent({
     TagsGroup
 },
   methods: {
-   
     loadDialog(postId){ 
       let body = document.body
       body.classList.add('no-scroll')
@@ -243,6 +242,9 @@ export default defineComponent({
   margin-left: 9px;
   color: rgb(100, 114, 130);
 }
+.dark .card-date {
+  color:rgb(205, 219, 233);
+ }
 
 .no-scroll {
   overflow:hidden;

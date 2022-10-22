@@ -127,11 +127,6 @@ export default {
 .dialog-text {
   font-size: 30px;
 }
-
-/* .container {
-  display: flex;
-  flex-direction: row ;
-} */
   
 .container {
   display: grid; 
@@ -145,6 +140,7 @@ export default {
 }
 
 .pageTitle { grid-area: pageTitle; }
+
 .description { 
   grid-area: description;
   font-weight: 500;
@@ -155,6 +151,11 @@ export default {
   margin: 0;
   margin-left: 15px;
  }
+
+ .dark .description {
+  color:rgb(206, 205, 205);
+ }
+
 .void { 
   grid-area: void;
   margin: auto; 
@@ -166,10 +167,6 @@ export default {
 }
 
 .desktop-image {
-  /* display: block;
-  margin: auto;
-  height: 260px;
-  width: auto; */
   pointer-events: none;
 }
 
@@ -211,7 +208,6 @@ export default {
     display: none; 
   }
 
-  
   .main-content{
     margin-top: 15px;
     margin-left: 12px;
