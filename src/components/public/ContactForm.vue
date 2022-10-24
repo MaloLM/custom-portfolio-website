@@ -81,6 +81,7 @@ export default {
               templateParams, //'#contactForm',
               process.env.VUE_APP_EMAILJS_USER_ID
               )
+              this.errorLabel = false;
               this.showSuccessMessage = true;
               // reseting form values
               this.name = ' '

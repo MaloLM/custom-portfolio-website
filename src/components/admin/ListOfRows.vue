@@ -81,4 +81,9 @@ button {
     margin-bottom: 15px;
     margin-top: 15px;
 }
+
+.dark button {
+  border-style: solid;
+  border-color: rgba(166, 166, 166, 0.5);
+}
 </style>
