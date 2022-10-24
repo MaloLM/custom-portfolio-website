@@ -25,7 +25,7 @@
 width: 60px;
 height: 30px;
 border-radius: 15px;
-background-color: rgb(39, 38, 38);
+background-color: rgb(10, 10, 10);
 position: relative;
 }
 

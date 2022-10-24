@@ -302,6 +302,22 @@ export default defineComponent({
   height: 2em;
 }
 
+.dark .carousel__prev {
+  border-style: solid;
+  border-color: rgba(166, 166, 166, 0.5);
+}
+
+.dark .carousel__next {
+  border-style: solid;
+  border-color: rgba(166, 166, 166, 0.5);
+}
+
+
+.dark .carousel__prev {
+  border-style: solid;
+  border-color: rgba(166, 166, 166, 0.5);
+}
+
 .carousel__next:hover {
   background-color: rgba(160, 160, 160, 1);
   transition: 0.5s;
