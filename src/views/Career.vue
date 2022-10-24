@@ -7,13 +7,13 @@
   </div>
 
   <div class="row-3">
-    <CardCaroussel title="Job experience" :posts="jobExperiences"></CardCaroussel>
+    <CardCaroussel title="Job experience" :posts="jobExperiences" showMore="true"></CardCaroussel>
   </div>
   <div class="row-4">
-    <CardCaroussel title="Professionnal projects" :posts="professionalProjects"></CardCaroussel>
+    <CardCaroussel title="Professionnal projects" :posts="professionalProjects" showMore="true"></CardCaroussel>
   </div>
   <div class="row-5">
-    <CardCaroussel title="Education" :posts="education"></CardCaroussel>
+    <CardCaroussel title="Education" :posts="education" showMore="true"></CardCaroussel>
   </div>
   <w-dialog  
   :model-value="dialog.show == true"

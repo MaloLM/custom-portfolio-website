@@ -24,7 +24,7 @@
             <div class="spacer">
 
             </div>
-            <button>
+            <button v-if="showMore != 'false'">
             Read more
             </button>
           </template>
@@ -103,7 +103,8 @@ export default defineComponent({
   name: 'Breakpoints',
   props:{
     title: String,
-    posts : Object
+    posts : Object,
+    showMore: String, 
   },
   data: () => ({
     store: useStore(),
@@ -132,6 +133,8 @@ export default defineComponent({
     settings: {
       itemsToShow: 1.15,
       snapAlign: 'center',
+      mouseDrag: true,
+      touchDrag: true, 
     },
     breakpoints: { 
       800: { // 800px and up
@@ -153,41 +156,44 @@ export default defineComponent({
 },
   methods: {
     loadDialog(postId){ 
-      let body = document.body
-      body.classList.add('no-scroll')
-      if (this.isBrowserSafari()){
-        body.classList.add('safari-no-scroll')
+      if(this.showMore == 'true') {
+        let body = document.body
+        body.classList.add('no-scroll')
+        if (this.isBrowserSafari()){
+          body.classList.add('safari-no-scroll')
+        }
+
+        let object = null
+
+        Object.entries(this.posts).forEach(([key, value]) => {
+            if(value['id'] == postId){
+              console.log(key)
+              object = value
+            }
+        });
+
+        if(object != null){
+          const isDark = this.store.getters.theme.isDark
+
+          if(isDark == true){
+            this.dialog.dialogBgColor = 'grey-dark5'
+          } else {
+            this.dialog.dialogBgColor = 'white'
+          } 
+          this.dialog.title = object.title;
+          this.dialog.date = object.date;
+          this.dialog.image = object.image;
+          this.dialog.description = object.description;
+          this.dialog.ressources = object.ressources;
+          this.dialog.skills = object.skills;
+          this.dialog.title = object.title;
+          this.dialog.ressource.name = object.ressource.name;
+          this.dialog.ressource.link = object.ressource.link;
+          
+          this.dialog.show = true
+        }
       }
-
-      let object = null
-
-      Object.entries(this.posts).forEach(([key, value]) => {
-          if(value['id'] == postId){
-            console.log(key)
-            object = value
-          }
-      });
-
-      if(object != null){
-        const isDark = this.store.getters.theme.isDark
-
-        if(isDark == true){
-          this.dialog.dialogBgColor = 'grey-dark5'
-        } else {
-          this.dialog.dialogBgColor = 'white'
-        } 
-        this.dialog.title = object.title;
-        this.dialog.date = object.date;
-        this.dialog.image = object.image;
-        this.dialog.description = object.description;
-        this.dialog.ressources = object.ressources;
-        this.dialog.skills = object.skills;
-        this.dialog.title = object.title;
-        this.dialog.ressource.name = object.ressource.name;
-        this.dialog.ressource.link = object.ressource.link;
-        
-        this.dialog.show = true
-      }
+   
     },
     unloadDialog(){
       let body = document.body
@@ -271,9 +277,9 @@ export default defineComponent({
   width: 70px;
   height: 70px;
   border-radius: 70px;
-  background-color: rgb(44, 70, 125);
+  background-color: rgb(196, 196, 196);
   border: solid;
-  border-color: rgba(255, 255, 255, 0.921);
+  border-color: rgba(255, 255, 255, 1);
   color: rgba(255, 255, 255, 0.921);
   transition: 0.5s;
 }
@@ -284,26 +290,28 @@ export default defineComponent({
   width: 70px;
   height: 70px;
   border-radius: 70px;
-  background-color: rgb(44, 70, 125);
+  background-color: rgb(196, 196, 196);
   border: solid;
-  border-color: rgba(255, 255, 255, 0.921);
+  border-color: rgba(255, 255, 255, 1);
   color: rgba(255, 255, 255, 0.921);
   transition: 0.5s;
 }
 
+.carousel__icon {
+  width: 2em;
+  height: 2em;
+}
+
 .carousel__next:hover {
-  background-color: rgba(255, 255, 255, 0.9);
-  border-color:rgb(44, 70, 125);
-  color: rgb(44, 70, 125);
+  background-color: rgba(160, 160, 160, 1);
   transition: 0.5s;
 }
 
 .carousel__prev:hover {
-  background-color: rgba(255, 255, 255, 0.9);
-  border-color: rgb(44, 70, 125);
-  color: rgb(44, 70, 125);
+  background-color: rgba(160, 160, 160, 1);
   transition: 0.5s;
 }
+
 
 button:hover {
   cursor: pointer;

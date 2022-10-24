@@ -4,7 +4,6 @@
     <img class="mobile-image" v-if="image != null && image != ''"
     v-bind:src="image"/>
     <div>
-      
       <div class="container">
         <h1 class="pageTitle"> {{firstName}} <br class="linebreak"/> {{lastName}} </h1>
         <p class="description">{{description}}</p>
@@ -21,9 +20,9 @@
     <br/>
   </div>
 
-  <CardCaroussel title="Hobbies and interests" v-if="hobbiesAndInterestsPosts != null"  :posts="hobbiesAndInterestsPosts"></CardCaroussel>
-  <CardCaroussel title="Personnal projects" v-if="personnalProjectsPosts != null" :posts="personnalProjectsPosts"></CardCaroussel>
-  
+  <CardCaroussel title="Personnal projects" v-if="personnalProjectsPosts != null" :posts="personnalProjectsPosts" showMore="true"></CardCaroussel>
+  <CardCaroussel title="Hobbies and interests" v-if="hobbiesAndInterestsPosts != null"  :posts="hobbiesAndInterestsPosts" showMore="false"></CardCaroussel>
+
   <w-dialog  
   :model-value="dialog.show == true"
   :fullscreen= "loadingFullscreen">
