@@ -46,7 +46,9 @@
     :bg-color="dialog.dialogBgColor"
     :persistent="dialog.persistent"
     :persistent-no-animation="dialog.persistentNoAnimation"
-    title-class="primary-light1--bg white">
+    title-class="primary-light1--bg white"
+    overlay-opacity="0.6">
+
 
     <div class="container">
       <div class="title">

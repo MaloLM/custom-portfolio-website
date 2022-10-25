@@ -14,7 +14,7 @@
       
       <router-link to="/" class="link" v-show="!mobile">About me </router-link> 
       <router-link to="/career" class="link" v-show="!mobile">Career </router-link> 
-      <router-link to="/travels" class="link" v-show="!mobile">Travels </router-link>
+      <!-- <router-link to="/travels" class="link" v-show="!mobile">Travels </router-link> -->
       <router-link to="/contact" class="link" v-show="!mobile">Get in touch </router-link> 
       <a class="link linkButton" :onclick="downloadCV" v-show="!mobile">Get my CV </a>
 
