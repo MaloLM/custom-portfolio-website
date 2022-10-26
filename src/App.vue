@@ -49,7 +49,7 @@
         </w-icon> 
         <router-link to="/" class="link" @click="toggleMobileNav">About me </router-link> 
         <router-link to="/career" class="link" @click="toggleMobileNav">Career </router-link> 
-        <router-link to="/travels" class="link" @click="toggleMobileNav">Travels </router-link>
+        <!-- <router-link to="/travels" class="link" @click="toggleMobileNav">Travels </router-link> -->
         <router-link to="/contact" class="link" @click="toggleMobileNav">Get in touch </router-link> 
         <a class="link linkButton" :onclick="downloadCV">Get my CV </a>
         <router-link to="/authentication" v-show="!mobile" class="link" @click="toggleMobileNav">Sign-in </router-link>
