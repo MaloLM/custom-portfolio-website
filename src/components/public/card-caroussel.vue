@@ -353,9 +353,10 @@ button:hover {
 }
 .date { 
   font-weight: bold;
+  font-size: 22px;
   grid-area: date;
-  margin-left: 10px; 
-  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-bottom: 10px;
 }
 .description { 
   grid-area: description;
@@ -368,11 +369,13 @@ button:hover {
 .ressources {    
   grid-area: ressources; 
   margin-left: 10px; 
+  margin-bottom: 10px;
 }
 .skills { 
   grid-area: skills;
   margin-left: 10px; 
   margin-top: 15px;
+  margin-bottom: 10px;
  }
 .ressource { 
   text-decoration: underline; 
@@ -424,6 +427,7 @@ button {
 .dialog-description{
   width: 100%;
   height: auto;
+  font-size: 21px;
 }
 
 /* most litle dimensions at the bottom*/
