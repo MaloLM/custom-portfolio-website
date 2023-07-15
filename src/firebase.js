@@ -1,3 +1,7 @@
+// Copyright (c) [2023] [Malo Le Mestre]
+// This software is released under the MIT License
+// https://opensource.org/licenses/MIT
+
 import firebase from 'firebase/compat/app';
 import "firebase/compat/database";
 const { initializeAppCheck, ReCaptchaV3Provider } = require("firebase/app-check");

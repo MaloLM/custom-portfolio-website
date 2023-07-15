@@ -1,3 +1,9 @@
+<!--
+Copyright (c) [2023] [Malo Le Mestre]
+This software is released under the MIT License
+https://opensource.org/licenses/MIT
+-->
+
 <template>
 <div class="aboutMe" >
   <div class="main-content" v-if="dialog.show != null && dialog.show != true">

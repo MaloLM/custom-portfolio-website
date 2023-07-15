@@ -1,3 +1,7 @@
+// Copyright (c) [2023] [Malo Le Mestre]
+// This software is released under the MIT License
+// https://opensource.org/licenses/MIT
+
 import { createRouter, createWebHashHistory } from 'vue-router'
 import AboutMe from '../views/AboutMe.vue'
 

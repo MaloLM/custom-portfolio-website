@@ -1,3 +1,9 @@
+<!--
+Copyright (c) [2023] [Malo Le Mestre]
+This software is released under the MIT License
+https://opensource.org/licenses/MIT
+-->
+
 <template>
     <div class="contact-form">
         <w-form v-model="valid" @submit.prevent="sendEmail" id="contactForm">

@@ -1,3 +1,9 @@
+<!--
+Copyright (c) [2023] [Malo Le Mestre]
+This software is released under the MIT License
+https://opensource.org/licenses/MIT
+-->
+
 <template>
   <h1 class="caroussel-title" v-if="posts != null"> {{title}} </h1>
   <Carousel class="caroussel" :settings="settings" :breakpoints="breakpoints" v-if="posts">

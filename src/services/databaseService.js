@@ -1,3 +1,7 @@
+// Copyright (c) [2023] [Malo Le Mestre]
+// This software is released under the MIT License
+// https://opensource.org/licenses/MIT
+
 import firebase from "../firebase";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import 'firebase/compat/auth';

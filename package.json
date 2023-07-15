@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "^1.1.2",
     "emailjs-com": "^3.2.0",
-    "firebase": "^9.10.0",
+    "firebase": "^8.6.8",
     "font-awesome": "^4.7.0",
     "vue": "^3.2.13",
     "vue-axios": "^3.5.0",
