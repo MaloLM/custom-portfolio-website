@@ -296,7 +296,7 @@ Finally, click "Send" and get generated public and private key.
 
 - save the public key inside the .env file:
 ```
-VUE_APP_RECAPTCHA_V3_PUBLIC_KEY=your_public_key 
+VUE_APP_RECAPTCHA_V3_PUBLIC_KEY=your_public_key
 ```
 
 > You can now deploy again so the changes are updated in production.
