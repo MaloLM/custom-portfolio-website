@@ -1,0 +1,98 @@
+{
+  "pages": {
+    "about-me": {
+      "description": "Welcome to my Portefolio! Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "firstName": "{firstname}",
+      "lastName": "{lastname}",
+      "image": "https://firebasestorage.googleapis.com/v0/b/my-portefolio-application.appspot.com/o/images%2Fimg_524946-3138461537.png?alt=media&token=98bc053a-71df-479b-9ea3-2e0d1504a5e7",
+      "hobbies-and-interests": {
+        "-NDitxcd-TkBdUh7OO99": {
+          "createdAt": 8,
+          "date": "Since 20XX",
+          "description": "Sed tempus urna et pharetra pharetra massa massa ultricies. Mattis enim ut tellus elementum sagittis vitae et leo. Dignissim sodales ut eu sem integer vitae justo eget magna. Urna molestie at elementum eu. Quis risus sed vulputate odio ut enim. Enim nec dui nunc mattis enim ut. Congue mauris rhoncus aenean vel elit scelerisque. Euismod quis viverra nibh cras pulvinar mattis nunc. Faucibus interdum posuere lorem ipsum dolor sit amet. Volutpat est velit egestas dui id ornare arcu. Est placerat in egestas erat imperdiet sed euismod nisi. Porttitor leo a diam sollicitudin tempor id eu nisl. Est ullamcorper eget nulla facilisi etiam dignissim diam quis. Ut venenatis tellus in metus.",
+          "id": "-NDitxcd-TkBdUh7OO99",
+          "image": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pixelstalk.net%2Fwp-content%2Fuploads%2F2016%2F09%2FAll-White-Background-for-Desktop.jpg&f=1&nofb=1&ipt=142727a7a2efbbfaeeaa3e2b4625a2d3f1ce690f8e6104d5c20f856d7558a136&ipo=images",
+          "ressource": {
+            "link": "https://github.com/MaloLM",
+            "name": "Visit my Github!"
+          },
+          "ressources": "-",
+          "skills": "-",
+          "title": "A hobby"
+        }
+      },
+      "personnal-projects": {
+        "-NDivEneetlPFgWBf8Xn": {
+          "createdAt": 1665087110337,
+          "date": "September 20XX",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          "id": "-NDivEneetlPFgWBf8Xn",
+          "image": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pixelstalk.net%2Fwp-content%2Fuploads%2F2016%2F09%2FAll-White-Background-for-Desktop.jpg&f=1&nofb=1&ipt=142727a7a2efbbfaeeaa3e2b4625a2d3f1ce690f8e6104d5c20f856d7558a136&ipo=images",
+          "ressource": {
+            "link": "-",
+            "name": "-"
+          },
+          "ressources": "VueJS/EmailJS/Recpatcha/Firebase Hosting/Firebase realtime DB/Firebase authentication/App check",
+          "skills": "Rigour/Demanding nature/Minimalism",
+          "title": "Click me!"
+        }
+      }
+    },
+    "career": {
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n",
+      "education": {
+        "-NDip5i8I6HBS1QnYdXB": {
+          "createdAt": 1665085500208,
+          "date": "20XX - 20XX",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          "id": "-NDip5i8I6HBS1QnYdXB",
+          "image": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pixelstalk.net%2Fwp-content%2Fuploads%2F2016%2F09%2FAll-White-Background-for-Desktop.jpg&f=1&nofb=1&ipt=142727a7a2efbbfaeeaa3e2b4625a2d3f1ce690f8e6104d5c20f856d7558a136&ipo=images",
+          "ressource": {
+            "link": "https://github.com/MaloLM",
+            "name": "Visit my github!"
+          },
+          "ressources": "-",
+          "skills": "Maths/Physic/Chemistry/Engineering basics/History/Geography/Philosophy/And more",
+          "title": "Your university"
+        }
+      },
+      "image": "",
+      "job-experiences": {
+        "-NDiiHK11YCY0gRaV4j1": {
+          "createdAt": 1665083712765,
+          "date": "Summer 20XX - 2 month",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          "id": "-NDiiHK11YCY0gRaV4j1",
+          "image": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pixelstalk.net%2Fwp-content%2Fuploads%2F2016%2F09%2FAll-White-Background-for-Desktop.jpg&f=1&nofb=1&ipt=142727a7a2efbbfaeeaa3e2b4625a2d3f1ce690f8e6104d5c20f856d7558a136&ipo=images",
+          "ressource": {
+            "link": "https://github.com/MaloLM",
+            "name": "Visit my github!"
+          },
+          "ressources": "What/Ever/You/Want",
+          "skills": "consectetur/adipiscing/eiusmod",
+          "title": "Dolore enim eiusmod"
+        }
+      },
+      "professional-projects": {
+        "-NDinjsYE0nE4NLoiZEd": {
+          "createdAt": 1665085144521,
+          "date": "20XX - 20XX",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          "id": "-NDinjsYE0nE4NLoiZEd",
+          "image": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pixelstalk.net%2Fwp-content%2Fuploads%2F2016%2F09%2FAll-White-Background-for-Desktop.jpg&f=1&nofb=1&ipt=142727a7a2efbbfaeeaa3e2b4625a2d3f1ce690f8e6104d5c20f856d7558a136&ipo=images",
+          "ressource": {
+            "link": "-",
+            "name": "-"
+          },
+          "ressources": "Python Flask/Plotly/Docker/Cellery/Redis/Pylint",
+          "skills": "Lorem/ipsum/pariatur",
+          "title": "Lorem ipsum pulvinar"
+        }
+      },
+      "title": "Career"
+    },
+    "curriculumVitae": {
+      "link": "https://url.to.get.from.manually.uploaded.cv.on.firebase.storage.then.put.the.url.not.here.but.in.the.env.file"
+    }
+  }
+}
