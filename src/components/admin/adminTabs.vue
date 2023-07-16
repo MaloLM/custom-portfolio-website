@@ -42,11 +42,6 @@ https://opensource.org/licenses/MIT
             <EducationForm formTypeToShare="career/education"></EducationForm>
         </template>
 
-        <template v-slot:tabPanel-8> 
-            <h3>Travels</h3>
-            <TravelsAdministration formTypeToShare="travels"></TravelsAdministration>
-        </template>
-
         <template v-slot:tabPanel-9> 
             <h3>Curriculum Vitae</h3>
             <CurriculumVitae formType="curriculumVitae"></CurriculumVitae>
@@ -64,7 +59,6 @@ import PersonnalProjectsForm from "./forms/PersonnalProjectsForm.vue";
 import ProfessionnalProjectsForm from "./forms/ProfessionnalProjectsForm.vue";
 import JobExperiencesForm from "./forms/JobExperiencesForm.vue";
 import EducationForm from "./forms/EducationForm.vue";
-import TravelsAdministration from "./forms/TravelsAdministation.vue";
 import CurriculumVitae from "./forms/CurriculumVitae.vue";
 
 export default {
@@ -77,7 +71,6 @@ export default {
         ProfessionnalProjectsForm,
         JobExperiencesForm,
         EducationForm,
-        TravelsAdministration,
         CurriculumVitae,
     },
     data() {
@@ -90,7 +83,6 @@ export default {
                 "Job experience",
                 "Professional projects",
                 "Education",
-                "Travels",
                 "CV",
             ],
         };

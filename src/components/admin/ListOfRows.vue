@@ -17,19 +17,13 @@ https://opensource.org/licenses/MIT
             :title="post.title">
             </ListRow>
         </div>
-
-        <div v-if="!isShow">
-            <TravelForm v-if="formType === 'travels'" @toggleShow="toggleShow($event)" :id="postToEditId"></TravelForm>
-            <MainForm v-else :formType="formType" @toggleShow="toggleShow($event)"  :id="postToEditId"></MainForm>
-        </div>
     </div>
 </template>
 
 
 <script>
 import ListRow from "./Row.vue";
-import MainForm from './forms/MainForm.vue';
-import TravelForm from './forms/TravelForm.vue';
+
 import databaseService from '@/services/databaseService';
 
 export default {
@@ -42,8 +36,6 @@ export default {
   },
   components: {
     ListRow,
-    MainForm,
-    TravelForm
 },
   props:{
     formType: String
