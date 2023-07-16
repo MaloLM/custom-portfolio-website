@@ -51,7 +51,6 @@ export default {
   setup(){},
   methods: {
     toggleShow(postId){
-      console.log("TOGGLE SHOW:", postId)
       if(postId == "null"){
         this.postToEditId = null
       } else {

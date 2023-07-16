@@ -174,8 +174,8 @@ export default defineComponent({
         let object = null
 
         Object.entries(this.posts).forEach(([key, value]) => {
+          console.log(key)
             if(value['id'] == postId){
-              console.log(key)
               object = value
             }
         });

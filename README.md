@@ -1,8 +1,6 @@
 # my-portefolio (Vue3)
 
-## Demo
 
-TBD
 
 ## Project setup
 
@@ -15,6 +13,7 @@ git clone project-link
 > Some files may be case sensitive and get renamed by operating system, after clonning. Running the app will then return "Module not found" Error. 
 
 ### Software Requirement 
+Using terminal inside project's root:
 ```
 npm install
 ```
@@ -23,7 +22,7 @@ npm install
 
 Rename example.env to .env, at the project root: same directory than this README.md.
 
-The structure is the following one. Through this configuration tutorial, you will get every of those informations.Ò
+The structure is the following one. Through this configuration tutorial, you will get every of those informations.
 ```
 VUE_APP_API_KEY=
 VUE_APP_AUTH_DOMAIN=
@@ -37,12 +36,6 @@ VUE_APP_EMAILJS_TEMPLATE_ID=
 VUE_APP_EMAILJS_USER_ID=
 VUE_APP_RECAPTCHA_V3_PUBLIC_KEY=
 VUE_APP_CV_LINK=
-```
-
-#### Compiles and hot-reloads for development
-
-```
-npm run serve
 ```
 
 ### Create a Firebase project
@@ -97,11 +90,11 @@ Go to Authentication/users submenu in order to create your admin user:
 ![create your admin user, providing an email address and a secret password.](./src/assets/readme/add_admin_user.png)
 
 
-### realtime database configuration
+### Realtime database configuration
 
 Go to Firebase Realtime Database menu and click "Create Database".
 
-1. choose locked mode
+1. choose your location and 'locked' mode
 
 2. Go to "Rules" submenu and paste following rules:
 
@@ -122,26 +115,23 @@ ___
 
 3. Then get the content from import-me.json in project's root to get the database structure. Import JSON file from "..." options of the menu. 
 
-<!-- 5. Go to AppCheck menu (if configured). Enforce the Realtime database. -->
+4. From the data submenu of the realtime database menu, you should see a URL above the JSON section. Copy it and paste it inside the .env file. It typically looks something like: https://<your-project-id>.firebaseio.com
 
-6. From the data submenu of the realtime database menu, you should see a URL above the JSON section.  It typically looks something like: https://<your-project-id>.firebaseio.com
-'''
+```
 VUE_APP_DATABASE_URL=your_url
-'''
+```
 
 ### Firebase storage configuration (for files storage)
 
 Go to Firebase Storage menu and click "Get Started".
 
-1. choose production mode
+1. choose 'production mode'.
 
-2. choose your storage location (cannot be changed anymore, in case of error, recreate a project)
+2. choose your storage location (cannot be changed anymore, in case of error, recreate a project).
 
 > After you set this location, you cannot change it later. This location setting will also be the default location for Cloud Firestore. 
 
 3. Click "Done"
-
-<!-- 4. Go to AppCheck menu (if configured). Enforce the storage -->
 
 4. Go to Firebase Storage / Rules. Edit rules so the read and write is possible (true):
 ```
@@ -204,9 +194,7 @@ Just follow the following steps:
 
 2. Go to Firebase Storage: cv / 
 
-3. Upload your file to cv/ directory 
-
-3. Alternatively, you can upload your PDF CV from the admin pannel of the app (when deployed)
+3. Upload your file to cv/ directory. Alternatively, you can upload your PDF CV from the admin pannel of the app (when deployed)
 
 4. Once file is uploaded, get the generated file url from the file description and paste it inside the .env file:
 ```
@@ -225,7 +213,8 @@ Go to Firebase Hosting menu and click "Get Started".
 1. Run those commands from your app's root directory: 
 
 ```
-npm install -g firebase-tools
+npm install firebase-tools
+npm install firebase@9
 ```
 
 2. Sign in to Google 
@@ -238,13 +227,43 @@ firebase login
 firebase init
 ```
 
-4. App build
+This command will ask for configuration questions:
+=== Project Setup
+? Which Firebase features do you want to set up for this directory? Press Space to select features, then Enter to confirm your choices.
+- Realtime Database: Configure a security rules file for Realtime Database and (optionally) provision default instance
+- Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys
+- Storage: Configure a security rules file for Cloud Storage
+
+
+? Please select an option: Use an existing project
+? Select a default Firebase project for this directory: your_firebase_project_name among selection
+
+=== Database Setup
+? What file should be used for Realtime Database Security Rules? database.rules.json
+
+=== Hosting Setup
+? What do you want to use as your public directory? dist
+? Configure as a single-page app (rewrite all urls to /index.html)? Yes
+? Set up automatic builds and deploys with GitHub? No
+
+=== Storage Setup
+? What file should be used for Storage Rules? storage.rules
+
+4. Compiles and hot-reloads to check the app is working locally
+If the project is running properly locally, then you can proceed to app build. 
+
+```
+npm run serve
+```
+
+5. App build
+App build will store the distribution version inside the dist directory.
 
 ```
 npm run build
 ```
 
-5. Deploy
+6. Deploy
 ```
 firebase deploy
 ```
@@ -274,29 +293,40 @@ You can follow this documentation to go through this step:
 - [[Official documentation] Connect a custom domain](https://firebase.google.com/docs/hosting/custom-domain?hl=fr)
 - [[Tutorial] - How to Setup Custom Domain for Google Firebase Website](https://www.youtube.com/watch?v=IBMNvoJcy-k)
 
-### App check activation
+# Debug, some issues you can meet
 
-Go to Firebase AppCheck menu and click "Get Started".
+## Storage read & write
 
-![app check menu / get started](./src/assets/readme/appcheck_menu.png)
+If you can update the database with new files (pictures, CV), encountering 401:403 messages: make sure the storage read & write are enabled. To do so, go to Firebase Storage / rules and switch 'false' to 'true'.
 
-Click "Register" then "ReCAPTCHA".
+![Storage](./src/assets/readme/firebase_storage_rules.png)
 
-![Click Register then ReCAPTCHA](./src/assets/readme/appcheck_recaptcha.png)
+> you should edit storage rules from your storage.rules file, generated after project configuration. By default, read & write are disabled.
 
-Then go to [ReCAPTCHA creatio site](https://www.google.com/recaptcha/admin/create) in order to allow ReCAPTCHA onto your domain.
+## Already configured project
 
-![allow ReCAPTCHA onto your domain](./src/assets/readme/recaptcha_domain_name_registration.png)
+Encountering following message while doing $ firebase init:
+> You are initializing within an existing Firebase project directory
 
-Finally, click "Send" and get generated public and private key.
+remove those files:
+- .firebaserc
+- firebase.json
 
-- save the secret key in the firebase appcheck configuration:
+process again $ firebase init 
 
-![save secret key](./src/assets/readme/save_secret_key.png)
+## import error
 
-- save the public key inside the .env file:
+### files renamed when pushing
+
+Some files may be renamed when pulling project because of case sensitive OS rules. When running the app locally, it may returns errors because of this.
+
+### Firebase version
+if Firebase imports are preventing the app to run locally, check the Firebase npm package version.
 ```
-VUE_APP_RECAPTCHA_V3_PUBLIC_KEY=your_public_key
+import firebase from 'firebase/compat/app';
 ```
 
-> You can now deploy again so the changes are updated in production.
+V8 of the package is not appropriate then move to the 9th version:
+```
+npm install firebase@9
+```

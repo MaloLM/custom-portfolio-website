@@ -74,7 +74,7 @@ class DatabaseService {
     return db.ref('/pages/'+ path + '/').child(id).remove();
   }
 
-  uploadFileThenUpdateAboutMe(path, file, title, description){
+  uploadFileThenUpdateAboutMe(path, file, firstname, lastname, description){
     // https://firebase.google.com/docs/storage/web/upload-files
     const storage = getStorage();
     const storageRef = ref(storage, 'images/'+ file.name);
@@ -100,6 +100,47 @@ class DatabaseService {
         () => {
           getDownloadURL(uploadTask.snapshot.ref)
           .then((downloadURL) => {
+            console.log("check here: " + downloadURL)
+            var children = {
+              firstName: firstname,
+              lastName: lastname,
+              description: description,
+              image: downloadURL
+            }
+            db.ref('/pages/' + path).update(children);
+            
+           });
+        }
+      );
+  }
+
+  uploadFileThenUpdateCareer(path, file, title, description){
+    // https://firebase.google.com/docs/storage/web/upload-files
+    const storage = getStorage();
+    const storageRef = ref(storage, 'images/'+ file.name);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on('state_changed', 
+        (snapshot) => {
+  
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+          switch (snapshot.state) {
+            case 'paused':
+              console.log('Upload is paused');
+              break;
+            case 'running':
+              console.log('Upload is running');
+              break;
+          }
+        }, 
+        (error) => {
+          console.log("error: ", error)
+        }, 
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref)
+          .then((downloadURL) => {
+            console.log("check here: " + downloadURL)
             var children = {
               title: title,
               description: description,

@@ -104,7 +104,7 @@ export default {
                     databaseService.updatePost(this.formType, children)
                     this.showSuccessAlert = true
                 } else if(this.imageFile != null){
-                    databaseService.uploadFileThenUpdateAboutMe(this.formType, this.imageFile, this.title, this.description)
+                    databaseService.uploadFileThenUpdateCareer(this.formType, this.imageFile, this.title, this.description)
                     this.showSuccessAlert = true
                 }  
             } catch(err){
