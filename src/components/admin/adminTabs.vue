@@ -42,7 +42,7 @@ https://opensource.org/licenses/MIT
             <EducationForm formTypeToShare="career/education"></EducationForm>
         </template>
 
-        <template v-slot:tabPanel-9> 
+        <template v-slot:tabPanel-8> 
             <h3>Curriculum Vitae</h3>
             <CurriculumVitae formType="curriculumVitae"></CurriculumVitae>
         </template>

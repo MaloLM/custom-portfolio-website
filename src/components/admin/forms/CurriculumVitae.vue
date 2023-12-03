@@ -5,39 +5,39 @@ https://opensource.org/licenses/MIT
 -->
 
 <template>
-<form @submit.prevent="this.uploadCV()">
-    <w-card 
-    title="Upload CV - pdf file only" 
-    title-class="grey"  
-    bg-color="grey-light5">
-        <input 
-        type="file" 
-        ref="file" 
-        @change="readFile()"
-        accept=".pdf" 
-        id="choose-file" 
-        bg-color="grey-light5"
-        name="choose-file"
-        required>
+    <form @submit.prevent="this.uploadCV()">
+        <w-card 
+        title="Upload CV - pdf file only" 
+        title-class="grey"  
+        bg-color="grey-light5">
+            <input 
+            type="file" 
+            ref="file" 
+            @change="readFile()"
+            accept=".pdf" 
+            id="choose-file" 
+            bg-color="grey-light5"
+            name="choose-file"
+            required>
 
-        <div v-if="file">
-            <h3>{{filename}}</h3>
+            <div v-if="file">
+                <h3>{{filename}}</h3>
+            </div>
+        </w-card>
+
+        <br>
+        
+        <div style="float:right;">
+            <button>Submit</button>
         </div>
-    </w-card>
-
+    </form>
     <br>
-    
-    <div style="float:right;">
-        <button>Submit</button>
-    </div>
-</form>
-<br>
-<br>
-<br>
-<w-transition-expand y>
-    <w-alert v-if="showSuccessAlert"  dismiss success class="alerts">Data was successfully submitted</w-alert>
-    <w-alert v-if="showErrorAlert" dismiss error>Data failed to get submitted</w-alert>
-</w-transition-expand>
+    <br>
+    <br>
+    <w-transition-expand y>
+        <w-alert v-if="showSuccessAlert"  dismiss success class="alerts">Data was successfully submitted</w-alert>
+        <w-alert v-if="showErrorAlert" dismiss error>Data failed to get submitted</w-alert>
+    </w-transition-expand>
 </template>
 
 

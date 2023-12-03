@@ -110,7 +110,6 @@ https://opensource.org/licenses/MIT
       downloadCV() {
         databaseService.getCurriculumVitaeLink().on('value', (snapshot) => {
           let cvLink = snapshot.val()
-          cvLink = process.env.VUE_APP_CV_LINK
           console.log('cvLink', cvLink)
 
           axios({
