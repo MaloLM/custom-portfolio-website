@@ -29,7 +29,7 @@ Below is a demonstration of the CMS in action, showing how easy it is to manage 
 
 ### Client side demo
 
-![CMS Demonstration](./docs/gifs/client_demo.gif)
+![CMS Demonstration](./docs/client_demo.gif)
 
 See the demo portfolio [here](https://portfolio.dopee.io).
 
