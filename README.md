@@ -1,62 +1,31 @@
 # Custom-portfolio-website
 
 ## Table of Contents
-- [DEMONSTRATION](#CONNECT)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+- [Introduction](#introduction)
+- [Demonstration](#demonstration)
+- [Licence](#licence)
+- [Contributors](#contributors)
+- [Contribute!](#contribute)
+- [Connect with product owner](#connect-with-product-owner)
+
+--- 
 
 
+## INTRODUCTION
 
+## DEMONSTRATION
 
+## LICENCE 
 
+## CONTRIBUTORS
 
+<!-- - [@MaloLM](https://github.com/MaloLM/) -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Product introduction
-
-##  DEMONSTRATION
-
-## Licence 
-
-## Technical Description
-
-
-## Contributors (GitHub)
-
-- [@MaloLM](https://github.com/MaloLM/)
-
-<!-- <a href = "https://github.com/MaloLM/custom-portfolio-website/contributors">
+<a href = "https://github.com/MaloLM/custom-portfolio-website/contributors">
    <img src = "https://contrib.rocks/image?repo=MaloLM/custom-portfolio-website/"/>
- </a> -->
+ </a>
 
-## CONTRIBUTE
+## CONTRIBUTE!
 
 I welcome contributions from everyone, irrespective of their origin. Here's how you can help:
 
@@ -79,5 +48,3 @@ Remember, every contribution, whether it's code, documentation, translations, or
       <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="Linkedin" height=40>
    </a>
 </div>
-
-# CONNECT 
