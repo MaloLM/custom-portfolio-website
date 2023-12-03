@@ -2,11 +2,11 @@
 // This software is released under the MIT License
 // https://opensource.org/licenses/MIT
 
-import firebase from "../firebase";
+import firebase from "../firebase.client";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import 'firebase/compat/auth';
 import 'firebase/compat/database';
-import 'firebase/compat/storage';
+// import 'firebase/compat/storage';
 
 const db = firebase.database()
 const auth = firebase.auth();

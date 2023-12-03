@@ -1,4 +1,4 @@
-# my-portefolio (Vue3)
+# custom-portefolio-website (Vue3)
 
 
 
@@ -63,7 +63,7 @@ VUE_APP_API_KEY=your_apiKey
 VUE_APP_AUTH_DOMAIN=your_authDomain
 VUE_APP_PROJECT_ID=your_projectId
 VUE_APP_STORAGE_BUCKET=your_storageBucket
-VUE_APP_MESSAGING_SENDER_ID=uour_messagingSenderId
+VUE_APP_MESSAGING_SENDER_ID=your_messagingSenderId
 VUE_APP_APP_ID=your_appId
 ```
 Finally, click to "go to console".
@@ -229,24 +229,32 @@ firebase init
 
 This command will ask for configuration questions:
 === Project Setup
-? Which Firebase features do you want to set up for this directory? Press Space to select features, then Enter to confirm your choices.
+
+Which Firebase features do you want to set up for this directory? Press Space to select features, then Enter to confirm your choices.
+
 - Realtime Database: Configure a security rules file for Realtime Database and (optionally) provision default instance
 - Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys
 - Storage: Configure a security rules file for Cloud Storage
 
 
-? Please select an option: Use an existing project
-? Select a default Firebase project for this directory: your_firebase_project_name among selection
+Please select an option: Use an existing project
+
+Select a default Firebase project for this directory: your_firebase_project_name among selection
 
 === Database Setup
-? What file should be used for Realtime Database Security Rules? database.rules.json
+
+What file should be used for Realtime Database Security Rules? database.rules.json
 
 === Hosting Setup
-? What do you want to use as your public directory? dist
-? Configure as a single-page app (rewrite all urls to /index.html)? Yes
-? Set up automatic builds and deploys with GitHub? No
+
+What do you want to use as your public directory ? dist
+
+Configure as a single-page app (rewrite all urls to /index.html) ? Yes
+
+Set up automatic builds and deploys with GitHub ? No
 
 === Storage Setup
+
 ? What file should be used for Storage Rules? storage.rules
 
 4. Compiles and hot-reloads to check the app is working locally
