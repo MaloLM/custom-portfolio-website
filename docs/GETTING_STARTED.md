@@ -1,7 +1,3 @@
-# custom-portefolio-website (Vue3)
-
-
-
 ## Project setup
 
 ### Git clone
