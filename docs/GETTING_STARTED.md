@@ -41,15 +41,15 @@ Make sure to get connected with your Google account.
 ___
 Click on "Get Start" or "Go to console" in top right corner:
 
-![get started image](./src/assets/readme/get_started.png)
+![get started image](../src/assets/readme/get_started.png)
 
 Click on "+ Add project" to define a new firebase application project by following few steps.
 
 ___  
-![choose web app](./src/assets/readme/web_app.png)
+![choose web app](../src/assets/readme/web_app.png)
 Then, choose to set a web app up and choose an app name. Do not select a Firebase hosting yet.
 
-![choose web app](./src/assets/readme/web_app2.png)
+![choose web app](../src/assets/readme/web_app2.png)
 
 Then you will get a piece of code with initialization information. Set the following one inside the .env file:
 
@@ -70,11 +70,11 @@ ___
 
 Go to Firebase authentication menu and click "Get Started".
 
-![Sign in method selection](./src/assets/readme/sign_in_method.png)
+![Sign in method selection](../src/assets/readme/sign_in_method.png)
 
 Choose the email/password sign in method.
 
-![enable email/password and disable Email link](./src/assets/readme/email_password.png)
+![enable email/password and disable Email link](../src/assets/readme/email_password.png)
 
 Enable Email/password and let Email link disabled. Save.
 
@@ -82,7 +82,7 @@ ___
 
 Go to Authentication/users submenu in order to create your admin user:
 
-![create your admin user, providing an email address and a secret password.](./src/assets/readme/add_admin_user.png)
+![create your admin user, providing an email address and a secret password.](../src/assets/readme/add_admin_user.png)
 
 
 ### Realtime database configuration
@@ -149,7 +149,7 @@ ___
 
 5. Once the storage is initiated, create the 2 following directories:
 
-![Create cv/ and images/ directories](./src/assets/readme/create_storage_directories.png)
+![Create cv/ and images/ directories](.../src/assets/readme/create_storage_directories.png)
 
 ### EmailJS configuration
 
@@ -159,15 +159,15 @@ Go to [EmailJS website](https://www.emailjs.com).
 
 2.Add a new service
 
-![Click on "Add a new service"](./src/assets/readme/emailjs_add_new_service.png)
+![Click on "Add a new service"](../src/assets/readme/emailjs_add_new_service.png)
 
 3. Choose one service (Gmail here)
 
-![Choose the email service you want"](./src/assets/readme/emailjs_select_service.png)
+![Choose the email service you want"](../src/assets/readme/emailjs_select_service.png)
 
 4. Choose a service name, connect your Google account and click "Create service"
 
-![Choose service name then confirm creation"](./src/assets/readme/emailjs_choose_name.png)
+![Choose service name then confirm creation"](../src/assets/readme/emailjs_choose_name.png)
 
 5. Create an email template using following docs:
 - [Creating email templates](https://www.emailjs.com/docs/user-guide/creating-email-templates/)
@@ -271,11 +271,11 @@ npm run build
 firebase deploy
 ```
 
-![Question related to IAM during deploy, say no](./src/assets/readme/deploy_with_iam.png)
+![Question related to IAM during deploy, say no](../src/assets/readme/deploy_with_iam.png)
 
 > During deploy, Firebase CLI may ask you a question about IAM Role, answer by no or by yes if you know what you are doing. 
 
-![hosting menu](./src/assets/readme/hosting_menu.png)
+![hosting menu](../src/assets/readme/hosting_menu.png)
 
 > If deploy is succesfull, you should see a production version of your app currently working and accessible from the displayed URLs
 
@@ -288,7 +288,7 @@ firebase deploy
 
 Go to Firebase Hosting menu and click "Add custom domain". A new menu appears:
 
-![custom menu configuration](./src/assets/readme/custom_domain_configuration.png)
+![custom menu configuration](../src/assets/readme/custom_domain_configuration.png)
 
 Then write your domain.
 
@@ -302,7 +302,7 @@ You can follow this documentation to go through this step:
 
 If you can update the database with new files (pictures, CV), encountering 401:403 messages: make sure the storage read & write are enabled. To do so, go to Firebase Storage / rules and switch 'false' to 'true'.
 
-![Storage](./src/assets/readme/firebase_storage_rules.png)
+![Storage](../src/assets/readme/firebase_storage_rules.png)
 
 > you should edit storage rules from your storage.rules file, generated after project configuration. By default, read & write are disabled.
 
