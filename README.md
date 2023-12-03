@@ -11,7 +11,7 @@
 
 ## INTRODUCTION
 
-This project is designed to set-up your personal portfolio website, showcasing both personal and professional aspects of an individual's life. It features a comprehensive view of personal projects, hobbies, educational background, professional experiences, and completed work projects. Additionally, the website allows for the download of a resume. All these elements can be conveniently managed through an administrator interface, essentially making this platform a Content Management System (CMS).
+This project is designed to set-up your personal portfolio website, showcasing both personal and professional aspects of an individual's life. It features a comprehensive view of personal projects, hobbies, educational background, professional experiences, and completed work projects. Additionally, the website allows for the download of a resume. All these elements can be conveniently managed through an administrator interface, essentially making this platform a basic Content Management System (CMS).
 
 Example of portfolio based onto this project [HERE](https://portfolio.dopee.io).
 
@@ -27,7 +27,26 @@ This portfolio website is developed using Vue.js 3 and leverages various free se
 
 Below is a demonstration of the CMS in action, showing how easy it is to manage and update the portfolio content.
 
-![CMS Demonstration](./docs/demo.gif)
+### Client side demo
+
+![CMS Demonstration](./docs/gifs/client_demo.gif)
+
+See the demo portfolio [here](https://portfolio.dopee.io).
+
+### Admin side demo
+
+Admin pannel allow to edit all the information you seed on the client side. Only the structure cannot be modified.
+- First name & last name
+- personnal description
+- self picture
+- Personnal projects
+- Hobbies
+- Jobs
+- Professionnal projects
+- Eduction
+- Curriculum Vitea (PDF file)
+
+Each card can be openned to display much more contextual information (title, date, description, custom tags).
 
 ## WEBSITE SETUP
 
