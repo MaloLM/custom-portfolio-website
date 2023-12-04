@@ -5,29 +5,29 @@ https://www.apache.org/licenses/LICENSE-2.0.html
 -->
 
 <template>
-    <div class="professional-projects">
-        <ListOfRows :formType="formTypeToShare"></ListOfRows>
-    </div>
+  <!-- Container for displaying a list of professional projects -->
+  <div class="professional-projects">
+    <!-- Use the 'ListOfRows' component to display rows of professional projects -->
+    <ListOfRows :formType="formTypeToShare"></ListOfRows>
+  </div>
 </template>
 
-
 <script>
-import ListOfRows from '../ListOfRows.vue';
+import ListOfRows from '../ListOfRows.vue'; // Import the 'ListOfRows' component
 
 export default {
   data() {
-    return {}
+    return {};
   },
   components: {
-    ListOfRows
+    ListOfRows, // Register the 'ListOfRows' component
   },
-  props:{
-    formTypeToShare: String
-  }
-}
+  props: {
+    formTypeToShare: String, // Declare a prop named 'formTypeToShare' of type String
+  },
+};
 </script>
 
-
 <style scoped>
-
+  /* Scoped CSS styles can be added here if needed for this component */
 </style>

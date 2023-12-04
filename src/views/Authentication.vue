@@ -133,10 +133,12 @@ export default {
 
 
 <style scoped>
+/* Styling for the authentication container */
 .authentication{
     height: 100vh;
 }
 
+/* Styling for card elements within the authentication section */
 .w-card{
     margin-top: 13%;
     margin-bottom: 100%;
@@ -144,30 +146,37 @@ export default {
     margin-right: 30%;
     transition: 0.3s;
     background-color: white;
-  }
+}
 
+/* Styling for buttons, particularly their positioning and shape */
 button {
     margin-top: 20px;
     margin-left: 10px;
     border-radius: 20px;
-    float:right;
+    float: right;
 }
 
+/* Additional spacing for elements within the authentication section */
 .spacing {
     margin-top: 5px;
 }
 
+/* Dark theme specific styling for cards */
 .dark .w-card {
     background-color: black;
 }
 
+/* Responsive styling for smaller screens */
 @media (max-width: 667px) {
+    /* Adjustments to main content area in smaller screens */
     .main-content{
         margin-top: 15px;
         margin-left: 12px;
         margin-right: 12px;
         transition: 0.3s;
     }
+
+    /* Adjustments to button styling in smaller screens */
     button {  
         float: none;
         display: block;
@@ -175,9 +184,10 @@ button {
         margin-right: auto;
         width: 70%;
     }
+
+    /* Increased spacing in smaller screens */
     .spacing {
         margin-top: 20px;
     }
 }
-
 </style>

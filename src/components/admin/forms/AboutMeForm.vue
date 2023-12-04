@@ -5,173 +5,212 @@ https://www.apache.org/licenses/LICENSE-2.0.html
 -->
 
 <template>
-    <form @submit.prevent="this.pushForm()">
-        <w-input
+    <!-- Form for submitting data -->
+    <form @submit.prevent="pushForm()">
+  
+      <!-- Input field for the first name -->
+      <w-input
         class="mb3 spacing"
         outline
-        label= "First name"
+        label="First name"
         v-model="firstName"
         bg-color="grey-light5"
-        required>
-        </w-input>
-
-        <w-input
+        required
+      >
+      </w-input>
+  
+      <!-- Input field for the last name -->
+      <w-input
         class="mb3 spacing"
         outline
-        label= "Last name"
+        label="Last name"
         v-model="lastName"
         bg-color="grey-light5"
-        required>
-        </w-input>
-
-        <w-textarea
+        required
+      >
+      </w-input>
+  
+      <!-- Textarea for the description -->
+      <w-textarea
         class="mt4 spacing"
         outline
         rows="4"
-        label= "Description"
+        label="Description"
         v-model="description"
         bg-color="grey-light5"
-        required>
-        </w-textarea>
-
-        <w-card 
+        required
+      >
+      </w-textarea>
+  
+      <!-- Card for handling image upload -->
+      <w-card
         title="Image"
-        title-class="grey" 
+        title-class="grey"
         bg-color="grey-light5"
-        class="spacing">
-            <input 
-            type="file" 
-            ref="file" 
-            @change="readFile()"
-            accept="image/*" 
-            id="choose-file" 
-            name="choose-file">
-
-            <div v-if="image">
-                <br>
-            </div>
-            <img v-if="image" :src="preview" class="image" />
-            
-        </w-card>
-        
-        <div class="spacing" style="float:right;">
-            <button>Submit</button>
+        class="spacing"
+      >
+        <!-- Input field for selecting an image -->
+        <input
+          type="file"
+          ref="file"
+          @change="readFile()"
+          accept="image/*"
+          id="choose-file"
+          name="choose-file"
+        />
+        <div v-if="image">
+          <br />
         </div>
+        <!-- Display the uploaded image if available -->
+        <img alt="" v-if="image" :src="preview" class="image" />
+      </w-card>
+  
+      <!-- Submit button -->
+      <div class="spacing" style="float: right;">
+        <button>Submit</button>
+      </div>
     </form>
-    <br>
-    <br>
+  
+    <br />
+    <br />
+  
+    <!-- Alerts for success and error messages with transitions -->
     <w-transition-expand y>
-        <w-alert v-if="showSuccessAlert"  dismiss success class="alerts">Data was successfully submitted</w-alert>
-        <w-alert v-if="showErrorAlert" dismiss error>Data failed to get submitted</w-alert>
+      <!-- Display success alert when 'showSuccessAlert' is true -->
+      <w-alert v-if="showSuccessAlert" dismiss success class="alerts">
+        Data was successfully submitted
+      </w-alert>
+  
+      <!-- Display error alert when 'showErrorAlert' is true -->
+      <w-alert v-if="showErrorAlert" dismiss error>
+        Data failed to get submitted
+      </w-alert>
     </w-transition-expand>
-</template>
-
+  </template>
+  
 
 <script>
-import databaseService from '@/services/databaseService';
-
-export default {
-    props:{
-        formType: String
+  import databaseService from '@/services/databaseService'; // Import the database service
+  
+  export default {
+    props: {
+      formType: String, // Prop to specify the form type
     },
-    data(){
-        return {
-            showSuccessAlert: false,
-            showErrorAlert: false,
-            firstName: null,
-            lastName: null,
-            description: null,
-            isImage: null,
-            image: null,
-            imageFile: null,
-        }
+    data() {
+      return {
+        showSuccessAlert: false, // Control flag for displaying success alert
+        showErrorAlert: false,   // Control flag for displaying error alert
+        firstName: null,         // First name input value
+        lastName: null,          // Last name input value
+        description: null,       // Description textarea value
+        isImage: null,           // Flag to indicate if the selected file is an image
+        image: null,             // URL of the selected image
+        imageFile: null,         // Reference to the selected image file
+      };
     },
-    setup(){},
+    setup() {},
     methods: {
-        readFile() {
-            this.file = this.$refs.file.files[0];
-            
-            if(this.file){
-                if (
-                this.file.name.includes(".png") ||
-                this.file.name.includes(".jpg") ||
-                this.file.name.includes(".jpeg")
-                ) {
-                    this.isImage = true
-                    this.image = true;
-                    this.imageFile = this.file
-                    this.preview = URL.createObjectURL(this.file);
-                } else {
-                    this.image = false;
-                    this.isImage = false;
-                }
-            } else {
-                this.showErrorAlert = true
-            }
-        },
-        pushForm(){
-            try{
-                if(this.isImage == null && this.imageFile == null){
-                    var children = {
-                        firstName: this.firstName,
-                        lastName: this.lastName,
-                        description: this.description,
-                    }
-                    databaseService.updatePost(this.formType, children)
-                    this.showSuccessAlert = true
-                } else if(this.imageFile != null){
-                    databaseService.uploadFileThenUpdateAboutMe(this.formType, this.imageFile, this.firstName, this.lastName, this.description)
-                    this.showSuccessAlert = true
-                }
-            } catch(err){
-                this.showErrorAlert = true
-            }
-        },
-        
+      // Method to read the selected image file and determine if it's an image
+      readFile() {
+        this.file = this.$refs.file.files[0];
+  
+        if (this.file) {
+          if (
+            this.file.name.includes(".png") ||
+            this.file.name.includes(".jpg") ||
+            this.file.name.includes(".jpeg")
+          ) {
+            this.isImage = true;
+            this.image = true;
+            this.imageFile = this.file;
+            this.preview = URL.createObjectURL(this.file);
+          } else {
+            this.image = false;
+            this.isImage = false;
+          }
+        } else {
+          this.showErrorAlert = true;
+        }
+      },
+      // Method to submit the form data
+      pushForm() {
+        try {
+          if (this.isImage == null && this.imageFile == null) {
+            // If no image is selected, update post data
+            var children = {
+              firstName: this.firstName,
+              lastName: this.lastName,
+              description: this.description,
+            };
+            databaseService.updatePost(this.formType, children);
+            this.showSuccessAlert = true;
+          } else if (this.imageFile != null) {
+            // If an image is selected, upload the image and update data
+            databaseService.uploadFileThenUpdateAboutMe(
+              this.formType,
+              this.imageFile,
+              this.firstName,
+              this.lastName,
+              this.description
+            );
+            this.showSuccessAlert = true;
+          }
+        } catch (err) {
+          this.showErrorAlert = true;
+        }
+      },
     },
-    mounted(){
-        databaseService.getAboutMeOrCareerData(this.formType, 'firstName').on('value', (snapshot) => {
-            this.firstName = snapshot.val()
-
-            databaseService.getAboutMeOrCareerData(this.formType, 'lastName').on('value', (snapshot) => {
-                this.lastName = snapshot.val()
-                
-                databaseService.getAboutMeOrCareerData(this.formType, 'description').on('value', (snapshot) => {
-                    this.description = snapshot.val()
-
-                    databaseService.getAboutMeOrCareerData(this.formType, 'image').on('value', (snapshot) => {
-                        this.image = snapshot.val()
-                        this.preview = snapshot.val()
-
-                    }, (errorObject) => {
-                        console.log('The read failed: ' + errorObject.name);
-                    }); 
-                }, (errorObject) => { console.log('The read failed: ' + errorObject.name); }); 
-            }, (errorObject) => { console.log('The read failed: ' + errorObject.name); }); 
-        }, (errorObject) => { console.log('The read failed: ' + errorObject.name); }); 
-    }
-}
+    mounted() {
+      // Fetch initial data from the database for first name, last name, description, and image
+      databaseService.getAboutMeOrCareerData(this.formType, 'firstName').on('value', (snapshot) => {
+        this.firstName = snapshot.val();
+  
+        databaseService.getAboutMeOrCareerData(this.formType, 'lastName').on('value', (snapshot) => {
+          this.lastName = snapshot.val();
+  
+          databaseService.getAboutMeOrCareerData(this.formType, 'description').on('value', (snapshot) => {
+            this.description = snapshot.val();
+  
+            databaseService.getAboutMeOrCareerData(this.formType, 'image').on('value', (snapshot) => {
+              this.image = snapshot.val();
+              this.preview = snapshot.val();
+            }, (errorObject) => {
+              console.log('The read failed: ' + errorObject.name);
+            });
+  
+          }, (errorObject) => {
+            console.log('The read failed: ' + errorObject.name);
+          });
+  
+        }, (errorObject) => {
+          console.log('The read failed: ' + errorObject.name);
+        });
+  
+      }, (errorObject) => {
+        console.log('The read failed: ' + errorObject.name);
+      });
+    },
+  };
 </script>
+  
 
+<style scoped>
+  /* Override button styles */
+  button {
+    padding: 10px 40px; /* Adjust padding for buttons */
+    margin-top: 0px;   /* Remove top margin for buttons */
+  }
 
-<style scoped> 
-button {
-    /* override */
-    padding: 10px 40px;
-    margin-top: 0px;
-}
+  .image {
+    max-width: 250px; /* Set maximum width for images */
+    height: auto;     /* Maintain image aspect ratio */
+  }
 
-.image{
-    max-width: 250px ;
-    height: auto;
-}
+  .alerts {
+    margin-right: 10px; /* Add right margin for elements with the 'alerts' class */
+  }
 
-.alerts{
-    margin-right: 10px;
-}
-
-.spacing {
-    margin: 20px;
-}
-
+  .spacing {
+    margin: 20px; /* Apply a margin of 20px to elements with the 'spacing' class */
+  }
 </style>
