@@ -1,7 +1,7 @@
 {
-  "name": "my-portefolio",
-  "version": "0.1.0",
-  "private": true,
+  "name": "custom-portfolio-website",
+  "version": "1.0.1",
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

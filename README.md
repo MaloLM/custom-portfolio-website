@@ -4,7 +4,7 @@
 - [Introduction](#introduction)
 - [Demonstration](#demonstration)
 - [Website setup](#website-setup)
-- [Licence](#licence)
+- [License](#license)
 - [Contributors](#contributors)
 - [Contribute!](#contribute)
 - [Connect with product owner](#connect-with-product-owner)
@@ -54,9 +54,9 @@ To begin setting up your portfolio website, please refer to the [Getting Started
 
 This guide provides detailed instructions on how to install, configure, and launch your new portfolio site.
 
-## LICENCE
+## LICENSE
 
-This project is licensed under the [Apache License 2.0](./docs/LICENCE). 
+This project is licensed under the [Apache License 2.0](./docs/LICENSE). 
 
 For more details, please refer to the license document located at:
 

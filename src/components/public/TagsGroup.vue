@@ -1,7 +1,7 @@
 <!--
 Copyright (c) [2023] [Malo Le Mestre]
-This software is released under the MIT License
-https://opensource.org/licenses/MIT
+This software is released under the Apache 2.0 License
+https://www.apache.org/licenses/LICENSE-2.0.html
 -->
 
 <template>
