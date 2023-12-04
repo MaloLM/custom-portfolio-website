@@ -110,7 +110,6 @@ https://opensource.org/licenses/MIT
       downloadCV() {
         databaseService.getCurriculumVitaeLink().on('value', (snapshot) => {
           let cvLink = snapshot.val()
-          console.log('cvLink', cvLink)
 
           axios({
             url: cvLink,
@@ -143,11 +142,10 @@ https://opensource.org/licenses/MIT
   color: #2c3e50;
   transition: 0.3s;
   background-color: #ffffff;
-  background-image: url("assets/white-theme-bckground.jpg");
+  background-image: url("assets/white-theme-bckground.png");
+  background-size: 102%;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  width: 100%;
-  height: 100%;
 }
 
 .main-content{
@@ -157,9 +155,10 @@ https://opensource.org/licenses/MIT
 
 .light #app {
   background-color: white;
-  background-image: url("assets/white-theme-bckground.jpg");
+  background-image: url("assets/white-theme-bckground.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-size: 102%;
   color:#2c3e50;
   transition: 0.3s;
 }
@@ -167,9 +166,10 @@ https://opensource.org/licenses/MIT
 .dark #app {
   background-color: rgb(57, 57, 57);
   color:rgb(206, 205, 205);
-  background-image: url("assets/dark-theme-bckground.jpg");
+  background-image: url("assets/dark-theme-bckground.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-size: 102%;
   transition: 0.3s;
 }
 

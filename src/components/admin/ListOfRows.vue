@@ -9,7 +9,8 @@ https://opensource.org/licenses/MIT
         <div v-if="isShow">
             <button @click="isShow = !isShow">Add new</button>
   
-            <ListRow @toggleShow="toggleShow($event)" 
+            <ListRow 
+            @toggleShow="toggleShow($event)" 
             @removePost="removePost($event)"
             v-for="post in posts"
             :key=post.id
@@ -17,13 +18,20 @@ https://opensource.org/licenses/MIT
             :title="post.title">
             </ListRow>
         </div>
+        <div v-if="!isShow">
+            <MainForm 
+            @toggleShow="toggleShow($event)"
+            :id="postToEditId"
+            :formType="formType"
+            ></MainForm>
+        </div>
     </div>
 </template>
 
 
 <script>
 import ListRow from "./Row.vue";
-
+import MainForm from './forms/MainForm.vue';
 import databaseService from '@/services/databaseService';
 
 export default {
@@ -36,6 +44,7 @@ export default {
   },
   components: {
     ListRow,
+    MainForm,
 },
   props:{
     formType: String
@@ -57,7 +66,7 @@ export default {
   mounted() {
     databaseService.getPosts(this.formType).on('value', (snapshot) => {
       this.posts = snapshot.val()
-      var indexes = Object.keys(this.posts)  
+      let indexes = Object.keys(this.posts)  
       if(indexes.length){
         indexes.forEach(element => {
           this.posts[element]['id'] = element

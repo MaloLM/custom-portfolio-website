@@ -261,6 +261,6 @@ Check the [dedicated guide](./GOING_FURTHER.md).
 - Associate a domain name to your website
 - Possibble issues you can face
 
-# Thank you for choosing my project <3
+# Thank you for choosing this project ❤️
 
-If you like my work, please share it or leave a star on GitHub <3 
+If you like my work, please share it or leave a star on GitHub 
