@@ -33,7 +33,7 @@ Below is a demonstration of the CMS in action, showing how easy it is to manage 
 
 See the demo portfolio [here](https://portfolio.dopee.io).
 
-### Admin side demo
+### Admin side
 
 Admin pannel allow to edit all the information you seed on the client side. Only the structure cannot be modified.
 - First name & last name
@@ -54,7 +54,7 @@ To begin setting up your portfolio website, please refer to the [Getting Started
 
 This guide provides detailed instructions on how to install, configure, and launch your new portfolio site.
 
-## LICENSE
+## LICENCE
 
 This project is licensed under the [Apache License 2.0](./docs/LICENCE). 
 
@@ -72,11 +72,11 @@ For more details, please refer to the license document located at:
 
 I welcome contributions from everyone, irrespective of their origin. Here's how you can help:
 
-1. **Read the Getting Started guide**: Detailed instructions on setting up the dev environment and contributing can be found in our [Getting started Guide](./GETTING_STARTED.md).
+1. **Read the Getting Started guide**: Detailed instructions on setting up the dev environment and contributing can be found in our [Getting started Guide](./docs/GETTING_STARTED.md).
 
 Remember, every contribution, whether it's code, documentation, translations, or even reporting bugs, is valuable to us. Let's make this project better together!
 
-## CONNECT WITH PROJECT OWNER
+## CONNECT WITH PRODUCT OWNER
 
 <div> 
    <a href="https://portfolio.dopee.io/#/contact" target="_blank">
