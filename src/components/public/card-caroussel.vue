@@ -68,14 +68,14 @@ https://www.apache.org/licenses/LICENSE-2.0.html
         <p class="dialog-description"> {{dialog.description}}</p>
       </div>
 
-      <div ref="skills" class="skills" v-if="dialog.skills != null && dialog.skills != '-'">
-        <p style="font-weight: bold;">Skills</p>
-        <TagsGroup :unparsedData="dialog.skills" bgColor="green"></TagsGroup>
-      </div>
-
       <div ref="ressources" class="ressources" v-if="dialog.ressources != null && dialog.ressources != '-'">
         <p style="font-weight: bold; margin-top: 7px;">Ressources & technologies</p>
         <TagsGroup :unparsedData="dialog.ressources" bgColor="purple"></TagsGroup>
+      </div>
+
+      <div ref="skills" class="skills" v-if="dialog.skills != null && dialog.skills != '-'">
+        <p style="font-weight: bold;">Skills</p>
+        <TagsGroup :unparsedData="dialog.skills" bgColor="green"></TagsGroup>
       </div>
 
       <div class="ressource">
