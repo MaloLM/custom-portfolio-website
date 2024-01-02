@@ -169,7 +169,7 @@ https://www.apache.org/licenses/LICENSE-2.0.html
   color: #2c3e50;
   transition: 0.3s;
   background-color: #ffffff;
-  background-image: url("assets/white-theme-bckground.png");
+  /* background-image: url("assets/white-theme-bckground.png"); */
   background-size: 102%;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -183,8 +183,8 @@ https://www.apache.org/licenses/LICENSE-2.0.html
 
 /* Light theme styles */
 .light #app {
-  background-color: white;
-  background-image: url("assets/white-theme-bckground.png");
+  background-color: rgb(212, 212, 212);
+  /* background-image: url("assets/white-theme-bckground.png"); */
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 102%;
@@ -195,8 +195,8 @@ https://www.apache.org/licenses/LICENSE-2.0.html
 /* Dark theme styles */
 .dark #app {
   background-color: rgb(57, 57, 57);
-  color: rgb(206, 205, 205);
-  background-image: url("assets/dark-theme-bckground.png");
+  color: rgb(206, 206, 206);
+  /* background-image: url("assets/dark-theme-bckground.png"); */
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 102%;
