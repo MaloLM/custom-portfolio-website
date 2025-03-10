@@ -11,23 +11,15 @@
     "axios": "^1.8.2",
     "emailjs-com": "^3.2.0",
     "firebase": "^10.7.0",
-    "firebase-tools": "^12.9.1",
     "font-awesome": "^4.7.0",
     "vue": "^3.2.13",
-    "vue-axios": "^3.5.0",
-    "vue-recaptcha": "^3.0.0-alpha.6",
     "vue-router": "^4.0.3",
     "vue3-carousel": "^0.1.46",
     "vuex": "^4.0.0",
     "wave-ui": "^2.42.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.16",
-    "@babel/eslint-parser": "^7.12.16",
     "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-plugin-eslint": "~5.0.0",
-    "@vue/cli-plugin-router": "~5.0.0",
-    "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3"

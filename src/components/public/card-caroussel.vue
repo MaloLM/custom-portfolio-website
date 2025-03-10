@@ -183,9 +183,8 @@ https://www.apache.org/licenses/LICENSE-2.0.html
           let object = null
 
           // Iterate through 'posts' to find the post with a matching 'id'
-          Object.entries(this.posts).forEach(([key, value]) => {
+          Object.entries(this.posts).forEach(([, value]) => {
             if(value['id'] == postId){
-              console.log(key)
               object = value
             }
           });
